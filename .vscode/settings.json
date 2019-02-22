@@ -1,0 +1,7 @@
+{
+	"files.associations": {
+		"main.h": "c",
+		"ft_sphere.h": "c",
+		"ft_printf.h": "c"
+	}
+}

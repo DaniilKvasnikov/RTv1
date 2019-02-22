@@ -6,13 +6,16 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 00:37:39 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/02/22 15:52:35 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/02/22 17:02:31 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-int	main(int argc, char **argv)
+int
+	main
+	(int argc,
+	char **argv)
 {
 	--argc;
 	++argv;

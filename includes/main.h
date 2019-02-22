@@ -6,16 +6,16 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 19:44:56 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/02/22 16:09:58 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/02/22 17:52:10 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MAIN_H
 # define MAIN_H
 
-# include "ft_printf.h"
 # include <mlx.h>
 # include <math.h>
+# include "ft_printf.h"
 
 # define WIN_H 500
 # define WIN_W (WIN_H * 16 / 10)
@@ -45,6 +45,11 @@
 
 # define X_P 0
 # define Y_P 1
+
+typedef struct	s_point
+{
+	float		pos[3];
+}				t_point;
 
 typedef struct	s_mydata
 {
@@ -90,6 +95,11 @@ int				ft_close(t_data *data);
 
 int				ft_is_flag(t_data *data, char *str);
 
-void		ft_raytracing(t_data *data, int pos[2]);
+void			ft_raytracing(t_data *data, int pos[2]);
+
+
+t_point			new_vector (t_point start, t_point end);
+
+# include "ft_sphere.h"
 
 #endif

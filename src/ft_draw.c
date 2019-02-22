@@ -6,13 +6,18 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 03:08:31 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/02/22 16:09:39 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/02/22 17:03:35 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-void		line_fast(t_data *env, double *p1, double *p2, int color)
+void
+	line_fast
+	(t_data *env,
+	double *p1,
+	double *p2,
+	int color)
 {
 	int i;
 	int x[2];
@@ -39,12 +44,19 @@ void		line_fast(t_data *env, double *p1, double *p2, int color)
 		}
 }
 
-void		ft_draw_px(t_data *data, int x, int y, int color)
+void
+	ft_draw_px
+	(t_data *data,
+	int x,
+	int y,
+	int color)
 {
 	data->img->data[y * WIN_W + x] = color;
 }
 
-int			ft_draw(t_data *data)
+int
+	ft_draw
+	(t_data *data)
 {
 	int	pos[2];
 

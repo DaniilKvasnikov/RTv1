@@ -6,13 +6,16 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 17:03:15 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/02/20 17:03:17 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/02/22 17:03:03 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-int			ft_is_flag(t_data *data, char *str)
+int
+	ft_is_flag
+	(t_data *data,
+	char *str)
 {
 	int	index;
 

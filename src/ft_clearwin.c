@@ -6,13 +6,15 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 01:37:54 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/02/20 18:04:58 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/02/22 17:03:49 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-void			ft_clearwin(t_data *data)
+void
+	ft_clearwin
+	(t_data *data)
 {
 	int index;
 

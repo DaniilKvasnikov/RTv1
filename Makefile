@@ -6,13 +6,13 @@
 #    By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/30 19:01:08 by rrhaenys          #+#    #+#              #
-#    Updated: 2019/02/22 15:45:07 by rrhaenys         ###   ########.fr        #
+#    Updated: 2019/02/22 17:53:06 by rrhaenys         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = RTv1
 COMMAND = gcc
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra #-Werror
 SRC_DIR = src/
 SRC_FIL = $(shell ls src | grep -E "ft_.+\.c")
 SRCS = $(addprefix  $(SRC_DIR), $(SRC_FIL))

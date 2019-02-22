@@ -6,13 +6,15 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 01:36:02 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/02/22 15:54:05 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/02/22 17:03:42 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-int				ft_close(t_data *data)
+int
+	ft_close
+	(t_data *data)
 {
 	exit(data == NULL);
 	return (0);

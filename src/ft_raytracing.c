@@ -6,13 +6,16 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 16:09:36 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/02/22 16:09:47 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/02/22 17:01:57 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-void		ft_raytracing(t_data *data, int pos[2])
+void
+	ft_raytracing
+	(t_data *data,
+	int pos[2])
 {
 	ft_draw_px(data, pos[X_P], pos[Y_P], 0xff0000 * (pos[X_P] % 2));
 }
