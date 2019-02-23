@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 16:44:39 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/02/23 04:35:29 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/02/23 06:07:09 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,15 +59,8 @@ int
 	t_point intersection_pos)
 {
 	int		color;
-	char	r;
-	char	g;
-	char	b;
 
 	color = ((t_sphere *)data)->color;
-	r = (color & 0xff0000) >> 16;
-	g = (color & 0x00ff00) >> 8;
-	b = color & 0x0000ff;
-	color = /*r * 0x010000 + g * 0x000100 + */b * 0x000001;
 	return (color);
 }
 

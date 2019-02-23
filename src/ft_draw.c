@@ -6,11 +6,12 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 03:08:31 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/02/23 04:15:27 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/02/23 06:58:30 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
+#include <stdio.h>
 
 void
 	line_fast
@@ -85,5 +86,6 @@ int
 	}
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win,
 		data->img->img_ptr, 0, 0);
+//	exit(0);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 17:47:33 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/02/23 00:33:09 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/02/23 07:01:36 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 t_point
 	vector_new
-	(float x,
-	float y,
-	float z)
+	(double x,
+	double y,
+	double z)
 {
 	t_point	v;
 
@@ -39,7 +39,7 @@ t_point
 	return (vector);
 }
 
-float
+double
 	vector_sum
 	(t_point *a,
 	t_point *b)
@@ -48,7 +48,7 @@ float
 	(a->x * b->x + a->y * b->y + a->z * b->z);
 }
 
-float
+double
 	module_vector
 	(t_point *v)
 {
@@ -59,7 +59,7 @@ void
 	vector_normalize
 	(t_point *vector)
 {
-	float module;
+	double module;
 
 	module = module_vector(vector);
 	vector->x = vector->x / module;

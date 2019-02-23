@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 19:44:56 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/02/23 04:00:35 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/02/23 07:00:53 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,14 @@
 
 typedef struct	s_matrix
 {
-	float		elem[4][4];
+	double		elem[4][4];
 }				t_matrix;
 
 typedef struct	s_point
 {
-	float		x;
-	float		y;
-	float		z;
+	double		x;
+	double		y;
+	double		z;
 }				t_point;
 
 typedef struct	s_img
@@ -84,7 +84,8 @@ typedef struct	s_mydata
 	t_point		angle;
 	t_point		dispx;
 	t_point		dispy;
-	float		*depth;
+	double		*depth;
+	double		*norm;
 	char		**argv;
 	int			argc;
 	t_matrix	*mat;
@@ -118,11 +119,11 @@ int				ft_is_flag(t_data *data, char *str);
 void			ft_raytracing(t_data *data, int pos[2], t_point vect, t_obj3d *obj);
 
 
-float			vector_sum(t_point *a, t_point *b);
+double			vector_sum(t_point *a, t_point *b);
 t_point			vector_mul(t_point start, t_point end);
-t_point			vector_new(float x, float y, float z);
+t_point			vector_new(double x, double y, double z);
 void			vector_normalize(t_point *vector);
-float			module_vector(t_point *v);
+double			module_vector(t_point *v);
 
 t_point			ft_matrix_mul(t_point v, t_matrix *m);
 void			ft_matrix_init(t_data *data, double a_x, double a_y, double a_z);
