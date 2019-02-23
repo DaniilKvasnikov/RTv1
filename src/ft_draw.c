@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 03:08:31 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/02/22 17:03:35 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/02/23 03:56:04 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,18 +58,31 @@ int
 	ft_draw
 	(t_data *data)
 {
-	int	pos[2];
+	int			pos[2];
+	t_point		dispx;
+	t_point		dispy;
+	t_point		vect;
+	t_sphere	*sphere1;
 
 	ft_clearwin(data);
 	pos[X_P] = -1;
+	ft_matrix_init(data, data->mydata->angle.x, data->mydata->angle.y, data->mydata->angle.z);
+	dispx = ft_matrix_mul(data->mydata->dispx, data->mydata->mat);
+	dispy = ft_matrix_mul(data->mydata->dispy, data->mydata->mat);
+	sphere1 = new_sphere(vector_new(0, 0, 0.1), 0.02, 0xff0000);
 	while (++pos[X_P] < WIN_W)
 	{
 		pos[Y_P] = -1;
 		while (++pos[Y_P] < WIN_H)
 		{
-			ft_raytracing(data, pos);
+			vect = ft_matrix_mul(vector_new(0, 0, 1), data->mydata->mat);
+			vect.x += dispx.x * (pos[0] * 2 / (float)WIN_W - 1) + dispy.x * (pos[1] * 2 / (float)WIN_H - 1);
+			vect.y += dispx.y * (pos[0] * 2 / (float)WIN_W - 1) + dispy.y * (pos[1] * 2 / (float)WIN_H - 1);
+			vect.z += dispx.z * (pos[0] * 2 / (float)WIN_W - 1) + dispy.z * (pos[1] * 2 / (float)WIN_H - 1);
+			ft_raytracing(data, pos, vect, sphere1);
 		}
 	}
+	free(sphere1);
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win,
 		data->img->img_ptr, 0, 0);
 	return (1);

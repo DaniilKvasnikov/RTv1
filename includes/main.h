@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 19:44:56 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/02/22 17:52:10 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/02/23 03:55:55 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # define WIN_H 500
 # define WIN_W (WIN_H * 16 / 10)
 # define WIN_S (WIN_W * WIN_H)
+
+# define EPSILON 1e-5
 
 # define B_SPACE 49
 # define B_ESC 53
@@ -46,22 +48,17 @@
 # define X_P 0
 # define Y_P 1
 
+typedef struct	s_matrix
+{
+	float		elem[4][4];
+}				t_matrix;
+
 typedef struct	s_point
 {
-	float		pos[3];
+	float		x;
+	float		y;
+	float		z;
 }				t_point;
-
-typedef struct	s_mydata
-{
-	double		posx;
-	double		posy;
-	double		dirx;
-	double		diry;
-	double		planex;
-	double		planey;
-	char		**argv;
-	int			argc;
-}				t_mydata;
 
 typedef struct	s_img
 {
@@ -71,6 +68,29 @@ typedef struct	s_img
 	int			bpp;
 	int			endian;
 }				t_img;
+
+typedef struct	s_obj3d
+{
+	void		*data;
+	int			(*intersect)(void *data, t_point pos_start,
+								t_point vect_start, t_point *intersection_pos);
+	int			(*get_color)(void *data, t_point intersection_pos);
+    t_point		(*get_normal_vector)(void *data, t_point intersection_pos);
+}				t_obj3d;
+
+typedef struct	s_mydata
+{
+	t_point		pos;
+	t_point		angle;
+	t_point		dispx;
+	t_point		dispy;
+	float		*depth;
+	char		**argv;
+	int			argc;
+	t_matrix	*mat;
+    t_obj3d		**objects;
+    int			objects_count;
+}				t_mydata;
 
 typedef struct	s_data
 {
@@ -95,10 +115,17 @@ int				ft_close(t_data *data);
 
 int				ft_is_flag(t_data *data, char *str);
 
-void			ft_raytracing(t_data *data, int pos[2]);
+void			ft_raytracing(t_data *data, int pos[2], t_point vect, void *obj);
 
 
-t_point			new_vector (t_point start, t_point end);
+float			vector_sum(t_point *a, t_point *b);
+t_point			vector_mul(t_point start, t_point end);
+t_point			vector_new(float x, float y, float z);
+void			vector_normalize(t_point *vector);
+float			module_vector(t_point *v);
+
+t_point			ft_matrix_mul(t_point v, t_matrix *m);
+void			ft_matrix_init(t_data *data, double a_x, double a_y, double a_z);
 
 # include "ft_sphere.h"
 

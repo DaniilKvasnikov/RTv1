@@ -6,30 +6,53 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 17:47:33 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/02/22 17:57:36 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/02/23 00:33:09 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
 t_point
-	new_vector
+	vector_new
+	(float x,
+	float y,
+	float z)
+{
+	t_point	v;
+
+	v.x = x;
+	v.y = y;
+	v.z = z;
+	return (v);
+}
+
+t_point
+	vector_mul
 	(t_point start,
 	t_point end)
 {
 	t_point vector;
 
-	vector.pos[0] = end.pos[0] - start.pos[0];
-	vector.pos[1] = end.pos[1] - start.pos[1];
-	vector.pos[2] = end.pos[2] - start.pos[2];
+	vector.x = end.x - start.x;
+	vector.y = end.y - start.y;
+	vector.z = end.z - start.z;
 	return (vector);
 }
 
 float
-	module_vector
-	(t_point *vector)
+	vector_sum
+	(t_point *a,
+	t_point *b)
 {
-	float	module;
+	return
+	(a->x * b->x + a->y * b->y + a->z * b->z);
+}
+
+float
+	module_vector
+	(t_point *v)
+{
+	return (sqrt(vector_sum(v, v)));
 }
 
 void
@@ -39,7 +62,7 @@ void
 	float module;
 
 	module = module_vector(vector);
-	vector->pos[0] = vector->pos[0] / module;
-	vector->pos[1] = vector->pos[1] / module;
-	vector->pos[2] = vector->pos[2] / module;
+	vector->x = vector->x / module;
+	vector->y = vector->y / module;
+	vector->z = vector->z / module;
 }

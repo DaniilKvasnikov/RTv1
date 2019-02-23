@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 16:45:42 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/02/22 16:57:30 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/02/23 03:55:45 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ int				intersect_sphere(void *data, t_point pos_start,
 								t_point vect_start, t_point *intersection_pos);
 int				get_color_sphere(void *data, t_point intersection_pos);
 t_point			get_normal_sphere(void *data, t_point intersection_pos);
+void			objects_add_sphere(t_data *data, t_sphere *sphere);
 
 #endif

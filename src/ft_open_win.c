@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/05 07:03:09 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/02/22 17:02:22 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/02/23 03:59:04 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,16 @@ void
 	char **argv)
 {
 	data->mydata = (t_mydata *)malloc(sizeof(t_mydata));
-	data->mydata->posx = 2;
-	data->mydata->posy = 2;
-	data->mydata->dirx = 1;
-	data->mydata->diry = 0;
-	data->mydata->planex = 0;
-	data->mydata->planey = -0.66;
+	data->mydata->pos = vector_new(0, 0, 0);
+	data->mydata->angle = vector_new(0, 0, 0);
+	data->mydata->dispx = vector_new(0.66 * (WIN_W / (float)WIN_H), 0, 0);
+	data->mydata->dispy = vector_new(0, 0.66, 0);
 	data->mydata->argc = argc;
 	data->mydata->argv = argv;
+	data->mydata->objects_count = 0;
+	data->mydata->depth = (float *)malloc(sizeof(float) * (WIN_W * WIN_H));
+	data->mydata->mat = (t_matrix *)malloc(sizeof(t_matrix));
+	objects_add_sphere(data, new_sphere(vector_new(0, 0, 0.1), 0.02, 0xff0000));
 }
 
 void
@@ -45,6 +47,7 @@ void
 		return ;
 	ft_start_game(&data, argc, argv);
 	mlx_do_key_autorepeaton(data.mlx_ptr);
+//	mlx_expose_hook(data.mlx_win, ft_draw, &data);
 	mlx_loop_hook(data.mlx_ptr, ft_draw, &data);
 	mlx_hook(data.mlx_win, 2, 1L << 2, key_press, &data);
 	mlx_hook(data.mlx_win, 3, 1L << 3, key_release, &data);
