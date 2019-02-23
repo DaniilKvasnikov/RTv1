@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 16:44:39 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/02/23 03:59:23 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/02/23 04:35:29 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ void
 	int		index;
 
 	data->mydata->objects_count++;
-	objects = (t_obj3d **)malloc(sizeof(t_obj3d *) * data->mydata->objects_count);
+	objects =
+	(t_obj3d **)malloc(sizeof(t_obj3d *) * data->mydata->objects_count);
 	index = -1;
 	while (++index < (data->mydata->objects_count - 1))
 		objects[index] = data->mydata->objects[index];
@@ -57,9 +58,16 @@ int
 	(void *data,
 	t_point intersection_pos)
 {
-	int	color;
+	int		color;
+	char	r;
+	char	g;
+	char	b;
 
 	color = ((t_sphere *)data)->color;
+	r = (color & 0xff0000) >> 16;
+	g = (color & 0x00ff00) >> 8;
+	b = color & 0x0000ff;
+	color = /*r * 0x010000 + g * 0x000100 + */b * 0x000001;
 	return (color);
 }
 
@@ -90,19 +98,12 @@ int
 
 	s = (t_sphere *)data;
 	a = v.x * v.x + v.y * v.y + v.z * v.z;
-	b = 2 * (v.x * (v_start.x - s->pos.x) +
-		v.y * (v_start.y - s->pos.y) +
+	b = 2 * (v.x * (v_start.x - s->pos.x) + v.y * (v_start.y - s->pos.y) +
 		v.z * (v_start.z - s->pos.z));
-	c = s->pos.x * s->pos.x +
-		s->pos.y * s->pos.y +
-		s->pos.z * s->pos.z +
-		v_start.x * v_start.x +
-		v_start.y * v_start.y +
-		v_start.z * v_start.z -
-		2 * (v_start.x * s->pos.x +
-		v_start.y * s->pos.y +
-		v_start.z * s->pos.z) -
-		s->rad * s->rad;
+	c = s->pos.x * s->pos.x + s->pos.y * s->pos.y + s->pos.z * s->pos.z +
+		v_start.x * v_start.x + v_start.y * v_start.y + v_start.z * v_start.z -
+		2 * (v_start.x * s->pos.x + v_start.y * s->pos.y + v_start.z * s->pos.z)
+		- s->rad * s->rad;
 	d = b * b - 4 * a * c;
 	if (d < 0)
 		return (0);
@@ -124,8 +125,7 @@ int
 	t = (min_t > EPSILON) ? min_t : max_t;
 	if (t < EPSILON)
 		return (0);
-    *intersection_pos = vector_new(v_start.x + t * v.x,
-                                  v_start.y + t * v.y,
-                                  v_start.z + t * v.z);
+	*intersection_pos =
+	vector_new(v_start.x + t * v.x, v_start.y + t * v.y, v_start.z + t * v.z);
 	return (1);
 }

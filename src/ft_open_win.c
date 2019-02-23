@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/05 07:03:09 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/02/23 03:59:04 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/02/23 04:18:27 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ void
 	data->mydata->objects_count = 0;
 	data->mydata->depth = (float *)malloc(sizeof(float) * (WIN_W * WIN_H));
 	data->mydata->mat = (t_matrix *)malloc(sizeof(t_matrix));
-	objects_add_sphere(data, new_sphere(vector_new(0, 0, 0.1), 0.02, 0xff0000));
+	objects_add_sphere(data, new_sphere(vector_new(0, -0.01, 0.1), 0.02, 0x008800));
+	objects_add_sphere(data, new_sphere(vector_new(0.05, -0.05, 0.2), 0.06, 0x880000));
 }
 
 void

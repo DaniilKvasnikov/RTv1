@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 19:44:56 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/02/23 03:55:55 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/02/23 04:00:35 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ int				ft_close(t_data *data);
 
 int				ft_is_flag(t_data *data, char *str);
 
-void			ft_raytracing(t_data *data, int pos[2], t_point vect, void *obj);
+void			ft_raytracing(t_data *data, int pos[2], t_point vect, t_obj3d *obj);
 
 
 float			vector_sum(t_point *a, t_point *b);
