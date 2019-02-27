@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 16:09:36 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/02/27 17:44:49 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/02/27 19:41:13 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,15 @@ void
 			data->mydata->depth[pos[X_P] + pos[Y_P] * WIN_W] = len;
 			norm = obj->get_normal_vector(obj->data, inter_pos);
 			color = obj->get_color(obj->data, inter_pos);
-			light = vector_new(inter_pos.x - 0,
-			inter_pos.y - 10,
-			inter_pos.z - 10);
+			light = vector_new(inter_pos.x - 10,
+			inter_pos.y - 0,
+			inter_pos.z - 0);
 			vector_normalize(&light);
 			delta = vector_sum(&norm, &light);
-			if (delta < 0)
-				delta = 0;
-			color = color_new(color, 0.2 + 0.8 * delta);
-			ft_draw_px(data, pos[X_P], pos[Y_P], color);
+			delta = delta * (double)(delta >= 0);
+			color = color_new(color, 0.3 + 0.7 * delta);
+//				printf("%lf %lf %lf\n", norm.x, norm.y, norm.z);
+				ft_draw_px(data, pos[X_P], pos[Y_P], color);
 		}
 	}
 }

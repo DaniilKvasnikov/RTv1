@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 16:44:39 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/02/27 17:43:19 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/02/27 19:44:12 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ t_point
 
 	s = (t_sphere *)data;
 	pos = s->pos;
-	vect = vector_mul(pos, inter_pos);
+	vect = vector_mul(inter_pos, pos);
 	vector_normalize(&vect);
 	return (vect);
 }
