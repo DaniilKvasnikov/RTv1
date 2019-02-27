@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 19:44:56 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/02/23 07:00:53 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/02/27 16:05:04 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <math.h>
 # include "ft_printf.h"
 
-# define WIN_H 500
+# define WIN_H 300
 # define WIN_W (WIN_H * 16 / 10)
 # define WIN_S (WIN_W * WIN_H)
 
@@ -85,7 +85,6 @@ typedef struct	s_mydata
 	t_point		dispx;
 	t_point		dispy;
 	double		*depth;
-	double		*norm;
 	char		**argv;
 	int			argc;
 	t_matrix	*mat;

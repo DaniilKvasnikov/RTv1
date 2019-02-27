@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 16:09:36 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/02/23 08:17:11 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/02/27 16:07:49 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void
 	t_point		v;
 	float		len;
 	t_point		norm;
-	t_point		start;
 	int			color;
 
 	if (obj->intersect(obj->data, data->mydata->pos, vect, &inter_pos) == 1)
@@ -51,16 +50,9 @@ void
 		{
 			data->mydata->depth[pos[X_P] + pos[Y_P] * WIN_W] = len;
 			norm = obj->get_normal_vector(data, inter_pos);
-			start = ((t_sphere *)obj->data)->pos;
-			data->mydata->norm[pos[X_P] + pos[Y_P] * WIN_W] =
-			(norm.x * start.x + norm.y * start.y + norm.z * start.z) /
-			(sqrt(norm.x * norm.x + norm.y * norm.y + norm.z * norm.z) *
-			sqrt(start.x * start.x + start.y * start.y + start.z * start.z));
-			data->mydata->norm[pos[X_P] + pos[Y_P] * WIN_W] = 1 -
-			(acos(data->mydata->norm[pos[X_P] + pos[Y_P] * WIN_W]) / (double)M_PI) * 4;
-			color = color_new(obj->get_color(obj->data, inter_pos), (data->mydata->norm[pos[X_P] + pos[Y_P] * WIN_W]));
-			ft_draw_px(data, pos[X_P], pos[Y_P],
-			color);
+			color = obj->get_color(obj->data, inter_pos);
+			color = color_new(color, 0.2);
+			ft_draw_px(data, pos[X_P], pos[Y_P], color);
 		}
 	}
 }

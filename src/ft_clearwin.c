@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 01:37:54 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/02/23 07:08:31 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/02/27 16:05:50 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void
 	{
 		data->img->data[index] = 0;
 		data->mydata->depth[index] = 50.0;
-		data->mydata->norm[index] = 0;
 	}
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win,
 		data->img->img_ptr, 0, 0);
