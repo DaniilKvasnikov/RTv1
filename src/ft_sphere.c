@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 16:44:39 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/02/23 06:07:09 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/02/27 17:43:19 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,15 @@ int
 t_point
 	get_normal_sphere
 	(void *data,
-	t_point intersection_pos)
+	t_point inter_pos)
 {
-	t_point vect;
+	t_point		vect;
+	t_point		pos;
+	t_sphere	*s;
 
-	vect = vector_mul(((t_sphere *)data)->pos, intersection_pos);
+	s = (t_sphere *)data;
+	pos = s->pos;
+	vect = vector_mul(pos, inter_pos);
 	vector_normalize(&vect);
 	return (vect);
 }

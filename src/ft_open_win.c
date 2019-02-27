@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/05 07:03:09 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/02/27 16:06:00 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/02/27 17:17:46 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,9 @@ void
 	data->mydata->objects_count = 0;
 	data->mydata->depth = (double *)malloc(sizeof(double) * (WIN_W * WIN_H));
 	data->mydata->mat = (t_matrix *)malloc(sizeof(t_matrix));
-	objects_add_sphere(data, new_sphere(vector_new(0, 0, 3), 1, 0x0000ff));
-	objects_add_sphere(data, new_sphere(vector_new(0, -1, 8), 5, 0xff0000));
+	objects_add_sphere(data, new_sphere(vector_new(0, 0, 10), 1, 0x0000ff));
+//	objects_add_sphere(data, new_sphere(vector_new(0, 3, 10), 1, 0xff0000));
+//	objects_add_sphere(data, new_sphere(vector_new(0, 0, 8), 5, 0xff0000));
 }
 
 void
@@ -48,8 +49,8 @@ void
 		return ;
 	ft_start_game(&data, argc, argv);
 	mlx_do_key_autorepeaton(data.mlx_ptr);
-//	mlx_expose_hook(data.mlx_win, ft_draw, &data);
-	mlx_loop_hook(data.mlx_ptr, ft_draw, &data);
+	mlx_expose_hook(data.mlx_win, ft_draw, &data);
+//	mlx_loop_hook(data.mlx_ptr, ft_draw, &data);
 	mlx_hook(data.mlx_win, 2, 1L << 2, key_press, &data);
 	mlx_hook(data.mlx_win, 3, 1L << 3, key_release, &data);
 	mlx_hook(data.mlx_win, 17, 1L << 17, ft_close, &data);
