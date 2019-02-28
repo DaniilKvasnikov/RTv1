@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 19:44:56 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/02/27 17:13:42 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/02/28 18:35:58 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ typedef struct	s_mydata
 	int			argc;
 	t_matrix	*mat;
     t_obj3d		**objects;
+	int			light_count;
+	t_point		*light;
     int			objects_count;
 }				t_mydata;
 

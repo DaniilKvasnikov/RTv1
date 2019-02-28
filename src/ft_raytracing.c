@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 16:09:36 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/02/27 19:41:13 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/02/28 19:09:42 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,42 @@ int
 	b = dcolor * (color & 0xff);
 	color = (r << 16) + (g << 8) + b;
 	return (color);
+}
+
+int
+	ft_shodow
+	(t_data *data,
+	t_point inter_pos,
+	t_obj3d *this)
+{
+	t_point	light;
+	t_point	shodow;
+	float	len;
+	float	new_len;
+	int		index;
+	t_obj3d	*obj;
+	t_point	new_inter_pos;
+
+	light = vector_mul(inter_pos, *(data->mydata->light));
+	printf("%lf %lf %lf\n", light.x, light.y, light.z);
+	len = module_vector(&light);
+	vector_normalize(&light);
+	index = -1;
+	while (++index < data->mydata->objects_count)
+	{
+		obj = data->mydata->objects[index];
+		if (obj != this && obj->intersect(obj->data, inter_pos, light, &new_inter_pos))
+		{
+			shodow = vector_mul(inter_pos, new_inter_pos);
+			new_len = module_vector(&shodow);
+			if (new_len <= len)
+			{
+				printf("nice %d %lf\n", index, new_len);
+				return (1);
+			}
+		}
+	}
+	return (0);
 }
 
 void
@@ -53,15 +89,14 @@ void
 			data->mydata->depth[pos[X_P] + pos[Y_P] * WIN_W] = len;
 			norm = obj->get_normal_vector(obj->data, inter_pos);
 			color = obj->get_color(obj->data, inter_pos);
-			light = vector_new(inter_pos.x - 10,
-			inter_pos.y - 0,
-			inter_pos.z - 0);
+			light = vector_mul(*(data->mydata->light), inter_pos);
 			vector_normalize(&light);
 			delta = vector_sum(&norm, &light);
 			delta = delta * (double)(delta >= 0);
+			if (ft_shodow(data, inter_pos, obj) == 1)
+				delta = 0.0;
 			color = color_new(color, 0.3 + 0.7 * delta);
-//				printf("%lf %lf %lf\n", norm.x, norm.y, norm.z);
-				ft_draw_px(data, pos[X_P], pos[Y_P], color);
+			ft_draw_px(data, pos[X_P], pos[Y_P], color);
 		}
 	}
 }
