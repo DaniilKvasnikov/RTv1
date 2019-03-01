@@ -6,14 +6,20 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 18:15:14 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/01 18:22:35 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/01 18:35:43 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 #include <stdio.h>
 
-t_cylinder		*new_cylinder(t_point pos, t_point vect, double h, double rad, int color)
+t_cylinder
+	*new_cylinder
+	(t_point pos,
+	t_point vect,
+	double h,
+	double rad,
+	int color)
 {
 	t_cylinder	*cylinder;
 
@@ -27,11 +33,24 @@ t_cylinder		*new_cylinder(t_point pos, t_point vect, double h, double rad, int c
 	return (cylinder);
 }
 
-int				intersect_cylinder(void *data, t_point pos_start, t_point vect_start, t_point *intersection_pos)
+int
+	intersect_cylinder
+	(void *data,
+	t_point pos_start,
+	t_point vect_start,
+	t_point *intersection_pos)
 {
+	t_cylinder	*cyl;
+
+	cyl = (t_cylinder *)data;
+	pos_start = vector_new(pos_start.x - cyl->pos.x, pos_start.y - cyl->pos.y, pos_start.z - cyl->pos.z);
+	return (0);
 }
 
-int				get_color_cylinder(void *data, t_point intersection_pos)
+int
+	get_color_cylinder
+	(void *data,
+	t_point intersection_pos)
 {
 	t_cylinder	*cylinder;
 
@@ -39,11 +58,21 @@ int				get_color_cylinder(void *data, t_point intersection_pos)
 	return (cylinder->color);
 }
 
-t_point			get_normal_cylinder(void *data, t_point intersection_pos)
+t_point
+	get_normal_cylinder
+	(void *data,
+	t_point intersection_pos)
 {
+	t_cylinder	*cylinder;
+
+	cylinder = (t_cylinder *)data;
+	return (cylinder->vect);
 }
 
-void			objects_add_cylinder(t_data *data, t_cylinder *cylinder)
+void
+	objects_add_cylinder
+	(t_data *data,
+	t_cylinder *cylinder)
 {
 	t_obj3d	**objects;
 	int		index;
