@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/05 07:03:09 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/01 14:39:02 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/01 18:07:23 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void
 	data->mydata->light->y = 0;
 	data->mydata->light->z = 0;
 	ft_parser(data->mydata);
-	ft_printf("%s\n", data->mydata->input);
+//	ft_printf("%s\n", data->mydata->input);
 	objects_add_sphere(
 		data,
 		new_sphere(
@@ -55,6 +55,20 @@ void
 			vector_new(-1.5, 1.5, 10.5),
 			vector_new(1.5, 1.5, 10.5),
 			0x00ff00));
+	objects_add_plane(
+		data,
+		new_plane(
+			new_triange(
+				vector_new(-1.5, -1.5, 10.5),
+				vector_new(-1.5, 1.5, 10.5),
+				vector_new(1.5, 1.5, 10.5),
+				0x00ff00),
+			new_triange(
+				vector_new(-1.5, -1.5, 10.5),
+				vector_new(1.5, -1.5, 10.5),
+				vector_new(1.5, 1.5, 10.5),
+				0x00ff00),
+			0x008888));
 }
 
 void

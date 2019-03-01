@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 12:45:13 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/01 14:37:47 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/01 18:05:05 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,10 @@ int
 
 	tr = (t_triangle *)data;
 	scalar_product = vector_sum(&(tr->norm), &vect_start);
-//	printf("intersect_triange %d %lf %lf %lf\n", 1, tr->norm.x, tr->norm.y, tr->norm.z);
 	if (fabs(scalar_product) < EPSILON)
 		return (0);
 	k = -(tr->norm.x * pos_start.x + tr->norm.y * pos_start.y
 		+ tr->norm.z * pos_start.z + tr->d) / scalar_product;
-//	printf("intersect_triange %d %f\n", 2, k);
 	if (fabs(k) < EPSILON)
 		return (0);
 
@@ -79,7 +77,6 @@ int
 	y = pos_start.y + vect_start.y * k;
 	z = pos_start.z + vect_start.z * k;
 	ipt = vector_new(x, y, z);
-//	printf("intersect_triange %d\n", 3);
 	if (check_dir(tr->v_p1_p2, vector_mul(tr->p1, ipt), tr->norm)
 		&& check_dir(tr->v_p2_p3, vector_mul(tr->p2, ipt), tr->norm)
 		&& check_dir(tr->v_p3_p1, vector_mul(tr->p3, ipt), tr->norm))
@@ -87,7 +84,6 @@ int
 		*intersection_pos = ipt;
 		return (1);
 	}
-//	printf("intersect_triange %d\n", 4);
 	return (0);
 }
 

@@ -2,6 +2,7 @@
 	"files.associations": {
 		"main.h": "c",
 		"ft_sphere.h": "c",
-		"ft_printf.h": "c"
+		"ft_printf.h": "c",
+		"ft_plane.h": "c"
 	}
 }
