@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 12:45:13 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/01 18:05:05 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/01 18:13:20 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int
 		return (1);
 }
 
-t_triangle		*new_triange(t_point p1, t_point p2, t_point p3, int color)
+t_triangle		*new_triangle(t_point p1, t_point p2, t_point p3, int color)
 {
 	t_triangle	*triangle;
 
@@ -49,7 +49,7 @@ t_triangle		*new_triange(t_point p1, t_point p2, t_point p3, int color)
 }
 
 int
-	intersect_triange
+	intersect_triangle
 	(void *data,
 	t_point pos_start,
 	t_point vect_start,
@@ -88,7 +88,7 @@ int
 }
 
 int
-	get_color_triange
+	get_color_triangle
 	(void *data,
 	t_point intersection_pos)
 {
@@ -99,7 +99,7 @@ int
 }
 
 t_point
-	get_normal_triange
+	get_normal_triangle
 	(void *data,
 	t_point intersection_pos)
 {
@@ -112,7 +112,7 @@ t_point
 }
 
 void
-	objects_add_triange
+	objects_add_triangle
 	(t_data *data,
 	t_triangle *triangle)
 {
@@ -127,9 +127,9 @@ void
 		objects[index] = data->mydata->objects[index];
 	objects[index] = (t_obj3d *)malloc(sizeof(t_obj3d));
 	objects[index]->data = triangle;
-	objects[index]->intersect = intersect_triange;
-	objects[index]->get_color = get_color_triange;
-	objects[index]->get_normal_vector = get_normal_triange;
+	objects[index]->intersect = intersect_triangle;
+	objects[index]->get_color = get_color_triangle;
+	objects[index]->get_normal_vector = get_normal_triangle;
 	if (data->mydata->objects_count > 1)
 		free(data->mydata->objects);
 	data->mydata->objects = objects;

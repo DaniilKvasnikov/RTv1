@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 17:24:07 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/01 18:07:38 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/01 18:13:56 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ int
 
 	t1 = ((t_plane *)data)->triangle1;
 	t2 = ((t_plane *)data)->triangle2;
-	return (intersect_triange(t1, pos_start, vect_start, intersection_pos) ||
-		intersect_triange(t2, pos_start, vect_start, intersection_pos));
+	return (intersect_triangle(t1, pos_start, vect_start, intersection_pos) ||
+		intersect_triangle(t2, pos_start, vect_start, intersection_pos));
 }
 
 int

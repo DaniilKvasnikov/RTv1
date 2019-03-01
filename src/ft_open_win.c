@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/05 07:03:09 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/01 18:11:18 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/01 18:13:31 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,12 @@ void
 	objects_add_plane(
 		data,
 		new_plane(
-			new_triange(
+			new_triangle(
 				vector_new(-1.5, -1.5, 10.5),
 				vector_new(-1.5, 1.5, 10.5),
 				vector_new(1.5, 1.5, 10.5),
 				0x00ff00),
-			new_triange(
+			new_triangle(
 				vector_new(-1.5, -1.5, 10.5),
 				vector_new(1.5, -1.5, 10.5),
 				vector_new(1.5, 1.5, 10.5),
