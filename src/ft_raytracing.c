@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 16:09:36 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/02/28 19:09:42 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/01 12:43:03 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int
 	t_point	new_inter_pos;
 
 	light = vector_mul(inter_pos, *(data->mydata->light));
-	printf("%lf %lf %lf\n", light.x, light.y, light.z);
 	len = module_vector(&light);
 	vector_normalize(&light);
 	index = -1;
@@ -56,10 +55,7 @@ int
 			shodow = vector_mul(inter_pos, new_inter_pos);
 			new_len = module_vector(&shodow);
 			if (new_len <= len)
-			{
-				printf("nice %d %lf\n", index, new_len);
 				return (1);
-			}
 		}
 	}
 	return (0);

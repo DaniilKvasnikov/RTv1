@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 17:47:33 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/02/23 07:01:36 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/01 13:23:33 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,22 @@ t_point
 	return (vector);
 }
 
+t_point
+	cross_product
+	(t_point a,
+	t_point b)
+{
+	return (vector_new(a.z * b.y - a.y * b.z,
+						a.x * b.z - a.z * b.x,
+						a.y * b.x - a.x * b.y));
+}
+
 double
 	vector_sum
 	(t_point *a,
 	t_point *b)
 {
-	return
-	(a->x * b->x + a->y * b->y + a->z * b->z);
+	return (a->x * b->x + a->y * b->y + a->z * b->z);
 }
 
 double

@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 19:44:56 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/02/28 18:35:58 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/01 13:23:57 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,10 +125,12 @@ t_point			vector_mul(t_point start, t_point end);
 t_point			vector_new(double x, double y, double z);
 void			vector_normalize(t_point *vector);
 double			module_vector(t_point *v);
+t_point			cross_product(t_point a, t_point b);
 
 t_point			ft_matrix_mul(t_point v, t_matrix *m);
 void			ft_matrix_init(t_data *data, double a_x, double a_y, double a_z);
 
 # include "ft_sphere.h"
+# include "ft_triangle.h"
 
 #endif
