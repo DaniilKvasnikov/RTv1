@@ -20,6 +20,7 @@
 # include <limits.h>
 # include "ft_spec.h"
 # include "libftr/libft.h"
+# include <inttypes.h>
 
 typedef struct	s_func
 {

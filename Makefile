@@ -20,6 +20,7 @@ OBJ	= $(SRCS:.c=.o)
 INCLUDE = -I libft/src -I includes -Iminilibx_macos
 MLX = -framework OpenCL -L./minilibx_macos -lmlx -framework OpenGL -framework AppKit
 LIB = ./libft/libft.a
+FLAGS_LINUX = -I ./includes_linux/ /usr/X11/lib/libmlx.a  -lXext -lX11 -lm -lpthread
 
 all: $(NAME)
 
@@ -29,6 +30,8 @@ $(LIB):
 $(NAME): $(LIB) $(OBJ)
 	$(COMMAND) $(FLAGS) -g -o $(NAME) $(INCLUDE) $(OBJ) $(LIB) $(MLX)
 
+linux: $(LIB) $(OBJ)
+	$(COMMAND) $(FLAGS) -g -o $(NAME) $(OBJ) $(LIB) $(FLAGS_LINUX)
 
 .c.o:
 	$(COMMAND) $(FLAGS) $(INCLUDE) -g -c -o $@ $<

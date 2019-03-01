@@ -16,6 +16,7 @@
 # include <mlx.h>
 # include <math.h>
 # include "ft_printf.h"
+# include <fcntl.h>
 
 # define WIN_H 500
 # define WIN_W (WIN_H * 16 / 10)
@@ -87,6 +88,7 @@ typedef struct	s_mydata
 	double		*depth;
 	char		**argv;
 	int			argc;
+	char		*input;
 	t_matrix	*mat;
     t_obj3d		**objects;
 	int			light_count;
@@ -129,6 +131,8 @@ t_point			cross_product(t_point a, t_point b);
 
 t_point			ft_matrix_mul(t_point v, t_matrix *m);
 void			ft_matrix_init(t_data *data, double a_x, double a_y, double a_z);
+
+void			ft_parser(t_mydata *mydata);
 
 # include "ft_sphere.h"
 # include "ft_triangle.h"

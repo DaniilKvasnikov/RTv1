@@ -1,0 +1,11 @@
+.light
+{
+	pos: 15, 2, -10
+	intensity: 10
+}
+.sphere
+{
+	pos: 0, 2, 4
+	rad: 2
+	color: 160
+}
