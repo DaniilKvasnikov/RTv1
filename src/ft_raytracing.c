@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 16:09:36 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/01 12:43:03 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/01 14:38:38 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ int
 		obj = data->mydata->objects[index];
 		if (obj != this && obj->intersect(obj->data, inter_pos, light, &new_inter_pos))
 		{
-			shodow = vector_mul(inter_pos, new_inter_pos);
+			shodow = vector_mul(new_inter_pos, *(data->mydata->light));
 			new_len = module_vector(&shodow);
-			if (new_len <= len)
+			if (new_len < len)
 				return (1);
 		}
 	}
@@ -80,7 +80,9 @@ void
 	{
 		v = vector_mul(data->mydata->pos, inter_pos);
 		len = module_vector(&v);
-		if (len < data->mydata->depth[pos[X_P] + pos[Y_P] * WIN_W])
+		if (len < data->mydata->depth[pos[X_P] + pos[Y_P] * WIN_W]
+//		&& (pos[Y_P] == (WIN_H / 2 + 50))
+		)
 		{
 			data->mydata->depth[pos[X_P] + pos[Y_P] * WIN_W] = len;
 			norm = obj->get_normal_vector(obj->data, inter_pos);

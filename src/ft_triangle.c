@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 12:45:13 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/01 14:02:55 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/01 14:37:47 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ t_triangle		*new_triange(t_point p1, t_point p2, t_point p3, int color)
 	triangle->p3 = p3;
 	triangle->color = color;
 	triangle->norm = cross_product(vector_mul(p1, p3), vector_mul(p3, p2));
+	vector_normalize(&triangle->norm);
 	triangle->d = -(p1.x * triangle->norm.x +
 	p1.y * triangle->norm.y + p1.z * triangle->norm.z);
 	triangle->v_p1_p2 = vector_mul(p1, p2);
@@ -107,9 +108,11 @@ t_point
 	t_point intersection_pos)
 {
 	t_triangle	*tr;
+	t_point		norm;
 
 	tr = (t_triangle *)data;
-	return (tr->norm);
+	norm = vector_new(-tr->norm.x, -tr->norm.y, -tr->norm.z);
+	return (norm);
 }
 
 void
