@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 18:15:14 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/01 18:35:43 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/02 16:06:51 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,56 @@ t_cylinder
 }
 
 int
+	intersect_cylinder2
+	(t_point raybase,
+	t_point raycos,
+	t_point base,
+	t_point axis,
+	double radius,
+	double *in,
+	double *out)
+{
+    int			hit;	/* True if ray intersects cyl   */
+    t_point		RC;		/* Ray base to cylinder base    */
+    double		d;		/* Shortest distance between    */
+						/*   the ray and the cylinder   */
+    double		t;
+	double		s;		/* Distances along the ray  */
+    t_point		n;
+	t_point		D;
+	t_point		O;
+    double		ln;
+	const double	pinf = HUGE;    /* Positive infinity        */
+
+	RC = vector_new(raybase.x - base.x, raybase.y - base.y, raybase.z - base.z);
+    n = cross_product(raycos,axis);
+ 
+    if  ( (ln = module_vector(&n)) == 0 ) {    /* ray parallel to cyl  */
+        d    = vector_sum(&RC,&axis);
+		D = vector_new(RC.x - d*axis.x, RC.y - d*axis.y, RC.z - d*axis.z);
+        d    = module_vector(&D);
+        *in  = -pinf;
+        *out =  pinf;
+        return (d <= radius);       /* true if ray is in cyl*/
+    }
+	vector_normalize(&n);
+ 
+    d    = fabs(vector_sum(&RC,&n));      /* shortest distance    */
+    hit  = (d <= radius);
+    if  (hit) {             /* if ray hits cylinder */
+        O = cross_product(RC,axis);
+        t = - vector_sum(&O,&n) / ln;
+        O = cross_product(n,axis);
+		vector_normalize(&O);
+        s = fabs (sqrt(radius*radius - d*d) / vector_sum(&raycos,&O));
+        *in  = t - s;           /* entering distance    */
+        *out = t + s;           /* exiting  distance    */
+    }
+ 
+    return (hit);
+}
+
+int
 	intersect_cylinder
 	(void *data,
 	t_point pos_start,
@@ -43,7 +93,10 @@ int
 	t_cylinder	*cyl;
 
 	cyl = (t_cylinder *)data;
-	pos_start = vector_new(pos_start.x - cyl->pos.x, pos_start.y - cyl->pos.y, pos_start.z - cyl->pos.z);
+	pos_start =
+	vector_new(pos_start.x - cyl->pos.x,
+	pos_start.y - cyl->pos.y, pos_start.z - cyl->pos.z);
+	exit(0);
 	return (0);
 }
 
