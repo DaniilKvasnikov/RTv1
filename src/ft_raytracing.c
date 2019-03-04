@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 16:09:36 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/04 17:33:04 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/04 20:42:13 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void
 
 	if (
 //		(pos[Y_P] == (WIN_H / 2)) &&
+//		(pos[X_P] == (WIN_W / 2 + 1)) &&
 		obj->intersect(obj->data, data->mydata->pos, vect, &inter_pos) == 1)
 	{
 		v = vector_mul(data->mydata->pos, inter_pos);
@@ -95,6 +96,7 @@ void
 			if (ft_shodow(data, inter_pos, obj) == 1)
 				delta = 0.0;
 			color = color_new(color, 0.3 + 0.7 * delta);
+//			printf("%lf %lf %lf %lf\n", norm.x, norm.y, norm.z, delta);
 			ft_draw_px(data, pos[X_P], pos[Y_P], color);
 		}
 	}

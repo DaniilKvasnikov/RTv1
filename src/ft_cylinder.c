@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 18:15:14 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/04 19:11:07 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/04 20:52:48 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -241,9 +241,30 @@ t_point
 	t_point intersection_pos)
 {
 	t_cylinder	*cylinder;
+	double		angle;
+	t_point		vect;
+	double		len;
 
 	cylinder = (t_cylinder *)data;
-	return (cylinder->vect);
+	vect = vector_mul(cylinder->pos, intersection_pos);
+	len = module_vector(&vect);
+	vector_normalize(&vect);
+	angle = vector_sum(&cylinder->vect, &vect);
+	len = len * angle;
+	vect = vector_mul(
+		intersection_pos,
+		vector_new(
+		cylinder->pos.x + cylinder->vect.x * len,
+		cylinder->pos.y + cylinder->vect.y * len,
+		cylinder->pos.z + cylinder->vect.z * len));
+	len = module_vector(&vect);
+	vector_normalize(&vect);
+	if (len < (cylinder->rad - 0.001))
+		if (angle < 0.01)
+			vect = vector_new(cylinder->vect.x, cylinder->vect.y, cylinder->vect.z);
+		else
+			vect = vector_new(-cylinder->vect.x, -cylinder->vect.y, -cylinder->vect.z);
+	return (vect);
 }
 
 void
