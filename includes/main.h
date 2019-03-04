@@ -22,6 +22,7 @@
 # define WIN_W (WIN_H * 16 / 10)
 # define WIN_S (WIN_W * WIN_H)
 
+# define HUGE 1.0e21
 # define EPSILON 1e-5
 
 # define B_SPACE 49
@@ -133,6 +134,7 @@ t_point			ft_matrix_mul(t_point v, t_matrix *m);
 void			ft_matrix_init(t_data *data, double a_x, double a_y, double a_z);
 
 void			ft_parser(t_mydata *mydata);
+char			*ft_get_info(char *line, char **p, char **name);
 
 # include "ft_sphere.h"
 # include "ft_triangle.h"

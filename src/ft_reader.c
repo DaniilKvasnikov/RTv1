@@ -1,5 +1,13 @@
 #include "main.h"
 
+void	ft_parse_error(char *msg)
+{
+	ft_printf("PARSE ERROR : ");
+	if (msg)
+		ft_printf("%s\n", msg);
+	exit(0);
+}
+
 void ft_remove_tabs(char **str)
 {
 	int i;
@@ -36,12 +44,26 @@ void ft_read_file(t_mydata *mydata)
 	close(fd);
 }
 
-void	ft_parser(t_mydata *mydata)
+void ft_parser(t_mydata *mydata)
 {
 	char *input;
+	char *content;
+	char *p;
+	char *name;
 
 	ft_read_file(mydata);
 	input = mydata->input;
-
-/* добавить парсинг названий и контента объектов */
+	name = NULL;
+	p = NULL;
+	while ((content = ft_get_info(input, &p, &name)))
+	{
+		input = p;
+		if (!*content)
+			break;
+		ft_strdel(&name);
+		ft_strdel(&content);
+	}
+	 if (content != NULL)
+		ft_parse_error("Invalid file");
+	/* добавить вставку объектов на основе name и content */
 }

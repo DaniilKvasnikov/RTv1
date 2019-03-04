@@ -80,7 +80,7 @@ int
 
 	RC = vector_new(raybase.x - base.x, raybase.y - base.y, raybase.z - base.z);
     n = cross_product(raycos,axis);
- 
+
     if  ( (ln = module_vector(&n)) == 0 ) {    /* ray parallel to cyl  */
         d    = vector_sum(&RC,&axis);
 		D = vector_new(RC.x - d*axis.x, RC.y - d*axis.y, RC.z - d*axis.z);
@@ -90,7 +90,7 @@ int
         return (d <= radius);       /* true if ray is in cyl*/
     }
 	vector_normalize(&n);
- 
+
     d    = fabs(vector_sum(&RC,&n));      /* shortest distance    */
     hit  = (d <= radius);
     if  (hit) {             /* if ray hits cylinder */
@@ -102,7 +102,7 @@ int
         *in  = t - s;           /* entering distance    */
         *out = t + s;           /* exiting  distance    */
     }
- 
+
     return (hit);
 }
 
@@ -111,7 +111,7 @@ void
 	(t_point *p,
 	char *s)
 {
-	printf("%s %lf %lf %lf\n", s, p->x, p->y, p->z);
+//	printf("%s %lf %lf %lf\n", s, p->x, p->y, p->z);
 }
 
 int
