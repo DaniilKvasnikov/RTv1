@@ -32,7 +32,30 @@ t_cylinder
 	cylinder->color = color;
 	return (cylinder);
 }
-
+/* ---- intcyl - Пересечь луч с цилиндром. --------------------- */
+/* */
+/* */
+/*	Описание:							*/
+/* Intcyl определяет пересечение луча с */
+/* цилиндр. */
+/* */
+/* На входе: */
+/* raybase = базовая точка пересекающегося луча. */
+/* raycos = Направляющие косинусы вышеупомянутого луча. (единица измерения)	*/
+/* base = Базовое местоположение цилиндра. */
+/* ось = ось симметрии для цилиндра. (единица измерения)	*/
+/* radius = радиус цилиндра. */
+/* */
+/* По возвращении: */
+/* in = Входное расстояние пересечения. */
+/* out = расстояние до пересечения. */
+/* */
+/* Returns: True, если луч пересекает цилиндр. */
+/* */
+/* Примечание: вход и / или выход может быть отрицательным, указывая */
+/* цилиндр расположен за началом луча. */
+/* */
+/* ------------------------------------------------ -------------------- */
 int
 	intersect_cylinder2
 	(t_point raybase,
@@ -83,6 +106,14 @@ int
     return (hit);
 }
 
+void
+	ft_printf_vect
+	(t_point *p,
+	char *s)
+{
+	printf("%s %lf %lf %lf\n", s, p->x, p->y, p->z);
+}
+
 int
 	intersect_cylinder
 	(void *data,
@@ -91,13 +122,15 @@ int
 	t_point *intersection_pos)
 {
 	t_cylinder	*cyl;
+	double		in;
+	double		out;
+	int			res;
 
 	cyl = (t_cylinder *)data;
-	pos_start =
-	vector_new(pos_start.x - cyl->pos.x,
-	pos_start.y - cyl->pos.y, pos_start.z - cyl->pos.z);
-	exit(0);
-	return (0);
+	res = 0;
+	ft_printf_vect(&cyl->vect, "cyl->vect");
+	res = intersect_cylinder2(pos_start, vect_start, cyl->pos, cyl->vect, cyl->rad, &in, &out);
+	return (res);
 }
 
 int

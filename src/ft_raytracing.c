@@ -81,17 +81,17 @@ void
 		v = vector_mul(data->mydata->pos, inter_pos);
 		len = module_vector(&v);
 		if (len < data->mydata->depth[pos[X_P] + pos[Y_P] * WIN_W]
-//		&& (pos[Y_P] == (WIN_H / 2 + 50))
+//		&& (pos[X_P] == (WIN_W / 2))
 		)
 		{
 			data->mydata->depth[pos[X_P] + pos[Y_P] * WIN_W] = len;
-			norm = obj->get_normal_vector(obj->data, inter_pos);
+//			norm = obj->get_normal_vector(obj->data, inter_pos);
 			color = obj->get_color(obj->data, inter_pos);
-			light = vector_mul(*(data->mydata->light), inter_pos);
-			vector_normalize(&light);
-			delta = vector_sum(&norm, &light);
-			delta = delta * (double)(delta >= 0);
-			if (ft_shodow(data, inter_pos, obj) == 1)
+//			light = vector_mul(*(data->mydata->light), inter_pos);
+//			vector_normalize(&light);
+//			delta = vector_sum(&norm, &light);
+//			delta = delta * (double)(delta >= 0);
+//			if (ft_shodow(data, inter_pos, obj) == 1)
 				delta = 0.0;
 			color = color_new(color, 0.3 + 0.7 * delta);
 			ft_draw_px(data, pos[X_P], pos[Y_P], color);
