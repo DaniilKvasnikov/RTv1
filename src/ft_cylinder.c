@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 18:15:14 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/02 16:06:51 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/04 12:40:22 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,13 +91,13 @@ int
 	t_point *intersection_pos)
 {
 	t_cylinder	*cyl;
+	double		in;
+	double		out;
 
 	cyl = (t_cylinder *)data;
-	pos_start =
-	vector_new(pos_start.x - cyl->pos.x,
-	pos_start.y - cyl->pos.y, pos_start.z - cyl->pos.z);
-	exit(0);
-	return (0);
+	return (
+		intersect_cylinder2(pos_start, vect_start, cyl->pos, cyl->vect,
+		cyl->rad, &in, &out));
 }
 
 int

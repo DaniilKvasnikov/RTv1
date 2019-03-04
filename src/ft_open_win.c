@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/05 07:03:09 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/02 15:47:01 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/04 12:45:16 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void
 		data,
 		new_cylinder(
 			vector_new(0, 0, 10),
-			vector_new(0, 0, 1),
+			vector_new(0.5, 0.5, 0),
 			10.0,
 			1.0,
 			0x00ff00));
