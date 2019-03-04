@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 16:09:36 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/01 14:38:38 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/04 17:33:04 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ int
 	while (++index < data->mydata->objects_count)
 	{
 		obj = data->mydata->objects[index];
-		if (obj != this && obj->intersect(obj->data, inter_pos, light, &new_inter_pos))
+		if (obj != this &&
+		obj->intersect(obj->data, inter_pos, light, &new_inter_pos))
 		{
 			shodow = vector_mul(new_inter_pos, *(data->mydata->light));
 			new_len = module_vector(&shodow);
@@ -70,19 +71,19 @@ void
 {
 	t_point		inter_pos;
 	t_point		v;
-	float		len;
+	double		len;
 	t_point		norm;
 	int			color;
 	t_point		light;
 	double		delta;
 
-	if (obj->intersect(obj->data, data->mydata->pos, vect, &inter_pos) == 1)
+	if (
+//		(pos[Y_P] == (WIN_H / 2)) &&
+		obj->intersect(obj->data, data->mydata->pos, vect, &inter_pos) == 1)
 	{
 		v = vector_mul(data->mydata->pos, inter_pos);
 		len = module_vector(&v);
-		if (len < data->mydata->depth[pos[X_P] + pos[Y_P] * WIN_W]
-//		&& (pos[Y_P] == (WIN_H / 2 + 50))
-		)
+		if (len < data->mydata->depth[pos[X_P] + pos[Y_P] * WIN_W])
 		{
 			data->mydata->depth[pos[X_P] + pos[Y_P] * WIN_W] = len;
 			norm = obj->get_normal_vector(obj->data, inter_pos);

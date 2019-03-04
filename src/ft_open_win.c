@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/05 07:03:09 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/04 12:45:16 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/04 17:30:03 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void
 	data->mydata->light_count = 1;
 	data->mydata->light =
 	(t_point *)malloc(sizeof(t_point) * data->mydata->light_count);
-	data->mydata->light->x = 10;
+	data->mydata->light->x = 5;
 	data->mydata->light->y = 0;
 	data->mydata->light->z = 0;
 	ft_parser(data->mydata);
@@ -64,9 +64,9 @@ void
 	objects_add_cylinder(
 		data,
 		new_cylinder(
-			vector_new(0, 0, 10),
-			vector_new(0.5, 0.5, 0),
-			10.0,
+			vector_new(0, 0, 5),
+			vector_new(1, 0, 5),
+			4.0,
 			1.0,
 			0x00ff00));
 }
@@ -87,8 +87,8 @@ void
 		return ;
 	ft_start_game(&data, argc, argv);
 	mlx_do_key_autorepeaton(data.mlx_ptr);
-	mlx_expose_hook(data.mlx_win, ft_draw, &data);
-//	mlx_loop_hook(data.mlx_ptr, ft_draw, &data);
+//	mlx_expose_hook(data.mlx_win, ft_draw, &data);
+	mlx_loop_hook(data.mlx_ptr, ft_draw, &data);
 	mlx_hook(data.mlx_win, 2, 1L << 2, key_press, &data);
 	mlx_hook(data.mlx_win, 3, 1L << 3, key_release, &data);
 	mlx_hook(data.mlx_win, 17, 1L << 17, ft_close, &data);

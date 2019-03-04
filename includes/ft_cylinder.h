@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 18:15:02 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/01 18:20:53 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/04 16:29:27 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ typedef struct	s_cylinder
 {
 	t_point		pos;
 	t_point		vect;
+	t_point		pos2;
 	double		h;
 	double		rad;
 	int			color;
