@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 18:15:14 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/04 17:33:36 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/04 19:11:07 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,28 +197,26 @@ int
 	t_cylinder	*cyl;
 	double		in;
 	double		out;
-	double		surfin;
-	double		surfout;
+	int			surfin;
+	int			surfout;
 	int			res;
-	t_point		vect1;
-	t_point		vect2;
-	double		delta1;
-	double		delta2;
 	t_plane2	bot;
 	t_plane2	top;
 
 	cyl = (t_cylinder *)data;
-	res = intersect_cylinder2(pos_start, vect_start, cyl->pos, cyl->vect,
-		cyl->rad, &in, &out);
 	bot.a = -cyl->vect.x;
 	bot.b = -cyl->vect.y;
 	bot.c = -cyl->vect.z;
-	bot.d = cyl->vect.x * cyl->pos.x + cyl->vect.y * cyl->pos.y + cyl->vect.z * cyl->pos.z;
+	bot.d = cyl->vect.x * cyl->pos.x + cyl->vect.y * cyl->pos.y
+	+ cyl->vect.z * cyl->pos.z;
 	top.a = cyl->vect.x;
 	top.b = cyl->vect.y;
 	top.c = cyl->vect.z;
-	top.d = -cyl->vect.x * cyl->pos2.x - cyl->vect.y * cyl->pos2.y - cyl->vect.z * cyl->pos2.z;
-	res = res && clipobj(&pos_start, &vect_start, &bot, &top, &in, &out, &surfin, &surfout);
+	top.d = -cyl->vect.x * cyl->pos2.x - cyl->vect.y * cyl->pos2.y
+	- cyl->vect.z * cyl->pos2.z;
+	res = intersect_cylinder2(pos_start, vect_start, cyl->pos, cyl->vect,
+	cyl->rad, &in, &out) &&
+	clipobj(&pos_start, &vect_start, &bot, &top, &in, &out, &surfin, &surfout);
 	*intersection_pos = vector_new(
 		pos_start.x + (vect_start.x * in),
 		pos_start.y + (vect_start.y * in),
