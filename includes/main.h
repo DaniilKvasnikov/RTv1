@@ -71,6 +71,17 @@ typedef struct	s_img
 	int			endian;
 }				t_img;
 
+typedef struct			s_parsed
+{
+	int					type;
+	t_point				pos;
+	t_point				vect;
+	float				rad;
+	double 				color;
+	double				h;
+	struct s_parsed		*next;
+}						t_parsed;
+
 typedef struct	s_obj3d
 {
 	void		*data;
@@ -79,15 +90,6 @@ typedef struct	s_obj3d
 	int			(*get_color)(void *data, t_point intersection_pos);
     t_point		(*get_normal_vector)(void *data, t_point intersection_pos);
 }				t_obj3d;
-
-typedef struct	s_parsed
-{
-	int			type;
-	t_point		pos;
-	float		rad;
-	int			color;
-	struct	s_parsed	*next;
-}				t_parsed;
 
 typedef struct	s_mydata
 {
@@ -143,12 +145,9 @@ t_point			cross_product(t_point a, t_point b);
 t_point			ft_matrix_mul(t_point v, t_matrix *m);
 void			ft_matrix_init(t_data *data, double a_x, double a_y, double a_z);
 
-void			ft_parser(t_mydata *mydata);
-char			*ft_get_info(char *line, char **p, char **name, int t);
-
 # include "ft_sphere.h"
 # include "ft_triangle.h"
 # include "ft_plane.h"
 # include "ft_cylinder.h"
-
+# include "ft_parsed.h"
 #endif
