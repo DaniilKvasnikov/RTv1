@@ -27,40 +27,51 @@ char *ft_get_close(char *str, char a)
 	return (NULL);
 }
 
-char *get_name(char *line)
+char *get_name(char *line, int type)
 {
 	char *p;
 	char *op;
 	char *clos;
 
 	op = line;
-	clos = ft_get_close(op, '{');
+	if (!type)
+		clos = ft_get_close(op, '{');
+	else if (type)
+		clos = ft_get_close(op, ':');
 	p = ft_strndup(op, clos - op);
 	return (p);
 }
 
-char *get_content(char *line)
+char *get_content(char *line, int type)
 {
 	char *p;
 	char *op;
 	char *clos;
 
 	p = line;
-	op = ft_get_close(p, '{') + 1;
-	clos = ft_get_close(op, '}');
+	if (!type)
+	{
+		op = ft_get_close(p, '{') + 1;
+		clos = ft_get_close(op, '}');
+	}
+	else if (type)
+	{
+		op = ft_get_close(p, ':') + 1;
+		clos = ft_get_close(op, ';');
+	}
 	p = ft_strndup(op, clos - op);
 	return (p);
 }
 
-char *ft_get_info(char *line, char **p, char **name)
+char *ft_get_info(char *line, char **p, char **name, int t)
 {
 	char *content;
 
 	content = NULL;
 	if (!line || !*line)
 		return (NULL);
-	*name = get_name(line);
-	content = get_content(line);
+	*name = get_name(line, t);
+	content = get_content(line, t);
 	*p = line + ft_strlen(*name) + ft_strlen(content) + 2;
 	return (content);
 }

@@ -80,6 +80,15 @@ typedef struct	s_obj3d
     t_point		(*get_normal_vector)(void *data, t_point intersection_pos);
 }				t_obj3d;
 
+typedef struct	s_parsed
+{
+	int			type;
+	t_point		pos;
+	float		rad;
+	int			color;
+	struct	s_parsed	*next;
+}				t_parsed;
+
 typedef struct	s_mydata
 {
 	t_point		pos;
@@ -91,6 +100,7 @@ typedef struct	s_mydata
 	int			argc;
 	char		*input;
 	t_matrix	*mat;
+	t_parsed	*parsed_obj;
     t_obj3d		**objects;
 	int			light_count;
 	t_point		*light;
@@ -134,7 +144,7 @@ t_point			ft_matrix_mul(t_point v, t_matrix *m);
 void			ft_matrix_init(t_data *data, double a_x, double a_y, double a_z);
 
 void			ft_parser(t_mydata *mydata);
-char			*ft_get_info(char *line, char **p, char **name);
+char			*ft_get_info(char *line, char **p, char **name, int t);
 
 # include "ft_sphere.h"
 # include "ft_triangle.h"

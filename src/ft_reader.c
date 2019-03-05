@@ -1,6 +1,6 @@
 #include "main.h"
 
-void	ft_parse_error(char *msg)
+void ft_parse_error(char *msg)
 {
 	ft_printf("PARSE ERROR : ");
 	if (msg)
@@ -44,6 +44,77 @@ void ft_read_file(t_mydata *mydata)
 	close(fd);
 }
 
+ t_parsed *new_obj(void)
+{
+
+	t_parsed *new;
+
+	new = (t_parsed *)ft_memalloc(sizeof(t_parsed));
+	new->type = 1;
+	new->pos = vector_new(0, 0, 10);
+	new->rad = 1;
+	new->color = RGB_RED;
+	new->next = NULL;
+	return (new);
+}
+
+void obj_push_back(t_parsed  **list, t_parsed *cur)
+{
+	if (!list)
+		return;
+	while (*list)
+		list = &(*list)->next;
+	*list = cur;
+}
+
+void	tag_pack_one(t_parsed *obj, char *tag, char *content)
+{
+	if (ft_strequ(tag, "rad"))
+		obj->type = ft_atoi(content);
+}
+
+
+
+void	ft_parse_object(t_parsed *obj, char *line)
+{
+	char *input;
+	char *content;
+	char *ptr;
+	char *tag;
+
+	input = line;
+	tag = NULL;
+	content = NULL;
+	while ((content = ft_get_info(input, &ptr, &tag, 1)))
+	{
+		input = ptr;
+		ft_printf("%s +++ %s\n", tag, content);
+		if (!*content)
+			break ;
+		tag_pack_one(obj, tag, content);
+		ft_strdel(&tag);
+		ft_strdel(&content);
+	}
+}
+
+void ft_add_object(t_mydata *mydata, char *name, char *content)
+{
+	t_parsed *obj;
+
+	if (ft_strequ(name, "sphere"))
+	{
+		obj = new_obj();
+		ft_parse_object(obj, content);
+		obj_push_back(&mydata->parsed_obj, obj);
+	}
+	/* else if (ft_strequ(name, "light"))
+	{
+
+	} */
+	/* else
+		ft_parse_error("Unknown object !"); */
+}
+
 void ft_parser(t_mydata *mydata)
 {
 	char *input;
@@ -55,15 +126,16 @@ void ft_parser(t_mydata *mydata)
 	input = mydata->input;
 	name = NULL;
 	p = NULL;
-	while ((content = ft_get_info(input, &p, &name)))
+	while ((content = ft_get_info(input, &p, &name, 0)))
 	{
 		input = p;
 		if (!*content)
 			break;
+		ft_add_object(mydata, name, content);
 		ft_strdel(&name);
 		ft_strdel(&content);
 	}
-	 if (content != NULL)
+	if (content != NULL)
 		ft_parse_error("Invalid file");
 	/* добавить вставку объектов на основе name и content */
 }
