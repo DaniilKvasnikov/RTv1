@@ -44,7 +44,7 @@ void ft_read_file(t_mydata *mydata)
 	close(fd);
 }
 
- t_parsed *new_obj(void)
+t_parsed *new_obj(void)
 {
 
 	t_parsed *new;
@@ -67,7 +67,7 @@ void obj_push_back(t_parsed  **list, t_parsed *cur)
 	*list = cur;
 }
 
-void	tag_pack_one(t_parsed *obj, char *tag, char *content)
+void tags_pack(t_parsed *obj, char *tag, char *content)
 {
 	if (ft_strequ(tag, "rad"))
 		obj->type = ft_atoi(content);
@@ -88,10 +88,9 @@ void	ft_parse_object(t_parsed *obj, char *line)
 	while ((content = ft_get_info(input, &ptr, &tag, 1)))
 	{
 		input = ptr;
-		ft_printf("%s +++ %s\n", tag, content);
 		if (!*content)
 			break ;
-		tag_pack_one(obj, tag, content);
+		tags_pack(obj, tag, content);
 		ft_strdel(&tag);
 		ft_strdel(&content);
 	}
