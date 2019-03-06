@@ -76,6 +76,9 @@ typedef struct			s_parsed
 	int					type;
 	t_point				pos;
 	t_point				vect;
+	t_point				p1;
+	t_point				p2;
+	t_point				p3;
 	float				rad;
 	double 				color;
 	double				h;

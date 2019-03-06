@@ -33,5 +33,5 @@ void ft_parser(t_data **data)
 	if (content != NULL)
 		ft_parse_error("Invalid file");
 	/* пока lights вносится сразу, объекты хранятся в parsed
-	доработать: добавлять объекты сразу в obj3d */
+	доработать: добавлять объекты в obj3d */
 }

@@ -1,0 +1,58 @@
+#include "main.h"
+
+unsigned int ft_atoh(char *ap)
+{
+	char *p;
+	unsigned int n;
+	int digit;
+	int lcase;
+
+	p = ap;
+	n = 0;
+	while (*p == ' ' || *p == '	')
+		p++;
+	if (*p == '0' && ((*(p + 1) == 'x') || (*(p + 1) == 'X')))
+		p += 2;
+	while ((digit = (*p >= '0' && *p <= '9')) ||
+		   (lcase = (*p >= 'a' && *p <= 'f')) ||
+		   (*p >= 'A' && *p <= 'F'))
+	{
+		n *= 16;
+		if (digit)
+			n += *p++ - '0';
+		else if (lcase)
+			n += 10 + (*p++ - 'a');
+		else
+			n += 10 + (*p++ - 'A');
+	}
+	return (n);
+}
+
+float ft_atof(const char *s)
+{
+	int		point[2];
+	float	rez[2];
+
+	point[0] = 0;
+	rez[0] = 0;
+	rez[1] = 1;
+	if (*s == '-')
+	{
+		s++;
+		rez[1] = -1;
+	}
+	while (*s)
+	{
+		if (*s == '.')
+			point[0] = 1;
+		point[1] = *s - '0';
+		if (point[1] >= 0 && point[1] <= 9)
+		{
+			if (point[0])
+				rez[1] /= 10.0f;
+			rez[0] = rez[0] * 10.0f + (float)point[1];
+		}
+		s++;
+	}
+	return (rez[0] * rez[1]);
+}

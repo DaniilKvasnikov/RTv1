@@ -35,6 +35,7 @@ void
 	data->mydata->light->y = 0;
 	data->mydata->light->z = 0;
 	ft_parser(&data);
+	ft_parsed_to_obj(&data);
 	// objects_add_sphere(
 	// 	data,
 	// 	new_sphere(
