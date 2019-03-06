@@ -10,3 +10,11 @@ sphere
 	pos: -3, 0, 35;
 	color: 0xff0000;
 }
+cylinder
+{
+	pos: 0, 0, 10;
+	vect: 1.0, 0.5, 0;
+	h: 10.;
+	rad: 1.0;
+	color: 0x00ff00;
+}

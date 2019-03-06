@@ -12,6 +12,15 @@ void		ft_add_obj(t_data **data, t_parsed *parsed)
 			parsed->pos,
 			parsed->rad,
 			parsed->color));
+	if (parsed->type == 2)
+		 objects_add_cylinder(
+		list,
+		new_cylinder(
+			parsed->pos,
+			parsed->vect,
+			parsed->h,
+			parsed->rad,
+			parsed->color));
 }
 
 void		ft_parsed_to_obj(t_data **data)

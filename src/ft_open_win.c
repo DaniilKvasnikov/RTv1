@@ -62,14 +62,14 @@ void
 	// 			vector_new(1.5, 1.5, 10.5),
 	// 			0x00ff00),
 	// 		0x008888));
-	objects_add_cylinder(
+/* 	objects_add_cylinder(
 		data,
 		new_cylinder(
 			vector_new(0, 0, 10),
 			vector_new(0.5, 0.5, 0),
 			10.0,
 			1.0,
-			0x00ff00));
+			0x00ff00)); */
 }
 
 void
