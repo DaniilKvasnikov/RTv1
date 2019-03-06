@@ -18,3 +18,10 @@ cylinder
 	rad: 1.0;
 	color: 0x00ff00;
 }
+triangle
+{
+	p1: -5, -10, 30;
+	p2: 5, -10, 30;
+	p3: 0, -15, 30;
+	color: 0xffffff;
+}

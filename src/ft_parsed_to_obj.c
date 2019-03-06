@@ -1,32 +1,28 @@
 #include "main.h"
 
-void		ft_add_obj(t_data **data, t_parsed *parsed)
+void ft_add_obj(t_data **data, t_parsed *p)
 {
-	t_data	*list;
+	t_data *list;
 
 	list = *data;
-	if (parsed->type == 1)
-		 objects_add_sphere(
-		list,
-		new_sphere(
-			parsed->pos,
-			parsed->rad,
-			parsed->color));
-	if (parsed->type == 2)
-		 objects_add_cylinder(
-		list,
-		new_cylinder(
-			parsed->pos,
-			parsed->vect,
-			parsed->h,
-			parsed->rad,
-			parsed->color));
+	if (p->type == 1)
+		objects_add_sphere(
+			list,
+			new_sphere(p->pos, p->rad, p->color));
+	if (p->type == 2)
+		objects_add_cylinder(
+			list,
+			new_cylinder(p->pos, p->vect, p->h, p->rad, p->color));
+	if (p->type == 3)
+		objects_add_triangle(
+			list,
+			new_triangle(p->p1, p->p2, p->p3, p->color));
 }
 
-void		ft_parsed_to_obj(t_data **data)
+void ft_parsed_to_obj(t_data **data)
 {
-	t_data		*list;
-	t_parsed	*parsed;
+	t_data *list;
+	t_parsed *parsed;
 
 	list = *data;
 	parsed = list->mydata->parsed_obj;

@@ -6,6 +6,9 @@ t_parsed	*new_obj(void)
 
 	new = (t_parsed *)ft_memalloc(sizeof(t_parsed));
 	new->type = 1;
+	new->p1 = vector_new(-1.5, -1.5, 10.5);
+	new->p2 = vector_new(-1.5, 1.5, 10.5);
+	new->p3 = vector_new(1.5, -1.5, 10.5);
 	new->pos = vector_new(0, 0, 10);
 	new->vect = vector_new(0.5, 0.5, 0);
 	new->rad = 2;
@@ -30,9 +33,9 @@ int			ft_is_obj(char *name)
 		return (1);
 	else if (ft_strequ(name, "cylinder"))
 		return (2);
-	else if (ft_strequ(name, "plane"))
-		return (3);
 	else if (ft_strequ(name, "triangle"))
+		return (3);
+	else if (ft_strequ(name, "plane"))
 		return (4);
 	else if (ft_strequ(name, "light"))
 		return (5);

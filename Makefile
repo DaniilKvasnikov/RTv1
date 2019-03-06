@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/01/30 19:01:08 by rrhaenys          #+#    #+#              #
-#    Updated: 2019/02/22 17:53:06 by rrhaenys         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 NAME = RTv1
 COMMAND = gcc
 FLAGS = -Wall -Wextra #-Werror
@@ -47,3 +35,4 @@ fclean: clean
 re: fclean all
 
 .PHONY: clean fclean all re
+

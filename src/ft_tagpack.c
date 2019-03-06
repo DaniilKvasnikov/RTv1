@@ -1,6 +1,6 @@
 #include "main.h"
 
-t_point		ft_get_vector(char *value)
+t_point ft_get_vector(char *value)
 {
 	double x;
 	double y;
@@ -14,7 +14,7 @@ t_point		ft_get_vector(char *value)
 	return (vector_new(x, y, z));
 }
 
-void		tags_pack(t_parsed **obj3, char *tag, char *content)
+void tags_pack(t_parsed **obj3, char *tag, char *content)
 {
 	t_parsed *obj;
 
@@ -29,9 +29,15 @@ void		tags_pack(t_parsed **obj3, char *tag, char *content)
 		obj->vect = ft_get_vector(content);
 	else if (ft_strequ(tag, "h"))
 		obj->h = ft_atoi(content);
+	else if (ft_strequ(tag, "p1"))
+		obj->p1 = ft_get_vector(content);
+	else if (ft_strequ(tag, "p2"))
+		obj->p2 = ft_get_vector(content);
+	else if (ft_strequ(tag, "p3"))
+		obj->p3 = ft_get_vector(content);
 }
 
-void		ft_parse_object(t_parsed **obj, char *line)
+void ft_parse_object(t_parsed **obj, char *line)
 {
 	char *input;
 	char *content;
