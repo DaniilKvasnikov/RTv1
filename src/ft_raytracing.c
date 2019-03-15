@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 16:09:36 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/15 17:32:03 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/15 18:12:46 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int
 	t_obj3d	*obj;
 	t_point	new_inter_pos;
 
-	light = vector_mul(inter_pos, *(data->mydata->light));
+	light = vector_mul(inter_pos, *(data->mydata->lights->light));
 	len = module_vector(&light);
 	vector_normalize(&light);
 	index = -1;
@@ -53,7 +53,7 @@ int
 		if (obj != this &&
 		obj->intersect(obj->data, inter_pos, light, &new_inter_pos))
 		{
-			shodow = vector_mul(new_inter_pos, *(data->mydata->light));
+			shodow = vector_mul(new_inter_pos, *(data->mydata->lights->light));
 			new_len = module_vector(&shodow);
 			if (new_len < len)
 			{
@@ -94,13 +94,13 @@ void
 			data->mydata->depth[pos[X_P] + pos[Y_P] * WIN_W] = len;
 			norm = obj->get_normal_vector(obj->data, inter_pos);
 			color = obj->get_color(obj->data, inter_pos);
-			light = vector_mul(*(data->mydata->light), inter_pos);
+			light = vector_mul(data->mydata->lights->light[0], inter_pos);
 			vector_normalize(&light);
 			delta = vector_sum(&norm, &light);
-			delta = delta * (double)(delta >= 0);
+			delta = (delta > 1.0) + delta * (double)((delta >= 0) * (delta <= 1.0));
 			if (ft_shodow(data, inter_pos, obj) == 1)
 				delta = 0.0;
-			color = color_new(color, 0.3 + 0.7 * delta);
+			color = color_new(color, 0.3 + data->mydata->lights->l_pows[0] * delta);
 //			printf("%lf %lf %lf %lf\n", norm.x, norm.y, norm.z, delta);
 			ft_draw_px(data, pos[X_P], pos[Y_P], color);
 		}

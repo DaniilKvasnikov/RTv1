@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 19:44:56 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/15 16:51:28 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/15 18:06:45 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,13 @@ typedef struct	s_obj3d
     t_point		(*get_normal_vector)(void *data, t_point intersection_pos);
 }				t_obj3d;
 
+typedef struct	s_lights
+{
+	int			light_count;
+	t_point		*light;
+	double		*l_pows;
+}				t_lights;
+
 typedef struct	s_mydata
 {
 	t_point		pos;
@@ -91,8 +98,7 @@ typedef struct	s_mydata
 	char		*input;
 	t_matrix	*mat;
     t_obj3d		**objects;
-	int			light_count;
-	t_point		*light;
+	t_lights	*lights;
     int			objects_count;
 }				t_mydata;
 
@@ -133,6 +139,9 @@ t_point			ft_matrix_mul(t_point v, t_matrix *m);
 void			ft_matrix_init(t_data *data, double a_x, double a_y, double a_z);
 
 void			ft_parser(t_mydata *mydata);
+
+void			ft_add_lights
+				(t_data *data, double x, double y, double z, double l_pow);
 
 # include "ft_sphere.h"
 # include "ft_triangle.h"
