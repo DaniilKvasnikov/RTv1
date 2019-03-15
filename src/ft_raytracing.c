@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 16:09:36 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/15 18:12:46 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/15 18:54:48 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,33 @@ int
 	return (0);
 }
 
+double
+	ft_get_delta_light
+	(t_data *data,
+	t_point inter_pos,
+	t_obj3d *obj)
+{
+	double	delta;
+	double	n_delta;
+	t_point	light;
+	t_point	norm;
+	int		index;
+
+	index = -1;
+	delta = 0.0;
+	while (++index < data->mydata->lights->light_count)
+	{
+		norm = obj->get_normal_vector(obj->data, inter_pos);
+		light = vector_mul(data->mydata->lights->light[index], inter_pos);
+		n_delta = vector_sum(&norm, &light);
+		n_delta = n_delta * (double)(n_delta >= 0);
+		if (ft_shodow(data, inter_pos, obj) == 0)
+			if (delta < (data->mydata->lights->l_pows[index] * n_delta))
+				delta = data->mydata->lights->l_pows[index] * n_delta;
+	}
+	return (delta);
+}
+
 void
 	ft_raytracing
 	(t_data *data,
@@ -83,7 +110,7 @@ void
 	double		delta;
 
 	if (
-//		(pos[Y_P] == (WIN_H / 2)) &&
+//		(pos[Y_P] == (WIN_H / 2 - 50)) &&
 //		(pos[X_P] == (WIN_W / 2 + 1)) &&
 		obj->intersect(obj->data, data->mydata->pos, vect, &inter_pos) == 1)
 	{
@@ -94,13 +121,10 @@ void
 			data->mydata->depth[pos[X_P] + pos[Y_P] * WIN_W] = len;
 			norm = obj->get_normal_vector(obj->data, inter_pos);
 			color = obj->get_color(obj->data, inter_pos);
-			light = vector_mul(data->mydata->lights->light[0], inter_pos);
-			vector_normalize(&light);
-			delta = vector_sum(&norm, &light);
-			delta = (delta > 1.0) + delta * (double)((delta >= 0) * (delta <= 1.0));
-			if (ft_shodow(data, inter_pos, obj) == 1)
-				delta = 0.0;
-			color = color_new(color, 0.3 + data->mydata->lights->l_pows[0] * delta);
+			delta = ft_get_delta_light(data, inter_pos, obj);
+			if (delta > 0.9)
+				delta = 0.9;
+			color = color_new(color, 0.1 + delta);
 //			printf("%lf %lf %lf %lf\n", norm.x, norm.y, norm.z, delta);
 			ft_draw_px(data, pos[X_P], pos[Y_P], color);
 		}

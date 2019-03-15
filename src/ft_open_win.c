@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/05 07:03:09 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/15 18:10:10 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/15 18:51:02 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ void
 	data->mydata->mat = (t_matrix *)malloc(sizeof(t_matrix));
 	data->mydata->lights = (t_lights *)malloc(sizeof(t_lights));
 	data->mydata->lights->light_count = 0;
-	ft_add_lights(data, 5, 0, 0, 0.4);
-	ft_add_lights(data, -5, 0, 0, 0.4);
+	ft_add_lights(data, 5, 0, 0, 0.2);
+	ft_add_lights(data, -5, 0, 0, 0.2);
 	// ft_parser(data->mydata);
 	// objects_add_sphere(
 	// 	data,
@@ -42,7 +42,7 @@ void
 	objects_add_sphere(
 		data,
 		new_sphere(
-			vector_new(0, 0, 11.5),
+			vector_new(0, 0, 12),
 			2,
 			0x00ff00));
 	// objects_add_plane(
