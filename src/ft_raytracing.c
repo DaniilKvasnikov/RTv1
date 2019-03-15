@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 16:09:36 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/04 20:42:13 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/15 17:32:03 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,12 @@ int
 			shodow = vector_mul(new_inter_pos, *(data->mydata->light));
 			new_len = module_vector(&shodow);
 			if (new_len < len)
+			{
+//				printf("%lf %lf %lf\n", new_inter_pos.x, new_inter_pos.y, new_inter_pos.z);
+//				printf("%lf %lf\n", new_len, len);
+//				printf("%lf %lf %lf %lf\n", norm.x, norm.y, norm.z, delta);
 				return (1);
+			}
 		}
 	}
 	return (0);

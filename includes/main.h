@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 19:44:56 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/01 18:17:04 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/15 16:51:28 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,5 +138,6 @@ void			ft_parser(t_mydata *mydata);
 # include "ft_triangle.h"
 # include "ft_plane.h"
 # include "ft_cylinder.h"
+# include "ft_cone.h"
 
 #endif

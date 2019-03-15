@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/05 07:03:09 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/04 20:55:01 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/15 17:33:43 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,41 +34,48 @@ void
 	data->mydata->light->x = 5;
 	data->mydata->light->y = 0;
 	data->mydata->light->z = 0;
-	ft_parser(data->mydata);
+	// ft_parser(data->mydata);
+	// objects_add_sphere(
+	// 	data,
+	// 	new_sphere(
+	// 		vector_new(0, 0, 10),
+	// 		1,
+	// 		0x0000ff));
 	objects_add_sphere(
 		data,
 		new_sphere(
-			vector_new(0, 0, 10),
-			1,
-			0x0000ff));
-	objects_add_sphere(
-		data,
-		new_sphere(
-			vector_new(-5, 0, 15),
-			5,
-			0xff0000));
-	objects_add_plane(
-		data,
-		new_plane(
-			new_triangle(
-				vector_new(-1.5, -1.5, 10.5),
-				vector_new(-1.5, 1.5, 10.5),
-				vector_new(1.5, 1.5, 10.5),
-				0x00ff00),
-			new_triangle(
-				vector_new(-1.5, -1.5, 10.5),
-				vector_new(1.5, -1.5, 10.5),
-				vector_new(1.5, 1.5, 10.5),
-				0x00ff00),
-			0x008888));
-	objects_add_cylinder(
-		data,
-		new_cylinder(
-			vector_new(-2.5, 0, 9),
-			vector_new(1, 0, 2),
-			4.0,
-			1.0,
+			vector_new(0, 0, 11.5),
+			2,
 			0x00ff00));
+	// objects_add_plane(
+	// 	data,
+	// 	new_plane(
+	// 		new_triangle(
+	// 			vector_new(-1.5, -1.5, 10.5),
+	// 			vector_new(-1.5, 1.5, 10.5),
+	// 			vector_new(1.5, 1.5, 10.5),
+	// 			0x00ff00),
+	// 		new_triangle(
+	// 			vector_new(-1.5, -1.5, 10.5),
+	// 			vector_new(1.5, -1.5, 10.5),
+	// 			vector_new(1.5, 1.5, 10.5),
+	// 			0x00ff00),
+	// 		0x008888));
+	// objects_add_cylinder(
+	// 	data,
+	// 	new_cylinder(
+	// 		vector_new(-2.5, 0, 9),
+	// 		vector_new(1, 0, 2),
+	// 		4.0,
+	// 		1.0,
+	// 		0x00ff00));
+	objects_add_cone(
+		data,
+		new_cone(
+			vector_new(0, 0, 10),
+			vector_new(0, 1, 0),
+			.25,
+			0xff0000));
 }
 
 void
