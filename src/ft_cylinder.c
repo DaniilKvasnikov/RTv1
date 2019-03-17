@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 18:15:14 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/02 16:06:51 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/04 20:52:48 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,34 +28,116 @@ t_cylinder
 	cylinder->pos = pos;
 	cylinder->vect = vect;
 	cylinder->h = h;
+	vector_normalize(&cylinder->vect);
+	cylinder->pos2 = vector_new(
+				cylinder->pos.x + (cylinder->vect.x * cylinder->h),
+				cylinder->pos.y + (cylinder->vect.y * cylinder->h),
+				cylinder->pos.z + (cylinder->vect.z * cylinder->h));
 	cylinder->rad = rad;
 	cylinder->color = color;
 	return (cylinder);
 }
-/* ---- intcyl - Пересечь луч с цилиндром. --------------------- */
+/* ---- clipobj - обрезать объект с помощью плоской пары. ------------------------ */
 /* */
 /* */
-/*	Описание:							*/
-/* Intcyl определяет пересечение луча с */
-/* цилиндр. */
+/* Описание: */
+/* Clipobj обрезает предоставленный бесконечный объект двумя */
+/* (верх и низ) ограничивающие плоскости. */
 /* */
-/* На входе: */
-/* raybase = базовая точка пересекающегося луча. */
-/* raycos = Направляющие косинусы вышеупомянутого луча. (единица измерения)	*/
-/* base = Базовое местоположение цилиндра. */
-/* ось = ось симметрии для цилиндра. (единица измерения)	*/
-/* radius = радиус цилиндра. */
+/* При входе: */
+/* raybase = Базовая точка пересекающегося луча. */
+/* raycos = Направляющие косинусы вышеупомянутого луча. (единица измерения) */
+/* bot = Нормальное и перпендикулярное расстояние нижней плоскости */
+/*. */
+/* top = Нормальное и перпендикулярное расстояние верхней плоскости */
+/*. */
+/* objin = Входное расстояние пересечения с */
+/* объектом. */
+/* objout = Выходное расстояние пересечения с */
+/* объектом. */
 /* */
 /* По возвращении: */
-/* in = Входное расстояние пересечения. */
-/* out = расстояние до пересечения. */
+/* objin = Входное расстояние пересечения. */
+/* objout = выходное расстояние пересечения. */
+/* surfin = Идентификатор входящей поверхности. */
+/* surfout = Идентификатор уходящей поверхности. */
 /* */
-/* Returns: True, если луч пересекает цилиндр. */
+/* Returns: True, если луч пересекает ограниченный объект. */
 /* */
-/* Примечание: вход и / или выход может быть отрицательным, указывая */
-/* цилиндр расположен за началом луча. */
-/* */
-/* ------------------------------------------------ -------------------- */
+/* ------------------------------------------ -------------------------- */
+
+#define		SIDE	0		/* Поверхность объекта		*/
+#define		BOT	1		/* Нижняя поверхность торцевой крышки	*/
+#define		TOP	2		/* Верхняя поверхность крышки	*/
+
+/* Plane: ax + by + cz + d = 0	*/
+typedef struct	s_plane2
+{
+	double		a;
+	double		b;
+	double		c;
+	double		d;
+}				t_plane2;
+
+int
+	clipobj
+	(t_point *raybase,
+	t_point *raycos,
+	t_plane2 *bot,
+	t_plane2 *top,
+	double *objin,
+	double *objout,
+	int *surfin,
+	int *surfout)
+{
+	double	dc, dw, t;
+	double	in, out;		/* Object  intersection dists.	*/
+
+	*surfin = *surfout = SIDE;
+	in  = *objin;
+	out = *objout;
+
+/*	Intersect the ray with the bottom end-cap plane.		*/
+
+	dc = bot->a*raycos->x  + bot->b*raycos->y  + bot->c*raycos->z;
+	dw = bot->a*raybase->x + bot->b*raybase->y + bot->c*raybase->z + bot->d;
+
+	if  ( dc == 0.0 ) {		/* If parallel to bottom plane	*/
+	    if	( dw >= 0. ) return (0);
+	} else {
+	    t  = - dw / dc;
+	    if	( dc >= 0.0 ) {			    /* If far plane	*/
+		if  ( t > in && t < out ) { out = t; *surfout = BOT; }
+		if  ( t < in  ) return (0);
+	     } else {				    /* If near plane	*/
+		if  ( t > in && t < out ) { in	= t; *surfin  = BOT; }
+		if  ( t > out ) return (0);
+	    }
+	}
+
+/*	Intersect the ray with the top end-cap plane.			*/
+
+	dc = top->a*raycos->x  + top->b*raycos->y  + top->c*raycos->z;
+	dw = top->a*raybase->x + top->b*raybase->y + top->c*raybase->z + top->d;
+
+	if  ( dc == 0.0 ) {		/* If parallel to top plane	*/
+	    if	( dw >= 0. ) return (0);
+	} else {
+	    t  = - dw / dc;
+	    if	( dc >= 0.0 ) {			    /* If far plane	*/
+		if  ( t > in && t < out ) { out = t; *surfout = TOP; }
+		if  ( t < in  ) return (0);
+	     } else {				    /* If near plane	*/
+		if  ( t > in && t < out ) { in	= t; *surfin  = TOP; }
+		if  ( t > out ) return (0);
+	    }
+	}
+
+	*objin	= in;
+	*objout = out;
+	return (in < out);
+}
+
 int
 	intersect_cylinder2
 	(t_point raybase,
@@ -66,44 +148,43 @@ int
 	double *in,
 	double *out)
 {
-    int			hit;	/* True if ray intersects cyl   */
-    t_point		RC;		/* Ray base to cylinder base    */
-    double		d;		/* Shortest distance between    */
-						/*   the ray and the cylinder   */
-    double		t;
-	double		s;		/* Distances along the ray  */
-    t_point		n;
+	int			hit;
+	t_point		RC;
+	double		d;
+	double		t;
+	double		s;
+	t_point		n;
 	t_point		D;
 	t_point		O;
-    double		ln;
-	const double	pinf = HUGE;    /* Positive infinity        */
+	double		ln;
+	const double	pinf = HUGE;
 
 	RC = vector_new(raybase.x - base.x, raybase.y - base.y, raybase.z - base.z);
-    n = cross_product(raycos,axis);
+	n = cross_product(raycos,axis);
 
-    if  ( (ln = module_vector(&n)) == 0 ) {    /* ray parallel to cyl  */
-        d    = vector_sum(&RC,&axis);
+	if ((ln = module_vector(&n)) == 0)
+	{
+		d = vector_sum(&RC,&axis);
 		D = vector_new(RC.x - d*axis.x, RC.y - d*axis.y, RC.z - d*axis.z);
-        d    = module_vector(&D);
-        *in  = -pinf;
-        *out =  pinf;
-        return (d <= radius);       /* true if ray is in cyl*/
-    }
+		d = module_vector(&D);
+		*in = -pinf;
+		*out = pinf;
+		return (d <= radius);
+	}
 	vector_normalize(&n);
-
-    d    = fabs(vector_sum(&RC,&n));      /* shortest distance    */
-    hit  = (d <= radius);
-    if  (hit) {             /* if ray hits cylinder */
-        O = cross_product(RC,axis);
-        t = - vector_sum(&O,&n) / ln;
-        O = cross_product(n,axis);
+	d = fabs(vector_sum(&RC,&n));
+	hit = (d <= radius);
+	if (hit)
+	{
+		O = cross_product(RC,axis);
+		t = -vector_sum(&O,&n) / ln;
+		O = cross_product(n,axis);
 		vector_normalize(&O);
-        s = fabs (sqrt(radius*radius - d*d) / vector_sum(&raycos,&O));
-        *in  = t - s;           /* entering distance    */
-        *out = t + s;           /* exiting  distance    */
-    }
-
-    return (hit);
+		s = fabs(sqrt(radius * radius - d * d) / vector_sum(&raycos, &O));
+		*in = t - s;
+		*out = t + s;
+	}
+	return (hit);
 }
 
 void
@@ -124,12 +205,30 @@ int
 	t_cylinder	*cyl;
 	double		in;
 	double		out;
+	int			surfin;
+	int			surfout;
 	int			res;
+	t_plane2	bot;
+	t_plane2	top;
 
 	cyl = (t_cylinder *)data;
-	res = 0;
-	ft_printf_vect(&cyl->vect, "cyl->vect");
-	res = intersect_cylinder2(pos_start, vect_start, cyl->pos, cyl->vect, cyl->rad, &in, &out);
+	bot.a = -cyl->vect.x;
+	bot.b = -cyl->vect.y;
+	bot.c = -cyl->vect.z;
+	bot.d = cyl->vect.x * cyl->pos.x + cyl->vect.y * cyl->pos.y
+	+ cyl->vect.z * cyl->pos.z;
+	top.a = cyl->vect.x;
+	top.b = cyl->vect.y;
+	top.c = cyl->vect.z;
+	top.d = -cyl->vect.x * cyl->pos2.x - cyl->vect.y * cyl->pos2.y
+	- cyl->vect.z * cyl->pos2.z;
+	res = intersect_cylinder2(pos_start, vect_start, cyl->pos, cyl->vect,
+	cyl->rad, &in, &out) &&
+	clipobj(&pos_start, &vect_start, &bot, &top, &in, &out, &surfin, &surfout);
+	*intersection_pos = vector_new(
+		pos_start.x + (vect_start.x * in),
+		pos_start.y + (vect_start.y * in),
+		pos_start.z + (vect_start.z * in));
 	return (res);
 }
 
@@ -150,9 +249,30 @@ t_point
 	t_point intersection_pos)
 {
 	t_cylinder	*cylinder;
+	double		angle;
+	t_point		vect;
+	double		len;
 
 	cylinder = (t_cylinder *)data;
-	return (cylinder->vect);
+	vect = vector_mul(cylinder->pos, intersection_pos);
+	len = module_vector(&vect);
+	vector_normalize(&vect);
+	angle = vector_sum(&cylinder->vect, &vect);
+	len = len * angle;
+	vect = vector_mul(
+		intersection_pos,
+		vector_new(
+		cylinder->pos.x + cylinder->vect.x * len,
+		cylinder->pos.y + cylinder->vect.y * len,
+		cylinder->pos.z + cylinder->vect.z * len));
+	len = module_vector(&vect);
+	vector_normalize(&vect);
+	if (len < (cylinder->rad - 0.001))
+		if (angle < 0.01)
+			vect = vector_new(cylinder->vect.x, cylinder->vect.y, cylinder->vect.z);
+		else
+			vect = vector_new(-cylinder->vect.x, -cylinder->vect.y, -cylinder->vect.z);
+	return (vect);
 }
 
 void
