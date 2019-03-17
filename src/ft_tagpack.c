@@ -1,5 +1,19 @@
 #include "main.h"
 
+int		ft_count_chars(char *str, char c)
+{
+	int	i;
+
+	i = 0;
+	while(*str)
+	{
+		if (*str == c)
+			i++;
+		str++;
+	}
+	return (i);
+}
+
 t_point ft_get_vector(char *value)
 {
 	double x;
@@ -7,6 +21,8 @@ t_point ft_get_vector(char *value)
 	double z;
 	char **tab;
 
+	if(ft_count_chars(value, ',') != 2)
+		ft_parse_error("vector have invalid number of params");
 	tab = ft_strsplit(value, ',');
 	x = ft_atof(tab[0]);
 	y = ft_atof(tab[1]);
@@ -37,6 +53,9 @@ void tags_pack(t_parsed **obj3, char *tag, char *content)
 		obj->p3 = ft_get_vector(content);
 	else if (ft_strequ(tag, "l_pow"))
 		obj->l_pow = ft_atof(content);
+	else
+		ft_parse_error("invalid tag!");
+
 }
 
 void ft_parse_object(t_parsed **obj, char *line)

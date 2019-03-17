@@ -38,6 +38,8 @@ char *get_name(char *line, int type)
 		clos = ft_get_close(op, '{');
 	else if (type)
 		clos = ft_get_close(op, ':');
+ 	if (!op || !clos)
+		ft_parse_error("object name reading failed ");
 	p = ft_strndup(op, clos - op);
 	return (p);
 }
@@ -59,6 +61,8 @@ char *get_content(char *line, int type)
 		op = ft_get_close(p, ':') + 1;
 		clos = ft_get_close(op, ';');
 	}
+	if (!op || !clos)
+		ft_parse_error("object parametres reading failed");
 	p = ft_strndup(op, clos - op);
 	return (p);
 }

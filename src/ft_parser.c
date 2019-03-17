@@ -26,12 +26,10 @@ void ft_parser(t_data **data)
 		input = p;
 		if (!*content)
 			break;
-		ft_add_object(list->mydata, name, content);
+		ft_create_and_add_object(list->mydata, name, content);
 		ft_strdel(&name);
 		ft_strdel(&content);
 	}
 	if (content != NULL)
 		ft_parse_error("Invalid file");
-	/* пока lights вносится сразу, объекты хранятся в parsed
-	доработать: добавлять объекты в obj3d */
 }

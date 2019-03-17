@@ -42,10 +42,12 @@ int			ft_is_obj(char *name)
 		return (5);
 	else if (ft_strequ(name, "cam"))
 		return (6);
+	else
+		ft_parse_error("invalid object type!");
 	return (0);
 }
 
-void		ft_add_object(t_mydata *mydata, char *name, char *content)
+void		ft_create_and_add_object(t_mydata *mydata, char *name, char *content)
 {
 	t_parsed *obj;
 	int type;
@@ -57,6 +59,6 @@ void		ft_add_object(t_mydata *mydata, char *name, char *content)
 		ft_parse_object(&obj, content);
 		obj_push_back(&mydata->parsed_obj, obj);
 	}
-	/* else
-		ft_parse_error("Error object"); */
+	else
+		ft_parse_error("Error object"); 
 }

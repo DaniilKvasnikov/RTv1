@@ -1,5 +1,16 @@
 #include "main.h"
 
+int	ft_notdigit(char *str)
+{
+	while (*str)
+	{
+		if (!(ft_isdigit(*str) || *str == '.' || *str == '-'))
+			return (1);
+		str++;
+	}
+	return(0);
+}
+
 unsigned int ft_atoh(char *ap)
 {
 	char *p;
@@ -36,6 +47,8 @@ float ft_atof(const char *s)
 	point[0] = 0;
 	rez[0] = 0;
 	rez[1] = 1;
+	if (ft_notdigit((char *)s))
+		ft_parse_error("parametres values reading failed");
 	if (*s == '-')
 	{
 		s++;
