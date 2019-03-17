@@ -82,6 +82,7 @@ typedef struct			s_parsed
 	float				rad;
 	double 				color;
 	double				h;
+	double				l_pow;
 	struct s_parsed		*next;
 }						t_parsed;
 
@@ -108,6 +109,7 @@ typedef struct	s_mydata
 	t_parsed	*parsed_obj;
     t_obj3d		**objects;
 	int			light_count;
+	int			light_num;
 	t_point		*light;
     int			objects_count;
 }				t_mydata;

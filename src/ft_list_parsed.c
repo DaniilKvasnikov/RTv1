@@ -39,21 +39,9 @@ int			ft_is_obj(char *name)
 		return (4);
 	else if (ft_strequ(name, "light"))
 		return (5);
+	else if (ft_strequ(name, "cam"))
+		return (6);
 	return (0);
-}
-
-void		ft_add_light(t_mydata *mydata, char *content)
-{
-	t_parsed	*cur;
-	char		*str;
-
-	str = get_content(content, 1);
-	cur = mydata->parsed_obj;
-	if (cur)
-	{
-		mydata->light[mydata->light_count] = ft_get_vector(str);
-		mydata->light_count++;
-	}
 }
 
 void		ft_add_object(t_mydata *mydata, char *name, char *content)
@@ -65,13 +53,14 @@ void		ft_add_object(t_mydata *mydata, char *name, char *content)
 	{
 		obj = new_obj();
 		obj->type = type;
+		type == 5 ? mydata->light_count += 1 : 0;
 		ft_parse_object(&obj, content);
 		obj_push_back(&mydata->parsed_obj, obj);
 	}
-	else if (ft_strequ(name, "light"))
+/* 	else if (ft_strequ(name, "light"))
 	{
-	//	ft_add_light(mydata, content);
-	}
+		ft_add_light(mydata, content);
+	} */
 	/* else
 		ft_parse_error("Error object"); */
 }

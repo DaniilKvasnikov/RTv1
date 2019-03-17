@@ -28,13 +28,15 @@ void
 	data->mydata->objects_count = 0;
 	data->mydata->depth = (double *)malloc(sizeof(double) * (WIN_W * WIN_H));
 	data->mydata->mat = (t_matrix *)malloc(sizeof(t_matrix));
-	data->mydata->light_count = 1;
-	data->mydata->light =
-	(t_point *)malloc(sizeof(t_point) * data->mydata->light_count);
+	data->mydata->light_count = 0;
+	data->mydata->light_num = 0;
+/* 	data->mydata->light =
+	(t_point *)malloc(sizeof(t_point) * (data->mydata->light_count));
 	data->mydata->light->x = 10;
 	data->mydata->light->y = 0;
-	data->mydata->light->z = 0;
+	data->mydata->light->z = 0; */
 	ft_parser(&data);
+	ft_parse_lights(&data);
 	ft_parsed_to_obj(&data);
 	// objects_add_sphere(
 	// 	data,
@@ -62,14 +64,14 @@ void
 	// 			vector_new(1.5, 1.5, 10.5),
 	// 			0x00ff00),
 	// 		0x008888));
-/* 	objects_add_cylinder(
+ 	objects_add_cylinder(
 		data,
 		new_cylinder(
 			vector_new(0, 0, 10),
 			vector_new(0.5, 0.5, 0),
 			10.0,
 			1.0,
-			0x00ff00)); */
+			0x00ff00));
 }
 
 void

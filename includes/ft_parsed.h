@@ -11,5 +11,6 @@ void			ft_parse_object(t_parsed **obj, char *line);
 void			ft_parsed_to_obj(t_data **data);
 unsigned int	ft_atoh(char *ap);
 float			ft_atof(const char *s);
+void			ft_parse_lights(t_data **data);
 
 #endif
