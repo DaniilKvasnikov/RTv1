@@ -1,3 +1,8 @@
+cam
+{
+	pos: 0, 0, 0;
+	vect: 0, 0, 0;
+}
 sphere
 {
 	rad: 3.5;
@@ -20,6 +25,11 @@ cylinder
 }
 light
 {
-	pos: -5, 0, 0;
+	pos: -5, 10, 0;
+	l_pow: 0.2;
+}
+light
+{
+	pos: -5, 10, 0;
 	l_pow: 0.2;
 }

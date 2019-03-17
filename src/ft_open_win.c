@@ -19,8 +19,8 @@ void
 	char **argv)
 {
 	data->mydata = (t_mydata *)malloc(sizeof(t_mydata));
-	data->mydata->pos = vector_new(0, 0, 0);
-	data->mydata->angle = vector_new(0, 0, 0);
+	/* data->mydata->pos = vector_new(0, 0, 0);
+	data->mydata->angle = vector_new(0, 0, 0); */
 	data->mydata->dispx = vector_new(0.66 * (WIN_W / (double)WIN_H), 0, 0);
 	data->mydata->dispy = vector_new(0, 0.66, 0);
 	data->mydata->argc = argc;

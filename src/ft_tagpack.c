@@ -24,6 +24,8 @@ t_point ft_get_vector(char *value)
 	if(ft_count_chars(value, ',') != 2)
 		ft_parse_error("vector have invalid number of params");
 	tab = ft_strsplit(value, ',');
+ 	if (!(tab[0] && tab[1] && tab[2]))
+		ft_parse_error("vector have invalid number of params");
 	x = ft_atof(tab[0]);
 	y = ft_atof(tab[1]);
 	z = ft_atof(tab[2]);
@@ -41,7 +43,7 @@ void tags_pack(t_parsed **obj3, char *tag, char *content)
 		obj->pos = ft_get_vector(content);
 	else if (ft_strequ(tag, "color"))
 		obj->color = ft_atoh(content);
-	else if (ft_strequ(tag, "vect"))
+	else if (ft_strequ(tag, "vect") || ft_strequ(tag, "angle"))
 		obj->vect = ft_get_vector(content);
 	else if (ft_strequ(tag, "h"))
 		obj->h = ft_atoi(content);

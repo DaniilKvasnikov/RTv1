@@ -1,5 +1,11 @@
 #include "main.h"
 
+void	ft_add_cam(t_data *data, t_point pos, t_point angle)
+{
+	data->mydata->pos = pos;
+	data->mydata->angle = angle;
+}
+
 void ft_add_obj(t_data **data, t_parsed *p)
 {
 	t_data *list;
@@ -29,6 +35,10 @@ void ft_add_obj(t_data **data, t_parsed *p)
 		ft_add_lights(
 			list,
 			p->pos.x, p->pos.y, p->pos.z, p->l_pow);
+	if (p->type == 6)
+		ft_add_cam(
+			list,
+			p->pos, p->vect);
 }
 
 void ft_parsed_to_obj(t_data **data)
