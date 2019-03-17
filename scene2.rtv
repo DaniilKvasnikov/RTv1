@@ -1,0 +1,24 @@
+sphere
+{
+	rad: 2;
+	pos: 0, 0, 12;
+	color: 0x00ff00;
+}
+cone
+{
+	pos: 0, 0, 10;
+	vect: 0, 1, 0;
+	rad: 0.25;
+	color: 0xff0000;
+}
+light
+{
+	pos: 5, 0, 0;
+	l_pow: 0.2;
+}
+light
+{
+	pos: -5, 0, 0;
+	l_pow: 0.2;
+}
+

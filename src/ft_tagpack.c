@@ -35,6 +35,8 @@ void tags_pack(t_parsed **obj3, char *tag, char *content)
 		obj->p2 = ft_get_vector(content);
 	else if (ft_strequ(tag, "p3"))
 		obj->p3 = ft_get_vector(content);
+	else if (ft_strequ(tag, "l_pow"))
+		obj->l_pow = ft_atof(content);
 }
 
 void ft_parse_object(t_parsed **obj, char *line)

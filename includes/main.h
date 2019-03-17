@@ -155,8 +155,6 @@ t_point			cross_product(t_point a, t_point b);
 t_point			ft_matrix_mul(t_point v, t_matrix *m);
 void			ft_matrix_init(t_data *data, double a_x, double a_y, double a_z);
 
-void			ft_parser(t_mydata *mydata);
-
 void			ft_add_lights
 				(t_data *data, double x, double y, double z, double l_pow);
 

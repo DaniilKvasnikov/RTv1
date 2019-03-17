@@ -7,37 +7,19 @@ sphere
 sphere
 {
 	rad: 5;
-	pos: -3, 0, 35;
+	pos: -3, 0, 20;
 	color: 0xff0000;
 }
 cylinder
 {
-	pos: 0, 0, 10;
-	vect: 1.0, 0.5, 0;
-	h: 10.;
+	pos: -2.5, 0, 9;
+	vect: 1.0, 0, 2;
+	h: 4.0;
 	rad: 1.0;
 	color: 0x00ff00;
 }
-triangle
-{
-	p1: -5, -10, 30;
-	p2: 5, -10, 30;
-	p3: 5, -15, 30;
-	color: 0xffffff;
-}
-triangle
-{
-	p1: -5, -15, 30;
-	p2: -5, -10, 30;
-	p3: 5, -15, 30;
-	color: 0xffffff;
-}
 light
 {
-	pos: 10, 10, 2;
+	pos: -5, 0, 0;
+	l_pow: 0.2;
 }
-light
-{
-	pos: 0, 1, 2;
-}
-

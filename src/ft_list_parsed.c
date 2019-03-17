@@ -15,6 +15,7 @@ t_parsed	*new_obj(void)
 	new->h = 20;
 	new->next = NULL;
 	new->color = RGB_RED;
+	new->l_pow = 0.2;
 	return (new);
 }
 
@@ -35,7 +36,7 @@ int			ft_is_obj(char *name)
 		return (2);
 	else if (ft_strequ(name, "triangle"))
 		return (3);
-	else if (ft_strequ(name, "plane"))
+	else if (ft_strequ(name, "cone"))
 		return (4);
 	else if (ft_strequ(name, "light"))
 		return (5);
@@ -53,14 +54,9 @@ void		ft_add_object(t_mydata *mydata, char *name, char *content)
 	{
 		obj = new_obj();
 		obj->type = type;
-		type == 5 ? mydata->light_count += 1 : 0;
 		ft_parse_object(&obj, content);
 		obj_push_back(&mydata->parsed_obj, obj);
 	}
-/* 	else if (ft_strequ(name, "light"))
-	{
-		ft_add_light(mydata, content);
-	} */
 	/* else
 		ft_parse_error("Error object"); */
 }
