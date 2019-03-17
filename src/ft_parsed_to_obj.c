@@ -39,6 +39,21 @@ void ft_add_obj(t_data **data, t_parsed *p)
 		ft_add_cam(
 			list,
 			p->pos, p->vect);
+	if (p->type == 7)
+		objects_add_plane(
+			list,
+			new_plane(
+				new_triangle(
+					vector_new(p->p1.x, p->p1.y, p->p1.z),
+					vector_new(p->p2.x, p->p2.y, p->p2.z),
+					vector_new(p->p3.x, p->p3.y, p->p3.z),
+					0x00ff00),
+				new_triangle(
+					vector_new(p->p1.x, p->p1.y, p->p1.z),
+					vector_new(p->p2.y, p->p2.x, p->p3.z),
+					vector_new(p->p3.y, p->p3.y, p->p3.z),
+					0x00ff00),
+				p->color));
 }
 
 void ft_parsed_to_obj(t_data **data)
