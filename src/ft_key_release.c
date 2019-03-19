@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 03:25:16 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/02/23 02:20:35 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/19 21:48:10 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int
 	if (key == 1)
 		player_turn(data, 0.02, 0.0);
 	if (key == 13)
-		player_turn(data, -0.02, 0.00);
+		player_turn(data, -0.02, 0.0);
 	if (ft_is_flag(data, "-k"))
 		ft_printf("key_press=%d\n", key);
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 16:09:36 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/19 20:48:26 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/19 21:18:31 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ int
 	ft_shodow
 	(t_data *data,
 	t_point inter_pos,
-	t_obj3d *this)
+	t_obj3d *this,
+	int l_num)
 {
 	t_point	light;
 	t_point	shodow;
@@ -43,7 +44,7 @@ int
 	t_obj3d	*obj;
 	t_point	new_inter_pos;
 
-	light = vector_mul(inter_pos, *(data->mydata->lights->light));
+	light = vector_mul(inter_pos, data->mydata->lights->light[l_num]);
 	len = module_vector(&light);
 	vector_normalize(&light);
 	index = -1;
@@ -53,7 +54,7 @@ int
 		if (obj != this &&
 		obj->intersect(obj->data, inter_pos, light, &new_inter_pos))
 		{
-			shodow = vector_mul(new_inter_pos, *(data->mydata->lights->light));
+			shodow = vector_mul(new_inter_pos, data->mydata->lights->light[l_num]);
 			new_len = module_vector(&shodow);
 			if (new_len < len && vector_sum(&shodow, &light) >= 0)
 			{
@@ -88,7 +89,7 @@ double
 		light = vector_mul(data->mydata->lights->light[index], inter_pos);
 		n_delta = vector_sum(&norm, &light);
 		n_delta = n_delta * (double)(n_delta >= 0);
-		if (ft_shodow(data, inter_pos, obj) == 0)
+		if (ft_shodow(data, inter_pos, obj, 0) == 0)
 			if (delta < (data->mydata->lights->l_pows[index] * n_delta))
 				delta = data->mydata->lights->l_pows[index] * n_delta;
 	}
