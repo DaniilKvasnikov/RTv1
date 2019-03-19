@@ -29,6 +29,8 @@ void
 	data->mydata->depth = (double *)malloc(sizeof(double) * (WIN_W * WIN_H));
 	data->mydata->mat = (t_matrix *)malloc(sizeof(t_matrix));
 	data->mydata->lights = (t_lights *)malloc(sizeof(t_lights));
+	data->mydata->parsed_obj = (t_parsed *)malloc(sizeof(t_parsed));
+	data->mydata->parsed_obj->next = NULL;
 	data->mydata->lights->light_count = 0;
 	ft_parser(&data);
 	ft_parsed_to_obj(&data);

@@ -21,11 +21,16 @@ t_parsed	*new_obj(void)
 
 void		obj_push_back(t_parsed **list, t_parsed *cur)
 {
-	if (!list)
-		return;
-	while (*list)
-		list = &(*list)->next;
-	*list = cur;
+	t_parsed	*tmp;
+
+	tmp = NULL;
+	if (list && cur)
+	{
+		tmp = *list;
+		while (tmp && tmp->next)
+			tmp = tmp->next;
+		tmp->next = cur;
+	}
 }
 
 int			ft_is_obj(char *name)

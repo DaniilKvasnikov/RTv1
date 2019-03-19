@@ -56,6 +56,19 @@ void ft_add_obj(t_data **data, t_parsed *p)
 				p->color));
 }
 
+void	ft_lstfree(t_parsed *alst)
+{
+	t_parsed	*tmp;
+
+	tmp = alst;
+	while (tmp)
+	{
+		alst = tmp;
+		tmp = tmp->next;
+		free(alst);
+	}
+}
+
 void ft_parsed_to_obj(t_data **data)
 {
 	t_data *list;
@@ -68,4 +81,5 @@ void ft_parsed_to_obj(t_data **data)
 		ft_add_obj(data, parsed);
 		parsed = parsed->next;
 	}
+	ft_lstfree(list->mydata->parsed_obj);
 }
