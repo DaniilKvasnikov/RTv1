@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 19:44:56 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/20 01:56:33 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/20 02:13:57 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,6 @@ void			ft_matrix_init
 void			ft_parser(t_mydata *mydata);
 
 void			ft_add_lights
-				(t_data *data, double x, double y, double z, double l_pow);
+				(t_data *data, t_point pos, double l_pow);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/05 07:03:09 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/20 00:39:35 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/20 02:33:32 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,8 @@ void
 	data->mydata->depth = (double *)malloc(sizeof(double) * (WIN_W * WIN_H));
 	data->mydata->lights = (t_lights *)malloc(sizeof(t_lights));
 	data->mydata->lights->light_count = 0;
-	ft_add_lights(data, 10, 0, 0, 0.2);
-	ft_add_lights(data, -10, 0, 0, 0.2);
-	// ft_parser(data->mydata);
+	ft_add_lights(data, vector_new(10, 0, 0), 0.2);
+	ft_add_lights(data, vector_new(-10, 0, 0), 0.2);
 	objects_add_sphere(
 		data,
 		new_sphere(

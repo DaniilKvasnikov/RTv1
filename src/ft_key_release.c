@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 03:25:16 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/19 21:48:10 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/20 02:33:44 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ int
 	return (1);
 }
 
-void			player_turn(t_data *data, double dx, double dy)
+void
+	player_turn(t_data *data, double dx, double dy)
 {
 	data->mydata->angle.x += dx;
 	data->mydata->angle.y += dy;

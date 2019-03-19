@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 03:08:31 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/19 22:48:32 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/20 02:38:39 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,5 @@ int
 	}
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win,
 		data->img->img_ptr, 0, 0);
-//	exit(0);
 	return (1);
 }

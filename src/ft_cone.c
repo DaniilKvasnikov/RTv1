@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/15 16:30:45 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/19 23:52:25 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/20 02:15:44 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ int
 	cone = (t_cone *)data;
 	x = vector_mul(cone->pos, pos_start);
 	a = vector_sum(&vect_start, &cone->vect);
-	a = vector_sum(&vect_start, &vect_start) - (1.0 + cone->rad * cone->rad) * a * a;
+	a = vector_sum(&vect_start, &vect_start) -
+	(1.0 + cone->rad * cone->rad) * a * a;
 	b = 2.0 * (vector_sum(&vect_start, &x) - (1.0 + cone->rad * cone->rad)
 		* vector_sum(&vect_start, &cone->vect) * vector_sum(&x, &cone->vect));
 	c = vector_sum(&x, &cone->vect);
@@ -56,7 +57,6 @@ int
 	d = b * b - 4 * a * c;
 	if (fabs(d) < EPSILON)
 		d = 0;
-
 	if (d >= 0)
 	{
 		double	t1;
