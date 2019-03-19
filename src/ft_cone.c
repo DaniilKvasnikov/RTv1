@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/15 16:30:45 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/15 17:50:22 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/19 23:52:25 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ int
 
 	cone = (t_cone *)data;
 	return (cone->color);
+	ft_printf("", &intersection_pos);
 }
 
 t_point
@@ -119,11 +120,6 @@ t_point
 		cone->pos.z + cone->vect.z * len));
 	len = module_vector(&vect);
 	vector_normalize(&vect);
-	// if (len < (cone->rad - 0.001))
-	// 	if (angle < 0.01)
-	// 		vect = vector_new(cone->vect.x, cone->vect.y, cone->vect.z);
-	// 	else
-	// 		vect = vector_new(-cone->vect.x, -cone->vect.y, -cone->vect.z);
 	return (vect);
 }
 
