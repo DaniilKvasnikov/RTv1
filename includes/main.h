@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 19:44:56 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/15 18:06:45 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/19 19:47:53 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,8 +145,9 @@ void			ft_add_lights
 
 # include "ft_sphere.h"
 # include "ft_triangle.h"
-# include "ft_plane.h"
+# include "ft_square.h"
 # include "ft_cylinder.h"
+# include "ft_plane.h"
 # include "ft_cone.h"
 
 #endif
