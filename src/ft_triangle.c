@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 12:45:13 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/01 18:13:20 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/19 20:27:17 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int
 		return (0);
 	k = -(tr->norm.x * pos_start.x + tr->norm.y * pos_start.y
 		+ tr->norm.z * pos_start.z + tr->d) / scalar_product;
-	if (fabs(k) < EPSILON)
+	if (k < EPSILON)
 		return (0);
 
 	float		x;

@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 18:15:14 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/19 19:36:33 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/19 21:08:05 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,8 +224,11 @@ int
 	top.d = -cyl->vect.x * cyl->pos2.x - cyl->vect.y * cyl->pos2.y
 	- cyl->vect.z * cyl->pos2.z;
 	res = intersect_cylinder2(pos_start, vect_start, cyl->pos, cyl->vect,
-	cyl->rad, &in, &out) &&
-	clipobj(&pos_start, &vect_start, &bot, &top, &in, &out, &surfin, &surfout);
+	cyl->rad, &in, &out);
+	if (in < 0)
+		return (0);
+	if (cyl->h != 0)
+		res = res && clipobj(&pos_start, &vect_start, &bot, &top, &in, &out, &surfin, &surfout);
 	*intersection_pos = vector_new(
 		pos_start.x + (vect_start.x * in),
 		pos_start.y + (vect_start.y * in),
@@ -268,10 +271,12 @@ t_point
 	len = module_vector(&vect);
 	vector_normalize(&vect);
 	if (len < (cylinder->rad - 0.001))
+	{
 		if (angle < 0.01)
 			vect = vector_new(cylinder->vect.x, cylinder->vect.y, cylinder->vect.z);
 		else
 			vect = vector_new(-cylinder->vect.x, -cylinder->vect.y, -cylinder->vect.z);
+	}
 	return (vect);
 }
 
