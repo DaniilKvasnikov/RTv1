@@ -1,0 +1,29 @@
+cam
+{
+	pos: 0, 0, 0;
+	vect: 0, 0, 0;
+}
+sphere
+{
+	rad: 1;
+	pos: 0, 0, 10;
+	color: 0x0000ff;
+}
+light
+{
+	pos: 5, 0, 10;
+	l_pow: 0.2;
+}
+plane
+{
+	pos: 0, 2, 10;
+	vect: 0, 1, 0;
+	color: 0x00ff00;
+}
+cone
+{
+	pos: 0, 0, 10;
+	vect: 0, 1, 0;
+	rad: 0.25;
+	color: 0xff0000;
+}

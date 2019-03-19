@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_atoh.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jfrankly <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/03/19 20:32:17 by jfrankly          #+#    #+#             */
+/*   Updated: 2019/03/19 20:33:37 by jfrankly         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "main.h"
 
-int	ft_notdigit(char *str)
+int				ft_notdigit(char *str)
 {
 	while (*str)
 	{
@@ -8,15 +20,15 @@ int	ft_notdigit(char *str)
 			return (1);
 		str++;
 	}
-	return(0);
+	return (0);
 }
 
-unsigned int ft_atoh(char *ap)
+unsigned int	ft_atoh(char *ap)
 {
-	char *p;
-	unsigned int n;
-	int digit;
-	int lcase;
+	char			*p;
+	unsigned int	n;
+	int				digit;
+	int				lcase;
 
 	p = ap;
 	n = 0;
@@ -25,8 +37,8 @@ unsigned int ft_atoh(char *ap)
 	if (*p == '0' && ((*(p + 1) == 'x') || (*(p + 1) == 'X')))
 		p += 2;
 	while ((digit = (*p >= '0' && *p <= '9')) ||
-		   (lcase = (*p >= 'a' && *p <= 'f')) ||
-		   (*p >= 'A' && *p <= 'F'))
+			(lcase = (*p >= 'a' && *p <= 'f')) ||
+			(*p >= 'A' && *p <= 'F'))
 	{
 		n *= 16;
 		if (digit)
@@ -39,7 +51,7 @@ unsigned int ft_atoh(char *ap)
 	return (n);
 }
 
-float ft_atof(const char *s)
+float			ft_atof(const char *s)
 {
 	int		point[2];
 	float	rez[2];

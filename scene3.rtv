@@ -6,19 +6,18 @@ cam
 sphere
 {
 	rad: 3.5;
-	pos: 2.6, 0, 28;
+	pos: 2, 0, 15;
 	color: 0x0000ff;
 }
 plane
 {
-	p1: -5, -5, 15;
-	p2: -5, 5, 15;
-	p3: 5, 5, 35;
+	pos: 2, 2, 14;
+	vect: 0, 1, 0;
 	color: 0x00ff00;
 }
 light
 {
-	pos: 10, 0, 10;
+	pos: 10, 0, 4;
 	l_pow: 0.2;
 }
 

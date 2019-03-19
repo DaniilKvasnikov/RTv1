@@ -6,80 +6,71 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 17:24:07 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/19 20:04:18 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/19 19:40:09 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
+#include <stdio.h>
 
-t_plane
-	*new_plane
-	(t_point pos,
-	t_point norm,
+t_square
+	*new_square
+	(t_triangle *triangle1,
+	t_triangle *triangle2,
 	int color)
 {
-	t_plane *plane;
+	t_square *square;
 
-	if ((plane = (t_plane *)malloc(sizeof(t_plane))) == NULL)
+	if ((square = (t_square *)malloc(sizeof(t_square))) == NULL)
 		return (NULL);
-	plane->pos = pos;
-	plane->norm = norm;
-	plane->color = color;
-	return (plane);
+	square->triangle1 = triangle1;
+	square->triangle2 = triangle2;
+	square->color = color;
+	return (square);
 }
 
 int
-	intersect_plane
+	intersect_square
 	(void *data,
 	t_point pos_start,
 	t_point vect_start,
 	t_point *intersection_pos)
 {
-	t_plane	*plane;
-	t_point	diff;
-	double	delta;
+	t_triangle *t1;
+	t_triangle *t2;
 
-	plane = ((t_plane *)data);
-	if (vector_sum(&vect_start, &plane->norm) == 0)
-		return (0);
-	diff = vector_mul(plane->pos, pos_start);
-	delta =
-	-vector_sum(&diff, &plane->norm) / vector_sum(&vect_start, &plane->norm);
-	if (delta < 0)
-		return (0);
-	*intersection_pos = vector_new(
-		diff.x + plane->pos.x + delta * vect_start.x,
-		diff.y + plane->pos.y + delta * vect_start.y,
-		diff.z + plane->pos.z + delta * vect_start.z);
-	return (1);
+	t1 = ((t_square *)data)->triangle1;
+	t2 = ((t_square *)data)->triangle2;
+	return (intersect_triangle(t1, pos_start, vect_start, intersection_pos) ||
+		intersect_triangle(t2, pos_start, vect_start, intersection_pos));
 }
 
 int
-	get_color_plane
+	get_color_square
 	(void *data,
 	t_point intersection_pos)
 {
-	t_plane	*plane;
+	t_square	*square;
 
-	plane = (t_plane *)data;
-	return (plane->color);
+	square = (t_square *)data;
+	return (square->color);
 }
 
 t_point
-	get_normal_plane
+	get_normal_square
 	(void *data,
 	t_point intersection_pos)
 {
-	t_plane	*plane;
+	t_square	*square;
 
-	plane = (t_plane *)data;
-	return (plane->norm);
+	square = (t_square *)data;
+	return (square->triangle2->norm);
 }
 
 void
-	objects_add_plane
+	objects_add_square
 	(t_data *data,
-	t_plane *plane)
+	t_square *square)
 {
 	t_obj3d	**objects;
 	int		index;
@@ -91,10 +82,10 @@ void
 	while (++index < (data->mydata->objects_count - 1))
 		objects[index] = data->mydata->objects[index];
 	objects[index] = (t_obj3d *)malloc(sizeof(t_obj3d));
-	objects[index]->data = plane;
-	objects[index]->intersect = intersect_plane;
-	objects[index]->get_color = get_color_plane;
-	objects[index]->get_normal_vector = get_normal_plane;
+	objects[index]->data = square;
+	objects[index]->intersect = intersect_square;
+	objects[index]->get_color = get_color_square;
+	objects[index]->get_normal_vector = get_normal_square;
 	if (data->mydata->objects_count > 1)
 		free(data->mydata->objects);
 	data->mydata->objects = objects;

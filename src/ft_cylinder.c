@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 18:15:14 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/04 20:52:48 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/19 19:36:33 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ t_cylinder
 	cylinder->color = color;
 	return (cylinder);
 }
+
 /* ---- clipobj - обрезать объект с помощью плоской пары. ------------------------ */
 /* */
 /* */
@@ -261,10 +262,9 @@ t_point
 	len = len * angle;
 	vect = vector_mul(
 		intersection_pos,
-		vector_new(
-		cylinder->pos.x + cylinder->vect.x * len,
-		cylinder->pos.y + cylinder->vect.y * len,
-		cylinder->pos.z + cylinder->vect.z * len));
+		vector_new(cylinder->pos.x + cylinder->vect.x * len,
+					cylinder->pos.y + cylinder->vect.y * len,
+					cylinder->pos.z + cylinder->vect.z * len));
 	len = module_vector(&vect);
 	vector_normalize(&vect);
 	if (len < (cylinder->rad - 0.001))

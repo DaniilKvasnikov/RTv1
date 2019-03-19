@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_list_parsed.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jfrankly <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/03/19 20:33:14 by jfrankly          #+#    #+#             */
+/*   Updated: 2019/03/19 20:33:18 by jfrankly         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "main.h"
 
 t_parsed	*new_obj(void)
@@ -8,11 +20,11 @@ t_parsed	*new_obj(void)
 	new->type = 1;
 	new->p1 = vector_new(-1.5, -1.5, 10.5);
 	new->p2 = vector_new(-1.5, 1.5, 10.5);
-	new->p3 = vector_new(1.5, -1.5, 10.5);
+	new->p3 = vector_new(1.5, 1.5, 10.5);
 	new->pos = vector_new(0, 0, 10);
 	new->vect = vector_new(0.5, 0.5, 0);
 	new->rad = 2;
-	new->h = 20;
+	new->h = 0;
 	new->next = NULL;
 	new->color = RGB_RED;
 	new->l_pow = 0.2;
