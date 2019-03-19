@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 19:44:56 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/19 19:47:53 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/20 01:56:33 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,66 +49,13 @@
 # define X_P 0
 # define Y_P 1
 
-typedef struct	s_matrix
-{
-	double		elem[4][4];
-}				t_matrix;
-
-typedef struct	s_point
-{
-	double		x;
-	double		y;
-	double		z;
-}				t_point;
-
-typedef struct	s_img
-{
-	void		*img_ptr;
-	int			*data;
-	int			size_l;
-	int			bpp;
-	int			endian;
-}				t_img;
-
-typedef struct	s_obj3d
-{
-	void		*data;
-	int			(*intersect)(void *data, t_point pos_start,
-								t_point vect_start, t_point *intersection_pos);
-	int			(*get_color)(void *data, t_point intersection_pos);
-    t_point		(*get_normal_vector)(void *data, t_point intersection_pos);
-}				t_obj3d;
-
-typedef struct	s_lights
-{
-	int			light_count;
-	t_point		*light;
-	double		*l_pows;
-}				t_lights;
-
-typedef struct	s_mydata
-{
-	t_point		pos;
-	t_point		angle;
-	t_point		dispx;
-	t_point		dispy;
-	double		*depth;
-	char		**argv;
-	int			argc;
-	char		*input;
-	t_matrix	*mat;
-    t_obj3d		**objects;
-	t_lights	*lights;
-    int			objects_count;
-}				t_mydata;
-
-typedef struct	s_data
-{
-	void		*mlx_ptr;
-	void		*mlx_win;
-	t_img		*img;
-	t_mydata	*mydata;
-}				t_data;
+# include "ft_structs.h"
+# include "ft_sphere.h"
+# include "ft_triangle.h"
+# include "ft_square.h"
+# include "ft_cylinder.h"
+# include "ft_plane.h"
+# include "ft_cone.h"
 
 void			ft_open_win(char *str, int argc, char **argv);
 
@@ -125,8 +72,8 @@ int				ft_close(t_data *data);
 
 int				ft_is_flag(t_data *data, char *str);
 
-void			ft_raytracing(t_data *data, int pos[2], t_point vect, t_obj3d *obj);
-
+void			ft_raytracing
+				(t_data *data, int pos[2], t_point vect, t_obj3d *obj);
 
 double			vector_sum(t_point *a, t_point *b);
 t_point			vector_mul(t_point start, t_point end);
@@ -136,18 +83,12 @@ double			module_vector(t_point *v);
 t_point			cross_product(t_point a, t_point b);
 
 t_point			ft_matrix_mul(t_point v, t_matrix *m);
-void			ft_matrix_init(t_data *data, double a_x, double a_y, double a_z);
+void			ft_matrix_init
+				(t_data *data, double a_x, double a_y, double a_z);
 
 void			ft_parser(t_mydata *mydata);
 
 void			ft_add_lights
 				(t_data *data, double x, double y, double z, double l_pow);
-
-# include "ft_sphere.h"
-# include "ft_triangle.h"
-# include "ft_square.h"
-# include "ft_cylinder.h"
-# include "ft_plane.h"
-# include "ft_cone.h"
 
 #endif
