@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/05 07:03:09 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/19 20:10:51 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/19 21:04:06 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,21 @@ void
 				vector_new(4, 4, 14),
 				0x00ff00),
 			0x008888));
-	// objects_add_cylinder(
-	// 	data,
-	// 	new_cylinder(
-	// 		vector_new(-2.5, 0, 9),
-	// 		vector_new(1, 0, 2),
-	// 		4.0,
-	// 		1.0,
-	// 		0x00ff00));
+	objects_add_triangle(
+		data,
+		new_triangle(
+				vector_new(5, -5, 13),
+				vector_new(-5, -5, 13),
+				vector_new(5, 5, 13),
+				0x00ff00));
+	objects_add_cylinder(
+		data,
+		new_cylinder(
+			vector_new(3, 0, 9),
+			vector_new(0, -1, 0),
+			1,
+			1.0,
+			0xff0000));
 	objects_add_cone(
 		data,
 		new_cone(
