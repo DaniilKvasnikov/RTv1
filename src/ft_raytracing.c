@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 16:09:36 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/15 18:54:48 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/19 20:48:26 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,9 @@ int
 		{
 			shodow = vector_mul(new_inter_pos, *(data->mydata->lights->light));
 			new_len = module_vector(&shodow);
-			if (new_len < len)
+			if (new_len < len && vector_sum(&shodow, &light) >= 0)
 			{
+//				printf("%lf %lf %lf -> ", inter_pos.x, inter_pos.y, inter_pos.z);
 //				printf("%lf %lf %lf\n", new_inter_pos.x, new_inter_pos.y, new_inter_pos.z);
 //				printf("%lf %lf\n", new_len, len);
 //				printf("%lf %lf %lf %lf\n", norm.x, norm.y, norm.z, delta);
@@ -110,7 +111,7 @@ void
 	double		delta;
 
 	if (
-//		(pos[Y_P] == (WIN_H / 2 - 50)) &&
+//		(pos[Y_P] == (WIN_H / 2 - 55)) &&
 //		(pos[X_P] == (WIN_W / 2 + 1)) &&
 		obj->intersect(obj->data, data->mydata->pos, vect, &inter_pos) == 1)
 	{
