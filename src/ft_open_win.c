@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/05 07:03:09 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/19 21:50:44 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/20 00:39:35 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void
 	data->mydata = (t_mydata *)malloc(sizeof(t_mydata));
 	data->mydata->mat = (t_matrix *)malloc(sizeof(t_matrix));
 	data->mydata->pos = vector_new(0, 0, 0);
-	data->mydata->angle = vector_new(-M_PI_2, 0, 0);
+	data->mydata->angle = vector_new(0, 0, 0);
 	data->mydata->dispx = vector_new(0.66 * (WIN_W / (double)WIN_H), 0, 0);
 	data->mydata->dispy = vector_new(0, 0.66, 0);
 	data->mydata->argc = argc;
@@ -30,8 +30,8 @@ void
 	data->mydata->depth = (double *)malloc(sizeof(double) * (WIN_W * WIN_H));
 	data->mydata->lights = (t_lights *)malloc(sizeof(t_lights));
 	data->mydata->lights->light_count = 0;
-	ft_add_lights(data, 5, 0, 0, 0.2);
-//	ft_add_lights(data, -5, 0, 0, 0.2);
+	ft_add_lights(data, 10, 0, 0, 0.2);
+	ft_add_lights(data, -10, 0, 0, 0.2);
 	// ft_parser(data->mydata);
 	objects_add_sphere(
 		data,
@@ -39,72 +39,48 @@ void
 			vector_new(0, 0, 12),
 			2,
 			0xff0000));
-	objects_add_sphere(
+	objects_add_square(
 		data,
-		new_sphere(
-			vector_new(12, 0, 0),
-			2,
-			0x00ff00));
-	objects_add_sphere(
+		new_square(
+			new_triangle(
+				vector_new(-4, -4, 14),
+				vector_new(-4, 4, 14),
+				vector_new(4, 4, 14),
+				0x00ff00),
+			new_triangle(
+				vector_new(-4, -4, 14),
+				vector_new(4, -4, 14),
+				vector_new(4, 4, 14),
+				0x00ff00),
+			0x008888));
+	objects_add_triangle(
 		data,
-		new_sphere(
-			vector_new(0, 0, -12),
-			2,
-			0x0000ff));
-	objects_add_sphere(
+		new_triangle(
+				vector_new(5, -5, 13),
+				vector_new(-5, -5, 13),
+				vector_new(5, 5, 13),
+				0x00ff00));
+	objects_add_cylinder(
 		data,
-		new_sphere(
-			vector_new(-12, 0, 0),
-			2,
+		new_cylinder(
+			vector_new(3, 0, 9),
+			vector_new(0, -1, 0),
+			1,
+			1.0,
+			0xff0000));
+	objects_add_cone(
+		data,
+		new_cone(
+			vector_new(0, 0, 10),
+			vector_new(0, 1, 0),
+			.25,
+			0xff0000));
+	objects_add_plane(
+		data,
+		new_plane(
+			vector_new(0, 2, 10),
+			vector_new(0, 1, 0),
 			0xffff00));
-	objects_add_sphere(
-		data,
-		new_sphere(
-			vector_new(0, -12, 0),
-			2,
-			0xffffff));
-	// objects_add_square(
-	// 	data,
-	// 	new_square(
-	// 		new_triangle(
-	// 			vector_new(-4, -4, 14),
-	// 			vector_new(-4, 4, 14),
-	// 			vector_new(4, 4, 14),
-	// 			0x00ff00),
-	// 		new_triangle(
-	// 			vector_new(-4, -4, 14),
-	// 			vector_new(4, -4, 14),
-	// 			vector_new(4, 4, 14),
-	// 			0x00ff00),
-	// 		0x008888));
-	// objects_add_triangle(
-	// 	data,
-	// 	new_triangle(
-	// 			vector_new(5, -5, 13),
-	// 			vector_new(-5, -5, 13),
-	// 			vector_new(5, 5, 13),
-	// 			0x00ff00));
-	// objects_add_cylinder(
-	// 	data,
-	// 	new_cylinder(
-	// 		vector_new(3, 0, 9),
-	// 		vector_new(0, -1, 0),
-	// 		1,
-	// 		1.0,
-	// 		0xff0000));
-	// objects_add_cone(
-	// 	data,
-	// 	new_cone(
-	// 		vector_new(0, 0, 10),
-	// 		vector_new(0, 1, 0),
-	// 		.25,
-	// 		0xff0000));
-	// objects_add_plane(
-	// 	data,
-	// 	new_plane(
-	// 		vector_new(0, 2, 10),
-	// 		vector_new(0, 1, 0),
-	// 		0xffff00));
 }
 
 void

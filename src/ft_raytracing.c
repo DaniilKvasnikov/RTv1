@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 16:09:36 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/19 21:18:31 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/20 00:49:11 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,11 +87,16 @@ double
 	{
 		norm = obj->get_normal_vector(obj->data, inter_pos);
 		light = vector_mul(data->mydata->lights->light[index], inter_pos);
+		vector_normalize(&norm);
+		vector_normalize(&light);
 		n_delta = vector_sum(&norm, &light);
 		n_delta = n_delta * (double)(n_delta >= 0);
-		if (ft_shodow(data, inter_pos, obj, 0) == 0)
-			if (delta < (data->mydata->lights->l_pows[index] * n_delta))
-				delta = data->mydata->lights->l_pows[index] * n_delta;
+		if (ft_shodow(data, inter_pos, obj, index) == 0)
+		{
+			delta += (data->mydata->lights->l_pows[index] * n_delta);
+			if (n_delta > 0.999)
+				return (-1);
+		}
 	}
 	return (delta);
 }
@@ -124,10 +129,11 @@ void
 			norm = obj->get_normal_vector(obj->data, inter_pos);
 			color = obj->get_color(obj->data, inter_pos);
 			delta = ft_get_delta_light(data, inter_pos, obj);
-			if (delta > 0.9)
+			if (delta >= 0.9)
 				delta = 0.9;
 			color = color_new(color, 0.1 + delta);
-//			printf("%lf %lf %lf %lf\n", norm.x, norm.y, norm.z, delta);
+			if (delta == -1)
+				color = 0xffffff;
 			ft_draw_px(data, pos[X_P], pos[Y_P], color);
 		}
 	}
