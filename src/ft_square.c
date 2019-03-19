@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_plane.c                                         :+:      :+:    :+:   */
+/*   ft_square.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 17:24:07 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/19 19:40:09 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/19 23:16:53 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int
 
 	square = (t_square *)data;
 	return (square->color);
+	ft_printf("", &intersection_pos);
 }
 
 t_point
@@ -65,6 +66,7 @@ t_point
 
 	square = (t_square *)data;
 	return (square->triangle2->norm);
+	ft_printf("", &intersection_pos);
 }
 
 void

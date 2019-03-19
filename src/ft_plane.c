@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 17:24:07 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/19 20:04:18 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/19 23:16:58 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int
 
 	plane = (t_plane *)data;
 	return (plane->color);
+	ft_printf("", &intersection_pos);
 }
 
 t_point
@@ -74,6 +75,7 @@ t_point
 
 	plane = (t_plane *)data;
 	return (plane->norm);
+	ft_printf("", &intersection_pos);
 }
 
 void

@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 12:45:13 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/19 20:27:17 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/19 23:16:39 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ int
 
 	tr = (t_triangle *)data;
 	return (tr->color);
+	ft_printf("", &intersection_pos);
 }
 
 t_point
@@ -109,6 +110,7 @@ t_point
 	tr = (t_triangle *)data;
 	norm = vector_new(-tr->norm.x, -tr->norm.y, -tr->norm.z);
 	return (norm);
+	ft_printf("", &intersection_pos);
 }
 
 void
