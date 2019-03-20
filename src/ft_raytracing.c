@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 16:09:36 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/20 00:49:11 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/20 05:02:51 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,11 @@ int
 		if (obj != this &&
 		obj->intersect(obj->data, inter_pos, light, &new_inter_pos))
 		{
-			shodow = vector_mul(new_inter_pos, data->mydata->lights->light[l_num]);
+			shodow =
+				vector_mul(new_inter_pos, data->mydata->lights->light[l_num]);
 			new_len = module_vector(&shodow);
 			if (new_len < len && vector_sum(&shodow, &light) >= 0)
-			{
-//				printf("%lf %lf %lf -> ", inter_pos.x, inter_pos.y, inter_pos.z);
-//				printf("%lf %lf %lf\n", new_inter_pos.x, new_inter_pos.y, new_inter_pos.z);
-//				printf("%lf %lf\n", new_len, len);
-//				printf("%lf %lf %lf %lf\n", norm.x, norm.y, norm.z, delta);
 				return (1);
-			}
 		}
 	}
 	return (0);
@@ -94,8 +89,8 @@ double
 		if (ft_shodow(data, inter_pos, obj, index) == 0)
 		{
 			delta += (data->mydata->lights->l_pows[index] * n_delta);
-			if (n_delta > 0.999)
-				return (-1);
+			if (n_delta > 0.98)
+				return (-(n_delta - 0.98) * 50.0);
 		}
 	}
 	return (delta);
@@ -113,13 +108,9 @@ void
 	double		len;
 	t_point		norm;
 	int			color;
-	t_point		light;
 	double		delta;
 
-	if (
-//		(pos[Y_P] == (WIN_H / 2 - 55)) &&
-//		(pos[X_P] == (WIN_W / 2 + 1)) &&
-		obj->intersect(obj->data, data->mydata->pos, vect, &inter_pos) == 1)
+	if (obj->intersect(obj->data, data->mydata->pos, vect, &inter_pos) == 1)
 	{
 		v = vector_mul(data->mydata->pos, inter_pos);
 		len = module_vector(&v);
@@ -131,9 +122,10 @@ void
 			delta = ft_get_delta_light(data, inter_pos, obj);
 			if (delta >= 0.9)
 				delta = 0.9;
-			color = color_new(color, 0.1 + delta);
-			if (delta == -1)
-				color = 0xffffff;
+			if (delta >= 0)
+				color = color_new(color, 0.1 + delta);
+			else
+				color = color + color_new(0xffffff - color, -delta);
 			ft_draw_px(data, pos[X_P], pos[Y_P], color);
 		}
 	}

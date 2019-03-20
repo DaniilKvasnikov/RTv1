@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/15 16:30:45 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/20 02:15:44 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/20 05:03:20 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ t_point
 	len = module_vector(&vect);
 	vector_normalize(&vect);
 	angle = vector_sum(&cone->vect, &vect);
-	len = len * angle;
+	len = len * (1 - 2 * (angle < 0));
 	vect = vector_mul(
 		intersection_pos,
 		vector_new(
