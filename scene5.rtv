@@ -1,29 +1,33 @@
 cam
 {
-	pos: 0, 0, 170;
+	pos: 0, 0, 17;
 	vect: 0, 0, 0;
 }
 plane
 {
-	pos: 0, 0, -40;
+	pos: 0, 0, -4;
 	vect: 90, 0, 0;
 	color: 0000aa;
 }
 plane
 {
-	pos: 0, -30, 0;
-	vect: 90, 0, 0;
+	pos: 0, -3, 0;
+	vect: 0, 0, 0;
 	color: 777777;
 }
 plane
 {
-	pos: 0, 0, -40;
-	vect: 90, 0, 0;
+	pos: 0, 3, 0;
+	vect: 0, 0, 0;
 	color: 777777;
 }
-plane
+light
 {
-	pos: 0, 0, -40;
-	vect: 90, 0, 0;
-	color: 0000aa;
+	pos: 8, 2, 15;
+	l_pow: 0.1;
+}
+light
+{
+	pos: -0, 2, 15;
+	l_pow: 0.1;
 }

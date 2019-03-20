@@ -17,14 +17,17 @@ int
 	(int argc,
 	char **argv)
 {
+	int		fd;
 	--argc;
 	++argv;
-	if (argc == 1)
-		ft_open_win(argv[0], argc, argv);
+
+	if (argc == 1 || argc == 2)
+	{
+		fd = ft_correct_fd(argc, argv);
+		ft_open_win(argv[0], argc, argv, fd);
+	}
 	else
-		ft_printf("%s\n%s\n\t%s\n\t%s\n",
-		"./RTv1 [file_name] [flags]",
-		"flags:",
-		"-k вывод кода клавиши");
+		ft_printf("%s\n",
+		"./RTv1 [file_name]");
 	return (0);
 }

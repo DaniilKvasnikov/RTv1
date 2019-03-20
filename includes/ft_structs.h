@@ -75,6 +75,7 @@ typedef struct			s_mydata
 	double				*depth;
 	char				**argv;
 	int					argc;
+	int					fd;
 	char				*input;
 	t_matrix			*mat;
 	t_parsed			*parsed_obj;

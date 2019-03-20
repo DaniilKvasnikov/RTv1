@@ -27,7 +27,8 @@ void	ft_add_obj(t_data **data, t_parsed *p)
 		objects_add_sphere(list, new_sphere(p->pos, p->rad, p->color));
 	if (p->type == 2)
 		objects_add_cylinder(list,
-			new_cylinder(p->pos, p->vect, vector_new(p->h, p->rad, 0), p->color));
+			new_cylinder(p->pos, p->vect,
+			vector_new(p->h, p->rad, 0), p->color));
 	if (p->type == 3)
 		objects_add_triangle(list,
 			new_triangle(p->p1, p->p2, p->p3, p->color));

@@ -58,7 +58,8 @@
 # include "ft_plane.h"
 # include "ft_cone.h"
 
-void			ft_open_win(char *str, int argc, char **argv);
+void			ft_open_win(char *str, int argc, char **argv, int fd);
+int				ft_correct_fd(int argc, char **argv);
 
 int				ft_draw(t_data *data);
 void			ft_draw_px(t_data *data, int x, int y, int color);

@@ -12,9 +12,20 @@
 
 #include "main.h"
 
+int		ft_correct_fd(int argc, char **argv)
+{
+	int		fd;
+
+	if (!(fd = open(argv[0], O_RDONLY)))
+		ft_parse_error("opening error");
+	if (fd == -1 || (argc == 2 && !ft_strequ(argv[1], "-k")))
+		ft_parse_error("ivalid file");
+	return (fd);
+}
+
 void		ft_parse_error(char *msg)
 {
-	ft_printf("PARSE ERROR : ");
+	ft_printf("ERROR : ");
 	if (msg)
 		ft_printf("%s\n", msg);
 	exit(0);
