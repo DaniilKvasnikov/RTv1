@@ -1,0 +1,11 @@
+cam
+{
+	pos: 0, 0, -2;
+	vect: 0, 0, 0;
+}
+sphere
+{
+	rad: 1;
+	pos: 0, 0, 0;
+	color: 0x00ff00;
+}

@@ -19,7 +19,7 @@ cylinder
 {
 	pos: -2.5, 0, 9;
 	vect: 1.0, 0, 2;
-	h: 4.0;
+	h: 0;
 	rad: 1.0;
 	color: 0x00ff00;
 }

@@ -1,0 +1,22 @@
+cam
+{
+	pos: 0, 0, -2;
+	vect: 0, 0, 0;
+}
+plane
+{
+	pos: 0, 3, 10;
+	vect: 0, 1, 0;
+	color: 0x0000ff;
+}
+sphere
+{
+	rad: 2;
+	pos: 0, 0, 12;
+	color: 0x00ff00;
+}
+light
+{
+	pos: 0, -10, 5;
+	l_pow: 0.1;
+}

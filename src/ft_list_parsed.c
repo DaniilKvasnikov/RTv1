@@ -21,8 +21,8 @@ t_parsed	*new_obj(void)
 	new->p1 = vector_new(-1.5, -1.5, 10.5);
 	new->p2 = vector_new(-1.5, 1.5, 10.5);
 	new->p3 = vector_new(1.5, 1.5, 10.5);
-	new->pos = vector_new(0, 0, 10);
-	new->vect = vector_new(0.5, 0.5, 0);
+	new->pos = vector_new(0, 0, 0);
+	new->vect = vector_new(0, 0, 0);
 	new->rad = 2;
 	new->h = 0;
 	new->next = NULL;
