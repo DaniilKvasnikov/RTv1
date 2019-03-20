@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 NAME = libft.a
-FLAGS = -Wall -Wextra #-Werror
+FLAGS = -Wall -Wextra -Werror
 SRC_DIR = src/
 SRC_FIL = $(shell ls src | grep -E "ft_.+\.c")
 SRCS = $(addprefix  $(SRC_DIR), $(SRC_FIL))

@@ -1,0 +1,29 @@
+cam
+{
+	pos: 0, 0, 170;
+	vect: 0, 0, 0;
+}
+plane
+{
+	pos: 0, 0, -40;
+	vect: 90, 0, 0;
+	color: 0000aa;
+}
+plane
+{
+	pos: 0, -30, 0;
+	vect: 90, 0, 0;
+	color: 777777;
+}
+plane
+{
+	pos: 0, 0, -40;
+	vect: 90, 0, 0;
+	color: 777777;
+}
+plane
+{
+	pos: 0, 0, -40;
+	vect: 90, 0, 0;
+	color: 0000aa;
+}

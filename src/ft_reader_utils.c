@@ -12,7 +12,7 @@
 
 #include "main.h"
 
-char *ft_strndup(char *s, size_t len)
+char	*ft_strndup(char *s, size_t len)
 {
 	char *dup;
 
@@ -25,7 +25,7 @@ char *ft_strndup(char *s, size_t len)
 	return (dup);
 }
 
-char *ft_get_close(char *str, char a)
+char	*ft_get_close(char *str, char a)
 {
 	char *p;
 
@@ -39,30 +39,33 @@ char *ft_get_close(char *str, char a)
 	return (NULL);
 }
 
-char *get_name(char *line, int type)
+char	*get_name(char *line, int type)
 {
 	char *p;
 	char *op;
 	char *clos;
 
 	op = line;
+	clos = NULL;
 	if (!type)
 		clos = ft_get_close(op, '{');
 	else if (type)
 		clos = ft_get_close(op, ':');
- 	if (!op || !clos)
+	if (!op || !clos)
 		ft_parse_error("object name reading failed ");
 	p = ft_strndup(op, clos - op);
 	return (p);
 }
 
-char *get_content(char *line, int type)
+char	*get_content(char *line, int type)
 {
 	char *p;
 	char *op;
 	char *clos;
 
 	p = line;
+	op = NULL;
+	clos = NULL;
 	if (!type)
 	{
 		op = ft_get_close(p, '{') + 1;
@@ -79,7 +82,7 @@ char *get_content(char *line, int type)
 	return (p);
 }
 
-char *ft_get_info(char *line, char **p, char **name, int t)
+char	*ft_get_info(char *line, char **p, char **name, int t)
 {
 	char *content;
 

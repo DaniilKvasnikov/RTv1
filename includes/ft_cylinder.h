@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 18:15:02 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/20 01:54:31 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/20 06:41:27 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,16 @@ typedef struct	s_cylinder
 	int			color;
 }				t_cylinder;
 
-t_cylinder		*new_cylinder(t_point pos, t_point vect, double h,
-				double rad, int color);
+typedef struct	s_plane2
+{
+	double		a;
+	double		b;
+	double		c;
+	double		d;
+}				t_plane2;
+
+t_cylinder		*new_cylinder(t_point pos, t_point vect,
+				t_point h_rad, int color);
 int				intersect_cylinder(void *data, t_point pos_start,
 				t_point vect_start, t_point *intersection_pos);
 int				get_color_cylinder(void *data, t_point intersection_pos);

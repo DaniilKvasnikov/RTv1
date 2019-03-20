@@ -11,9 +11,10 @@
 /* ************************************************************************** */
 
 #ifndef FT_PARSED_H
-#define FT_PARSED_H
+# define FT_PARSED_H
 
-void			ft_create_and_add_object(t_mydata *mydata, char *name, char *content);
+void			ft_create_and_add_object
+				(t_mydata *mydata, char *name, char *content);
 char			*get_content(char *line, int type);
 void			ft_parser(t_data **mydata);
 char			*ft_get_info(char *line, char **p, char **name, int t);

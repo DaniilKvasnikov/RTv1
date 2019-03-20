@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_tagpack.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jfrankly <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/03/20 12:57:58 by jfrankly          #+#    #+#             */
+/*   Updated: 2019/03/20 12:57:59 by jfrankly         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "main.h"
 
-int		ft_count_chars(char *str, char c)
+int			ft_count_chars(char *str, char c)
 {
 	int	i;
 
 	i = 0;
-	while(*str)
+	while (*str)
 	{
 		if (*str == c)
 			i++;
@@ -14,17 +26,17 @@ int		ft_count_chars(char *str, char c)
 	return (i);
 }
 
-t_point ft_get_vector(char *value)
+t_point		ft_get_vector(char *value)
 {
-	double x;
-	double y;
-	double z;
-	char **tab;
+	double	x;
+	double	y;
+	double	z;
+	char	**tab;
 
-	if(ft_count_chars(value, ',') != 2)
+	if (ft_count_chars(value, ',') != 2)
 		ft_parse_error("vector have invalid number of params");
 	tab = ft_strsplit(value, ',');
- 	if (!(tab[0] && tab[1] && tab[2]))
+	if (!(tab[0] && tab[1] && tab[2]))
 		ft_parse_error("vector have invalid number of params");
 	x = ft_atof(tab[0]);
 	y = ft_atof(tab[1]);
@@ -32,7 +44,7 @@ t_point ft_get_vector(char *value)
 	return (vector_new(x, y, z));
 }
 
-void tags_pack(t_parsed **obj3, char *tag, char *content)
+void		tags_pack(t_parsed **obj3, char *tag, char *content)
 {
 	t_parsed *obj;
 
@@ -57,10 +69,9 @@ void tags_pack(t_parsed **obj3, char *tag, char *content)
 		obj->l_pow = ft_atof(content);
 	else
 		ft_parse_error("invalid tag!");
-
 }
 
-void ft_parse_object(t_parsed **obj, char *line)
+void		ft_parse_object(t_parsed **obj, char *line)
 {
 	char *input;
 	char *content;
@@ -74,7 +85,7 @@ void ft_parse_object(t_parsed **obj, char *line)
 	{
 		input = ptr;
 		if (!*content)
-			break;
+			break ;
 		tags_pack(obj, tag, content);
 		ft_strdel(&tag);
 		ft_strdel(&content);

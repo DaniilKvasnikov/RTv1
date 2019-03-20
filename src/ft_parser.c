@@ -20,13 +20,13 @@ void		ft_parse_error(char *msg)
 	exit(0);
 }
 
-void ft_parser(t_data **data)
+void		ft_parser(t_data **data)
 {
-	char *input;
-	char *content;
-	char *p;
-	char *name;
-	t_data *list;
+	char	*input;
+	char	*content;
+	char	*p;
+	char	*name;
+	t_data	*list;
 
 	list = *data;
 	ft_read_file(list->mydata);
@@ -37,7 +37,7 @@ void ft_parser(t_data **data)
 	{
 		input = p;
 		if (!*content)
-			break;
+			break ;
 		ft_create_and_add_object(list->mydata, name, content);
 		ft_strdel(&name);
 		ft_strdel(&content);

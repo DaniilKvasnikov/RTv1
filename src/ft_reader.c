@@ -12,10 +12,9 @@
 
 #include "main.h"
 
-
-void ft_remove_tabs(char **str)
+void	ft_remove_tabs(char **str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while ((*str)[i])
@@ -27,11 +26,11 @@ void ft_remove_tabs(char **str)
 	}
 }
 
-void ft_read_file(t_mydata *mydata)
+void	ft_read_file(t_mydata *mydata)
 {
-	char *line;
-	int fd;
-	int ret;
+	char	*line;
+	int		fd;
+	int		ret;
 
 	line = NULL;
 	if (!(fd = open(mydata->argv[0], O_RDONLY)))
@@ -46,6 +45,6 @@ void ft_read_file(t_mydata *mydata)
 	}
 	ft_remove_tabs(&mydata->input);
 	if (ret != 0)
-		return;
+		return ;
 	close(fd);
 }

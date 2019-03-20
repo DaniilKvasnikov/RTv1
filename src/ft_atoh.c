@@ -60,7 +60,7 @@ float			ft_atof(const char *s)
 	rez[0] = 0;
 	rez[1] = 1;
 	if (ft_notdigit((char *)s))
-		ft_parse_error("parametres values reading failed");	
+		ft_parse_error("parametres values reading failed");
 	if (*s == '-')
 	{
 		s++;
@@ -68,15 +68,11 @@ float			ft_atof(const char *s)
 	}
 	while (*s)
 	{
-		point[0] += (*s == '.')? 1 : 0;
-/* 		if (*s == '.')
-			point[0] = 1; */
+		point[0] += (*s == '.') ? 1 : 0;
 		point[1] = *s - '0';
 		if (point[1] >= 0 && point[1] <= 9)
 		{
-			/* if (point[0])
-				rez[1] /= 10.0f; */
-			rez[1] /= (point[0])? 10.0f : 1;
+			rez[1] /= (point[0]) ? 10.0f : 1;
 			rez[0] = rez[0] * 10.0f + (float)point[1];
 		}
 		s++;

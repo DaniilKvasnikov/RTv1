@@ -66,10 +66,11 @@ int			ft_is_obj(char *name)
 	return (0);
 }
 
-void		ft_create_and_add_object(t_mydata *mydata, char *name, char *content)
+void		ft_create_and_add_object(t_mydata *mydata,
+				char *name, char *content)
 {
-	t_parsed *obj;
-	int type;
+	t_parsed	*obj;
+	int			type;
 
 	if ((type = ft_is_obj(name)))
 	{

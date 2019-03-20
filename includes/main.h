@@ -22,7 +22,6 @@
 # define WIN_W (WIN_H * 16 / 10)
 # define WIN_S (WIN_W * WIN_H)
 
-# define HUGE 1.0e21
 # define EPSILON 1e-5
 
 # define B_SPACE 49

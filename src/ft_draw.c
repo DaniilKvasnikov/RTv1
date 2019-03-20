@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 03:08:31 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/20 02:38:39 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/20 05:49:35 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,28 @@ void
 	data->img->data[y * WIN_W + x] = color;
 }
 
+void
+	ft_draw_body
+	(t_data *data,
+	int pos[2],
+	t_point dispx,
+	t_point dispy)
+{
+	t_point		vect;
+	int			index;
+
+	vect = ft_matrix_mul(vector_new(0, 0, 1), data->mydata->mat);
+	vect.x += dispx.x * (pos[0] * 2 / (float)WIN_W - 1) +
+	dispy.x * (pos[1] * 2 / (float)WIN_H - 1);
+	vect.y += dispx.y * (pos[0] * 2 / (float)WIN_W - 1) +
+	dispy.y * (pos[1] * 2 / (float)WIN_H - 1);
+	vect.z += dispx.z * (pos[0] * 2 / (float)WIN_W - 1) +
+	dispy.z * (pos[1] * 2 / (float)WIN_H - 1);
+	index = -1;
+	while (++index < data->mydata->objects_count)
+		ft_raytracing(data, pos, vect, data->mydata->objects[index]);
+}
+
 int
 	ft_draw
 	(t_data *data)
@@ -62,8 +84,6 @@ int
 	int			pos[2];
 	t_point		dispx;
 	t_point		dispy;
-	t_point		vect;
-	int			index;
 
 	ft_clearwin(data);
 	pos[X_P] = -1;
@@ -75,15 +95,7 @@ int
 	{
 		pos[Y_P] = -1;
 		while (++pos[Y_P] < WIN_H)
-		{
-			vect = ft_matrix_mul(vector_new(0, 0, 1), data->mydata->mat);
-			vect.x += dispx.x * (pos[0] * 2 / (float)WIN_W - 1) + dispy.x * (pos[1] * 2 / (float)WIN_H - 1);
-			vect.y += dispx.y * (pos[0] * 2 / (float)WIN_W - 1) + dispy.y * (pos[1] * 2 / (float)WIN_H - 1);
-			vect.z += dispx.z * (pos[0] * 2 / (float)WIN_W - 1) + dispy.z * (pos[1] * 2 / (float)WIN_H - 1);
-			index = -1;
-			while (++index < data->mydata->objects_count)
-				ft_raytracing(data, pos, vect, data->mydata->objects[index]);
-		}
+			ft_draw_body(data, pos, dispx, dispy);
 	}
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win,
 		data->img->img_ptr, 0, 0);

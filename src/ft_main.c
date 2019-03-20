@@ -19,7 +19,7 @@ int
 {
 	--argc;
 	++argv;
-	if (argc >= 1)
+	if (argc == 1)
 		ft_open_win(argv[0], argc, argv);
 	else
 		ft_printf("%s\n%s\n\t%s\n\t%s\n",
