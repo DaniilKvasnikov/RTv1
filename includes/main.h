@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 19:44:56 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/20 02:13:57 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/20 15:01:27 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,7 @@ void			ft_parser(t_mydata *mydata);
 
 void			ft_add_lights
 				(t_data *data, t_point pos, double l_pow);
+
+int				clipobj(t_clipobj o);
 
 #endif

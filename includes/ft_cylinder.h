@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 18:15:02 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/20 14:29:28 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/20 15:03:37 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,26 +33,50 @@ typedef struct	s_plane2
 
 typedef struct	s_intersect_cylinder2
 {
-	t_point raybase;
-	t_point raycos;
-	t_point base;
-	t_point axis;
-	double radius;
-	double *in;
-	double *out;
+	t_point		raybase;
+	t_point		raycos;
+	t_point		base;
+	t_point		axis;
+	double		radius;
+	double		*in;
+	double		*out;
 }				t_intersect_cylinder2;
 
 typedef struct	s_intersect_cylinder3
 {
-	t_point raycos;
-	t_point axis;
-	double radius;
-	double *in;
-	double *out;
-	t_point n;
-	t_point rc;
-	double ln;
+	t_point		raycos;
+	t_point		axis;
+	double		radius;
+	double		*in;
+	double		*out;
+	t_point		n;
+	t_point		rc;
+	double		ln;
 }				t_intersect_cylinder3;
+
+typedef struct	s_clipobj
+{
+	t_point		*raybase;
+	t_point		*rayc;
+	t_plane2	*bot;
+	t_plane2	*top;
+	double		*objin;
+	double		*objout;
+	int			*surfin;
+	int			*surfout;
+}				t_clipobj;
+
+typedef struct	s_clipobj2
+{
+	double		dc;
+	double		dw;
+	double		t;
+	double		in;
+	double		out;
+	int			*surfout;
+	int			*surfin;
+	int			new_;
+}				t_clipobj2;
 
 t_cylinder		*new_cylinder(t_point pos, t_point vect,
 				t_point h_rad, int color);
