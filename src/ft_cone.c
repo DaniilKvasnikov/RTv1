@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/15 16:30:45 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/20 05:03:20 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/20 05:57:33 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ int
 	double	b;
 	double	c;
 	double	d;
+	double	t1;
+	double	t2;
 
 	cone = (t_cone *)data;
 	x = vector_mul(cone->pos, pos_start);
@@ -59,9 +61,6 @@ int
 		d = 0;
 	if (d >= 0)
 	{
-		double	t1;
-		double	t2;
-
 		t1 = (-b - sqrt(d)) / (2 * a);
 		t2 = (-b + sqrt(d)) / (2 * a);
 		if ((t1 <= t2 && t1 >= 0) || (t1 >= 0 && t2 < 0))
@@ -101,7 +100,7 @@ t_point
 	(void *data,
 	t_point intersection_pos)
 {
-	t_cone	*cone;
+	t_cone		*cone;
 	double		angle;
 	t_point		vect;
 	double		len;
