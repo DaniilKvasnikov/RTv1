@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 12:45:53 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/01 18:13:14 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/20 01:58:39 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ typedef struct	s_triangle
 	t_point		norm;
 	int			color;
 	float		d;
-    t_point		v_p1_p2;
-    t_point		v_p2_p3;
-    t_point		v_p3_p1;
+	t_point		v_p1_p2;
+	t_point		v_p2_p3;
+	t_point		v_p3_p1;
 }				t_triangle;
 
 t_triangle		*new_triangle(t_point p1, t_point p2, t_point p3, int color);

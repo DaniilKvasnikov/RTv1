@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/15 16:30:45 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/15 17:50:22 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/20 02:15:44 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ int
 	cone = (t_cone *)data;
 	x = vector_mul(cone->pos, pos_start);
 	a = vector_sum(&vect_start, &cone->vect);
-	a = vector_sum(&vect_start, &vect_start) - (1.0 + cone->rad * cone->rad) * a * a;
+	a = vector_sum(&vect_start, &vect_start) -
+	(1.0 + cone->rad * cone->rad) * a * a;
 	b = 2.0 * (vector_sum(&vect_start, &x) - (1.0 + cone->rad * cone->rad)
 		* vector_sum(&vect_start, &cone->vect) * vector_sum(&x, &cone->vect));
 	c = vector_sum(&x, &cone->vect);
@@ -56,7 +57,6 @@ int
 	d = b * b - 4 * a * c;
 	if (fabs(d) < EPSILON)
 		d = 0;
-
 	if (d >= 0)
 	{
 		double	t1;
@@ -93,6 +93,7 @@ int
 
 	cone = (t_cone *)data;
 	return (cone->color);
+	ft_printf("", &intersection_pos);
 }
 
 t_point
@@ -119,11 +120,6 @@ t_point
 		cone->pos.z + cone->vect.z * len));
 	len = module_vector(&vect);
 	vector_normalize(&vect);
-	// if (len < (cone->rad - 0.001))
-	// 	if (angle < 0.01)
-	// 		vect = vector_new(cone->vect.x, cone->vect.y, cone->vect.z);
-	// 	else
-	// 		vect = vector_new(-cone->vect.x, -cone->vect.y, -cone->vect.z);
 	return (vect);
 }
 

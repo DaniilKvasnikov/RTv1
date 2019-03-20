@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/15 17:58:08 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/15 18:05:26 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/20 02:13:37 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 void
 	ft_add_lights
 	(t_data *data,
-	double x,
-	double y,
-	double z,
+	t_point pos,
 	double l_pow)
 {
 	int		index;
@@ -35,9 +33,7 @@ void
 		light[index] = data->mydata->lights->light[index];
 		l_pows[index] = data->mydata->lights->l_pows[index];
 	}
-	light[index].x = x;
-	light[index].y = y;
-	light[index].z = z;
+	light[index] = pos;
 	l_pows[index] = l_pow;
 	if (data->mydata->lights->light_count > 1)
 	{

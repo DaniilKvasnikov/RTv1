@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 17:47:33 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/01 13:23:33 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/20 02:03:30 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,16 +62,4 @@ double
 	(t_point *v)
 {
 	return (sqrt(vector_sum(v, v)));
-}
-
-void
-	vector_normalize
-	(t_point *vector)
-{
-	double module;
-
-	module = module_vector(vector);
-	vector->x = vector->x / module;
-	vector->y = vector->y / module;
-	vector->z = vector->z / module;
 }

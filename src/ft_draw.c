@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 03:08:31 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/02/23 06:58:30 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/20 02:38:39 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ int
 
 	ft_clearwin(data);
 	pos[X_P] = -1;
-	ft_matrix_init(data, data->mydata->angle.x, data->mydata->angle.y, data->mydata->angle.z);
+	ft_matrix_init(data,
+	data->mydata->angle.x, data->mydata->angle.y, data->mydata->angle.z);
 	dispx = ft_matrix_mul(data->mydata->dispx, data->mydata->mat);
 	dispy = ft_matrix_mul(data->mydata->dispy, data->mydata->mat);
 	while (++pos[X_P] < WIN_W)
@@ -86,6 +87,5 @@ int
 	}
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_win,
 		data->img->img_ptr, 0, 0);
-//	exit(0);
 	return (1);
 }

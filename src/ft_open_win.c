@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/05 07:03:09 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/19 21:04:06 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/20 02:33:32 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,33 +19,27 @@ void
 	char **argv)
 {
 	data->mydata = (t_mydata *)malloc(sizeof(t_mydata));
-	/* data->mydata->pos = vector_new(0, 0, 0);
-	data->mydata->angle = vector_new(0, 0, 0); */
+	data->mydata->mat = (t_matrix *)malloc(sizeof(t_matrix));
+	data->mydata->pos = vector_new(0, 0, 0);
+	data->mydata->angle = vector_new(0, 0, 0);
 	data->mydata->dispx = vector_new(0.66 * (WIN_W / (double)WIN_H), 0, 0);
 	data->mydata->dispy = vector_new(0, 0.66, 0);
 	data->mydata->argc = argc;
 	data->mydata->argv = argv;
 	data->mydata->objects_count = 0;
 	data->mydata->depth = (double *)malloc(sizeof(double) * (WIN_W * WIN_H));
-	data->mydata->mat = (t_matrix *)malloc(sizeof(t_matrix));
 	data->mydata->lights = (t_lights *)malloc(sizeof(t_lights));
 	data->mydata->parsed_obj = (t_parsed *)malloc(sizeof(t_parsed));
 	data->mydata->parsed_obj->next = NULL;
 	data->mydata->lights->light_count = 0;
-	ft_parser(&data);
-	ft_parsed_to_obj(&data);
-	// objects_add_sphere(
-	// 	data,
-	// 	new_sphere(
-	// 		vector_new(0, 0, 10),
-	// 		1,
-	// 		0x0000ff));
- 	/* objects_add_sphere(
+	ft_add_lights(data, vector_new(10, 0, 0), 0.2);
+	ft_add_lights(data, vector_new(-10, 0, 0), 0.2);
+	objects_add_sphere(
 		data,
 		new_sphere(
-			vector_new(0, 1, 12),
+			vector_new(0, 0, 12),
 			2,
-			0x00ff00));
+			0xff0000));
 	objects_add_square(
 		data,
 		new_square(
@@ -81,7 +75,7 @@ void
 			vector_new(0, 0, 10),
 			vector_new(0, 1, 0),
 			.25,
-			0xff0000)); */
+			0xff0000)); 
 /*  	objects_add_plane(
 		data,
 		new_plane(

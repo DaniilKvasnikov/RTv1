@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 18:15:14 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/19 21:08:05 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/19 23:17:02 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -245,6 +245,7 @@ int
 
 	cylinder = (t_cylinder *)data;
 	return (cylinder->color);
+	ft_printf("", &intersection_pos);
 }
 
 t_point
