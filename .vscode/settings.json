@@ -4,6 +4,7 @@
 		"ft_sphere.h": "c",
 		"ft_printf.h": "c",
 		"ft_plane.h": "c",
-		"ft_square.h": "c"
+		"ft_square.h": "c",
+		"ft_structs.h": "c"
 	}
 }

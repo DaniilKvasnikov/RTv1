@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/22 16:09:36 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/20 05:02:51 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/20 05:13:29 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,28 +36,26 @@ int
 	t_obj3d *this,
 	int l_num)
 {
-	t_point	light;
-	t_point	shodow;
+	t_point	point[2];
 	float	len;
-	float	new_len;
 	int		index;
 	t_obj3d	*obj;
-	t_point	new_inter_pos;
+	t_point	n_inter_pos;
 
-	light = vector_mul(inter_pos, data->mydata->lights->light[l_num]);
-	len = module_vector(&light);
-	vector_normalize(&light);
+	point[0] = vector_mul(inter_pos, data->mydata->lights->light[l_num]);
+	len = module_vector(&point[0]);
+	vector_normalize(&point[0]);
 	index = -1;
 	while (++index < data->mydata->objects_count)
 	{
 		obj = data->mydata->objects[index];
 		if (obj != this &&
-		obj->intersect(obj->data, inter_pos, light, &new_inter_pos))
+		obj->intersect(obj->data, inter_pos, point[0], &n_inter_pos))
 		{
-			shodow =
-				vector_mul(new_inter_pos, data->mydata->lights->light[l_num]);
-			new_len = module_vector(&shodow);
-			if (new_len < len && vector_sum(&shodow, &light) >= 0)
+			point[1] =
+			vector_mul(n_inter_pos, data->mydata->lights->light[l_num]);
+			if (module_vector(&point[1]) < len &&
+				vector_sum(&point[1], &point[0]) >= 0)
 				return (1);
 		}
 	}
@@ -106,7 +104,6 @@ void
 	t_point		inter_pos;
 	t_point		v;
 	double		len;
-	t_point		norm;
 	int			color;
 	double		delta;
 
@@ -117,7 +114,6 @@ void
 		if (len < data->mydata->depth[pos[X_P] + pos[Y_P] * WIN_W])
 		{
 			data->mydata->depth[pos[X_P] + pos[Y_P] * WIN_W] = len;
-			norm = obj->get_normal_vector(obj->data, inter_pos);
 			color = obj->get_color(obj->data, inter_pos);
 			delta = ft_get_delta_light(data, inter_pos, obj);
 			if (delta >= 0.9)

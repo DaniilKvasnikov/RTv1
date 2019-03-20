@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/20 02:06:51 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/20 02:21:33 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/20 05:19:46 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int
 	t_triangle	*tr;
 	float		scalar_product;
 	float		k;
+	t_point		ipt;
 
 	tr = (t_triangle *)data;
 	scalar_product = vector_sum(&(tr->norm), &vect_start);
@@ -47,16 +48,8 @@ int
 		+ tr->norm.z * pos_start.z + tr->d) / scalar_product;
 	if (k < EPSILON)
 		return (0);
-
-	float		x;
-	float		y;
-	float		z;
-	t_point		ipt;
-
-	x = pos_start.x + vect_start.x * k;
-	y = pos_start.y + vect_start.y * k;
-	z = pos_start.z + vect_start.z * k;
-	ipt = vector_new(x, y, z);
+	ipt = vector_new(pos_start.x + vect_start.x * k,
+	pos_start.y + vect_start.y * k, pos_start.z + vect_start.z * k);
 	if (check_dir(tr->v_p1_p2, vector_mul(tr->p1, ipt), tr->norm)
 		&& check_dir(tr->v_p2_p3, vector_mul(tr->p2, ipt), tr->norm)
 		&& check_dir(tr->v_p3_p1, vector_mul(tr->p3, ipt), tr->norm))
