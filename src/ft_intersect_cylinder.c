@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/20 05:58:32 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/20 06:03:44 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/20 07:00:57 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,22 @@ int
 	return (hit);
 }
 
+static t_plane2
+	set_pars
+	(double a,
+	double b,
+	double c,
+	double d)
+{
+	t_plane2	plane;
+
+	plane.a = a;
+	plane.b = b;
+	plane.c = c;
+	plane.d = d;
+	return (plane);
+}
+
 int
 	intersect_cylinder
 	(void *data,
@@ -161,35 +177,25 @@ int
 	t_point *intersection_pos)
 {
 	t_cylinder	*cyl;
-	double		in;
-	double		out;
-	int			surfin;
-	int			surfout;
+	double		inter[2];
+	int			surf[2];
 	int			res;
-	t_plane2	bot;
-	t_plane2	top;
+	t_plane2	plane[2];
 
 	cyl = (t_cylinder *)data;
-	bot.a = -cyl->vect.x;
-	bot.b = -cyl->vect.y;
-	bot.c = -cyl->vect.z;
-	bot.d = cyl->vect.x * cyl->pos.x + cyl->vect.y * cyl->pos.y
-	+ cyl->vect.z * cyl->pos.z;
-	top.a = cyl->vect.x;
-	top.b = cyl->vect.y;
-	top.c = cyl->vect.z;
-	top.d = -cyl->vect.x * cyl->pos2.x - cyl->vect.y * cyl->pos2.y
-	- cyl->vect.z * cyl->pos2.z;
+	plane[0] = set_pars(-cyl->vect.x, -cyl->vect.y, -cyl->vect.z, cyl->vect.x *
+	cyl->pos.x + cyl->vect.y * cyl->pos.y + cyl->vect.z * cyl->pos.z);
+	plane[1] = set_pars(cyl->vect.x, cyl->vect.y, cyl->vect.z, -cyl->vect.x *
+	cyl->pos2.x - cyl->vect.y * cyl->pos2.y - cyl->vect.z * cyl->pos2.z);
 	res = intersect_cylinder2(pos_start, vect_start, cyl->pos, cyl->vect,
-	cyl->rad, &in, &out);
-	if (in < 0)
+	cyl->rad, &inter[0], &inter[1]);
+	if (inter[0] < 0)
 		return (0);
 	if (cyl->h != 0)
 		res = res && clipobj(&pos_start, &vect_start,
-		&bot, &top, &in, &out, &surfin, &surfout);
-	*intersection_pos = vector_new(
-		pos_start.x + (vect_start.x * in),
-		pos_start.y + (vect_start.y * in),
-		pos_start.z + (vect_start.z * in));
+		&plane[0], &plane[1], &inter[0], &inter[1], &surf[0], &surf[1]);
+	*intersection_pos = vector_new(pos_start.x + (vect_start.x * inter[0]),
+	pos_start.y + (vect_start.y * inter[0]),
+	pos_start.z + (vect_start.z * inter[0]));
 	return (res);
 }

@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/15 16:30:45 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/20 05:57:33 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/20 06:45:47 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,58 +29,6 @@ t_cone
 	cone->rad = rad;
 	cone->color = color;
 	return (cone);
-}
-
-int
-	intersect_cone
-	(void *data,
-	t_point pos_start,
-	t_point vect_start,
-	t_point *intersection_pos)
-{
-	t_cone	*cone;
-	t_point	x;
-	double	a;
-	double	b;
-	double	c;
-	double	d;
-	double	t1;
-	double	t2;
-
-	cone = (t_cone *)data;
-	x = vector_mul(cone->pos, pos_start);
-	a = vector_sum(&vect_start, &cone->vect);
-	a = vector_sum(&vect_start, &vect_start) -
-	(1.0 + cone->rad * cone->rad) * a * a;
-	b = 2.0 * (vector_sum(&vect_start, &x) - (1.0 + cone->rad * cone->rad)
-		* vector_sum(&vect_start, &cone->vect) * vector_sum(&x, &cone->vect));
-	c = vector_sum(&x, &cone->vect);
-	c = vector_sum(&x, &x) - (1 + cone->rad * cone->rad) * c * c;
-	d = b * b - 4 * a * c;
-	if (fabs(d) < EPSILON)
-		d = 0;
-	if (d >= 0)
-	{
-		t1 = (-b - sqrt(d)) / (2 * a);
-		t2 = (-b + sqrt(d)) / (2 * a);
-		if ((t1 <= t2 && t1 >= 0) || (t1 >= 0 && t2 < 0))
-		{
-			*intersection_pos =
-			vector_new(pos_start.x + vect_start.x * t1,
-						pos_start.y + vect_start.y * t1,
-						pos_start.z + vect_start.z * t1);
-			return (1);
-		}
-		if ((t2 <= t1 && t2 >= 0) || (t2 >= 0 && t1 < 0))
-		{
-			*intersection_pos =
-			vector_new(pos_start.x + vect_start.x * t2,
-						pos_start.y + vect_start.y * t2,
-						pos_start.z + vect_start.z * t2);
-			return (1);
-		}
-	}
-	return (0);
 }
 
 int

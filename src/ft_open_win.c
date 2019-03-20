@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/05 07:03:09 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/20 02:33:32 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/20 06:42:13 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,7 @@ void
 		new_cylinder(
 			vector_new(3, 0, 9),
 			vector_new(0, -1, 0),
-			1,
-			1.0,
+			vector_new(1, 1, 0),
 			0xff0000));
 	objects_add_cone(
 		data,

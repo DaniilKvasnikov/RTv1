@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 18:15:14 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/20 06:02:16 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/20 06:41:01 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ t_cylinder
 	*new_cylinder
 	(t_point pos,
 	t_point vect,
-	double h,
-	double rad,
+	t_point h_rad,
 	int color)
 {
 	t_cylinder	*cylinder;
@@ -27,13 +26,13 @@ t_cylinder
 		return (NULL);
 	cylinder->pos = pos;
 	cylinder->vect = vect;
-	cylinder->h = h;
+	cylinder->h = h_rad.x;
 	vector_normalize(&cylinder->vect);
 	cylinder->pos2 = vector_new(
 				cylinder->pos.x + (cylinder->vect.x * cylinder->h),
 				cylinder->pos.y + (cylinder->vect.y * cylinder->h),
 				cylinder->pos.z + (cylinder->vect.z * cylinder->h));
-	cylinder->rad = rad;
+	cylinder->rad = h_rad.y;
 	cylinder->color = color;
 	return (cylinder);
 }
