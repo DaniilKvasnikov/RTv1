@@ -6,12 +6,50 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/20 05:58:32 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/20 13:55:40 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/20 14:32:20 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 #include <stdio.h>
+
+int
+	clipobj2
+	(double dc,
+	double dw,
+	double t,
+	double in,
+	double out,
+	int *surfout,
+	int *surfin,
+	int new_)
+{
+	if (dc != 0.0)
+	{
+		t = -dw / dc;
+		if (dc >= 0.0)
+		{
+			if (t > in && t < out)
+			{
+				out = t;
+				*surfout = new_;
+			}
+			if (t < in)
+				return (0);
+		}
+		else
+		{
+			if (t > in && t < out)
+			{
+				in = t;
+				*surfin = new_;
+			}
+			if (t > out)
+				return (0);
+		}
+	}
+	return (1);
+}
 
 int
 	clipobj
@@ -26,7 +64,6 @@ int
 {
 	double	dc;
 	double	dw;
-	double	t;
 	double	in;
 	double	out;
 
@@ -37,67 +74,16 @@ int
 	dc = bot->a * raycos->x + bot->b * raycos->y + bot->c * raycos->z;
 	dw =
 	bot->a * raybase->x + bot->b * raybase->y + bot->c * raybase->z + bot->d;
-	if (dc == 0.0)
-	{
-		if (dw >= 0.0)
-			return (0);
-	}
-	else
-	{
-		t = -dw / dc;
-		if (dc >= 0.0)
-		{
-			if (t > in && t < out)
-			{
-				out = t;
-				*surfout = 1;
-			}
-			if (t < in)
-				return (0);
-		}
-		else
-		{
-			if (t > in && t < out)
-			{
-				in = t;
-				*surfin = 1;
-			}
-			if (t > out)
-				return (0);
-		}
-	}
+	if (dc == 0.0 && dw >= 0.0)
+		return (0);
+	if (clipobj2(dc, dw, 0, in, out, surfout, surfin, 1) == 0)
+		return (0);
 	dc = top->a * raycos->x + top->b * raycos->y + top->c * raycos->z;
 	dw =
 	top->a * raybase->x + top->b * raybase->y + top->c * raybase->z + top->d;
-	if (dc == 0.0)
-	{
-		if (dw >= 0.0)
-			return (0);
-	}
-	else
-	{
-		t = -dw / dc;
-		if (dc >= 0.0)
-		{
-			if (t > in && t < out)
-			{
-				out = t;
-				*surfout = 2;
-			}
-			if (t < in)
-				return (0);
-		}
-		else
-		{
-			if (t > in && t < out)
-			{
-				in = t;
-				*surfin = 2;
-			}
-			if (t > out)
-				return (0);
-		}
-	}
+	if ((dc == 0.0 && dw >= 0.0) ||
+		clipobj2(dc, dw, 0, in, out, surfout, surfin, 2) == 0)
+		return (0);
 	*objin = in;
 	*objout = out;
 	return (in < out);
@@ -105,31 +91,25 @@ int
 
 int
 	intersect_cylinder3
-	(t_point raycos,
-	t_point axis,
-	double radius,
-	double *in,
-	double *out,
-	t_point n,
-	t_point rc,
-	double ln)
+	(t_intersect_cylinder3 ob)
 {
 	t_point			o;
 	double			s;
 	double			t;
 	double			d;
 
-	vector_normalize(&n);
-	d = fabs(vector_sum(&rc, &n));
-	if (d <= radius)
+	vector_normalize(&ob.n);
+	d = fabs(vector_sum(&ob.rc, &ob.n));
+	if (d <= ob.radius)
 	{
-		o = cross_product(rc, axis);
-		t = -vector_sum(&o, &n) / ln;
-		o = cross_product(n, axis);
+		o = cross_product(ob.rc, ob.axis);
+		t = -vector_sum(&o, &ob.n) / ob.ln;
+		o = cross_product(ob.n, ob.axis);
 		vector_normalize(&o);
-		s = fabs(sqrt(radius * radius - d * d) / vector_sum(&raycos, &o));
-		*in = t - s;
-		*out = t + s;
+		s = fabs(sqrt(ob.radius * ob.radius - d * d) /
+		vector_sum(&ob.raycos, &o));
+		*ob.in = t - s;
+		*ob.out = t + s;
 		return (1);
 	}
 	return (0);
@@ -137,13 +117,7 @@ int
 
 int
 	intersect_cylinder2
-	(t_point raybase,
-	t_point raycos,
-	t_point base,
-	t_point axis,
-	double radius,
-	double *in,
-	double *out)
+	(t_intersect_cylinder2 o)
 {
 	double			d;
 	double			ln;
@@ -151,18 +125,20 @@ int
 	t_point			n;
 	t_point			rc;
 
-	rc = vector_new(raybase.x - base.x, raybase.y - base.y, raybase.z - base.z);
-	n = cross_product(raycos, axis);
+	rc = vector_new(
+		o.raybase.x - o.base.x, o.raybase.y - o.base.y, o.raybase.z - o.base.z);
+	n = cross_product(o.raycos, o.axis);
 	if ((ln = module_vector(&n)) == 0)
 	{
-		d = vector_sum(&rc, &axis);
-		v_d =
-			vector_new(rc.x - d * axis.x, rc.y - d * axis.y, rc.z - d * axis.z);
-		*in = -HUGE;
-		*out = HUGE;
-		return (module_vector(&v_d) <= radius);
+		d = vector_sum(&rc, &o.axis);
+		v_d = vector_new(
+			rc.x - d * o.axis.x, rc.y - d * o.axis.y, rc.z - d * o.axis.z);
+		*o.in = -HUGE;
+		*o.out = HUGE;
+		return (module_vector(&v_d) <= o.radius);
 	}
-	return (intersect_cylinder3(raycos, axis, radius, in, out, n, rc, ln));
+	return (intersect_cylinder3((t_intersect_cylinder3)
+		{o.raycos, o.axis, o.radius, o.in, o.out, n, rc, ln}));
 }
 
 static t_plane2
@@ -199,8 +175,8 @@ int
 	cyl->pos.x + cyl->vect.y * cyl->pos.y + cyl->vect.z * cyl->pos.z);
 	plane[1] = set_pars(cyl->vect.x, cyl->vect.y, cyl->vect.z, -cyl->vect.x *
 	cyl->pos2.x - cyl->vect.y * cyl->pos2.y - cyl->vect.z * cyl->pos2.z);
-	res = intersect_cylinder2(pos_start, vect_start, cyl->pos, cyl->vect,
-	cyl->rad, &inter[0], &inter[1]);
+	res = intersect_cylinder2((t_intersect_cylinder2){pos_start, vect_start,
+	cyl->pos, cyl->vect, cyl->rad, &inter[0], &inter[1]});
 	if (inter[0] < 0)
 		return (0);
 	if (cyl->h != 0)
