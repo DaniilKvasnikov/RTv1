@@ -17,7 +17,7 @@ cylinder
 {
 	pos: 3, 0, 9;
 	vect: 0, -1, 0;
-	rad: 1;
+	rad: 2;
 	h: 2;
 	color: 0x00fff0;
 }

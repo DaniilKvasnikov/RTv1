@@ -34,7 +34,7 @@ void
 		l_pows[index] = data->mydata->lights->l_pows[index];
 	}
 	light[index] = pos;
-	l_pows[index] = l_pow;
+	l_pows[index] = fabs(l_pow);
 	if (data->mydata->lights->light_count > 1)
 	{
 		free(data->mydata->lights->light);

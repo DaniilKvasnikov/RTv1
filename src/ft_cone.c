@@ -26,7 +26,7 @@ t_cone
 		return (NULL);
 	cone->pos = pos;
 	cone->vect = vect;
-	cone->rad = rad;
+	cone->rad = fabs(rad);
 	cone->color = color;
 	return (cone);
 }

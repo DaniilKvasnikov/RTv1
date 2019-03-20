@@ -26,13 +26,13 @@ t_cylinder
 		return (NULL);
 	cylinder->pos = pos;
 	cylinder->vect = vect;
-	cylinder->h = h_rad.x;
+	cylinder->h = fabs(h_rad.x);
 	vector_normalize(&cylinder->vect);
 	cylinder->pos2 = vector_new(
 				cylinder->pos.x + (cylinder->vect.x * cylinder->h),
 				cylinder->pos.y + (cylinder->vect.y * cylinder->h),
 				cylinder->pos.z + (cylinder->vect.z * cylinder->h));
-	cylinder->rad = h_rad.y;
+	cylinder->rad = fabs(h_rad.y);
 	cylinder->color = color;
 	return (cylinder);
 }

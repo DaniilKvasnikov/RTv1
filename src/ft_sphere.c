@@ -48,7 +48,7 @@ t_sphere
 	if ((sphere = (t_sphere *)malloc(sizeof(t_sphere))) == NULL)
 		return (NULL);
 	sphere->pos = pos;
-	sphere->rad = rad;
+	sphere->rad = fabs(rad);
 	sphere->color = color;
 	return (sphere);
 }
