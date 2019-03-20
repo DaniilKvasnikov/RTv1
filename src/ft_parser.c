@@ -12,7 +12,7 @@
 
 #include "main.h"
 
-int		ft_correct_fd(int argc, char **argv)
+int			ft_correct_fd(int argc, char **argv)
 {
 	int		fd;
 
@@ -33,10 +33,10 @@ void		ft_parse_error(char *msg)
 
 void		ft_parser(t_mydata **data, int fd)
 {
-	char	*input;
-	char	*content;
-	char	*p;
-	char	*name;
+	char		*input;
+	char		*content;
+	char		*p;
+	char		*name;
 	t_mydata	*list;
 
 	list = *data;

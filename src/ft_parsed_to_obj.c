@@ -59,7 +59,7 @@ void	ft_lstfree(t_parsed *alst)
 
 void	ft_parsed_to_obj(t_data **data)
 {
-	t_data	*list;
+	t_data		*list;
 	t_parsed	*parsed;
 
 	list = *data;

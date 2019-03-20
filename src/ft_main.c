@@ -18,9 +18,9 @@ int
 	char **argv)
 {
 	int		fd;
+
 	--argc;
 	++argv;
-
 	if (argc == 1 || argc == 2)
 	{
 		fd = ft_correct_fd(argc, argv);
