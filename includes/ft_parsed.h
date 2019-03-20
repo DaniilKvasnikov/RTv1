@@ -16,9 +16,9 @@
 void			ft_create_and_add_object
 				(t_mydata *mydata, char *name, char *content);
 char			*get_content(char *line, int type);
-void			ft_parser(t_data **mydata);
+void			ft_parser(t_mydata **mydata, int fd);
 char			*ft_get_info(char *line, char **p, char **name, int t);
-void			ft_read_file(t_mydata *mydata);
+void			ft_read_file(t_mydata *mydata, int fd);
 t_point			ft_get_vector(char *value);
 void			ft_parse_object(t_parsed **obj, char *line);
 void			ft_parsed_to_obj(t_data **data);

@@ -26,17 +26,12 @@ void	ft_remove_tabs(char **str)
 	}
 }
 
-void	ft_read_file(t_mydata *mydata)
+void	ft_read_file(t_mydata *mydata, int fd)
 {
 	char	*line;
-	int		fd;
 	int		ret;
 
 	line = NULL;
-	if (!(fd = open(mydata->argv[0], O_RDONLY)))
-		ft_parse_error("opening error");
-	if (fd == -1)
-		ft_parse_error("ivalid file");
 	mydata->input = ft_strdup("");
 	while ((ret = get_next_line(fd, &line) > 0))
 	{

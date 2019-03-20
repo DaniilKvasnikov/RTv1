@@ -18,7 +18,7 @@ void
 	int argc,
 	char **argv, int fd)
 {
-	data->mydata = (t_mydata *)malloc(sizeof(t_mydata));
+	//data->mydata = (t_mydata *)malloc(sizeof(t_mydata));
 	data->mydata->mat = (t_matrix *)malloc(sizeof(t_matrix));
 	data->mydata->pos = vector_new(0, 0, 0);
 	data->mydata->angle = vector_new(0, 0, 0);
@@ -30,10 +30,10 @@ void
 	data->mydata->objects_count = 0;
 	data->mydata->depth = (double *)malloc(sizeof(double) * (WIN_W * WIN_H));
 	data->mydata->lights = (t_lights *)malloc(sizeof(t_lights));
-	data->mydata->parsed_obj = (t_parsed *)malloc(sizeof(t_parsed));
-	data->mydata->parsed_obj->next = NULL;
+/* 	data->mydata->parsed_obj = (t_parsed *)malloc(sizeof(t_parsed));
+	data->mydata->parsed_obj->next = NULL; */
 	data->mydata->lights->light_count = 0;
-	ft_parser(&data);
+	//ft_parser(&data);
 	ft_parsed_to_obj(&data);
 }
 
@@ -44,12 +44,16 @@ void
 	char **argv, int fd)
 {
 	t_data	data;
-
+	if ((data.mydata = (t_mydata *)malloc(sizeof(t_mydata))) == NULL)
+		return ;
+	data.mydata->parsed_obj = (t_parsed *)malloc(sizeof(t_parsed));
+	data.mydata->parsed_obj->next = NULL;
+	ft_parser(&(data.mydata), fd);
 	if (((data.mlx_ptr = mlx_init()) == 0) ||
 		((data.mlx_win =
 		mlx_new_window(data.mlx_ptr, WIN_W, WIN_H, str)) == NULL) ||
-		((data.img = (t_img *)malloc(sizeof(t_img))) == NULL) ||
-		((data.mydata = (t_mydata *)malloc(sizeof(t_mydata))) == NULL))
+		((data.img = (t_img *)malloc(sizeof(t_img))) == NULL) /*||
+		((data.mydata = (t_mydata *)malloc(sizeof(t_mydata))) == NULL)*/)
 		return ;
 	ft_start_game(&data, argc, argv, fd);
 	mlx_do_key_autorepeaton(data.mlx_ptr);
