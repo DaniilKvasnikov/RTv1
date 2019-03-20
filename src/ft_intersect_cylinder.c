@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/20 05:58:32 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/03/20 07:00:57 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/03/20 13:55:40 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,38 @@ int
 }
 
 int
+	intersect_cylinder3
+	(t_point raycos,
+	t_point axis,
+	double radius,
+	double *in,
+	double *out,
+	t_point n,
+	t_point rc,
+	double ln)
+{
+	t_point			o;
+	double			s;
+	double			t;
+	double			d;
+
+	vector_normalize(&n);
+	d = fabs(vector_sum(&rc, &n));
+	if (d <= radius)
+	{
+		o = cross_product(rc, axis);
+		t = -vector_sum(&o, &n) / ln;
+		o = cross_product(n, axis);
+		vector_normalize(&o);
+		s = fabs(sqrt(radius * radius - d * d) / vector_sum(&raycos, &o));
+		*in = t - s;
+		*out = t + s;
+		return (1);
+	}
+	return (0);
+}
+
+int
 	intersect_cylinder2
 	(t_point raybase,
 	t_point raycos,
@@ -113,44 +145,24 @@ int
 	double *in,
 	double *out)
 {
-	int				hit;
-	t_point			rc;
 	double			d;
-	double			t;
-	double			s;
-	t_point			n;
-	t_point			v_d;
-	t_point			o;
 	double			ln;
-	const double	pinf = HUGE;
+	t_point			v_d;
+	t_point			n;
+	t_point			rc;
 
 	rc = vector_new(raybase.x - base.x, raybase.y - base.y, raybase.z - base.z);
 	n = cross_product(raycos, axis);
-
 	if ((ln = module_vector(&n)) == 0)
 	{
 		d = vector_sum(&rc, &axis);
 		v_d =
-		vector_new(rc.x - d * axis.x, rc.y - d * axis.y, rc.z - d * axis.z);
-		d = module_vector(&v_d);
-		*in = -pinf;
-		*out = pinf;
-		return (d <= radius);
+			vector_new(rc.x - d * axis.x, rc.y - d * axis.y, rc.z - d * axis.z);
+		*in = -HUGE;
+		*out = HUGE;
+		return (module_vector(&v_d) <= radius);
 	}
-	vector_normalize(&n);
-	d = fabs(vector_sum(&rc, &n));
-	hit = (d <= radius);
-	if (hit)
-	{
-		o = cross_product(rc, axis);
-		t = -vector_sum(&o, &n) / ln;
-		o = cross_product(n, axis);
-		vector_normalize(&o);
-		s = fabs(sqrt(radius * radius - d * d) / vector_sum(&raycos, &o));
-		*in = t - s;
-		*out = t + s;
-	}
-	return (hit);
+	return (intersect_cylinder3(raycos, axis, radius, in, out, n, rc, ln));
 }
 
 static t_plane2
