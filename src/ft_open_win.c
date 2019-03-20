@@ -32,9 +32,11 @@ void
 	data->mydata->parsed_obj = (t_parsed *)malloc(sizeof(t_parsed));
 	data->mydata->parsed_obj->next = NULL;
 	data->mydata->lights->light_count = 0;
-	ft_add_lights(data, vector_new(10, 0, 0), 0.2);
+	ft_parser(&data);
+	ft_parsed_to_obj(&data);
+/* 	ft_add_lights(data, vector_new(10, 0, 0), 0.2);
 	ft_add_lights(data, vector_new(-10, 0, 0), 0.2);
-	objects_add_sphere(
+ 	objects_add_sphere(
 		data,
 		new_sphere(
 			vector_new(0, 0, 12),
@@ -75,7 +77,7 @@ void
 			vector_new(0, 0, 10),
 			vector_new(0, 1, 0),
 			.25,
-			0xff0000)); 
+			0xff0000)); */  
 /*  	objects_add_plane(
 		data,
 		new_plane(

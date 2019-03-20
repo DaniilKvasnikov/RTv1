@@ -27,6 +27,6 @@ plane
 }
 light
 {
-	pos: -5, 0, 0;
-	l_pow: 0.1;
+	pos: -10, 0, 0;
+	l_pow: 0.2;
 }

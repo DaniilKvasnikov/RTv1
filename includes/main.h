@@ -51,6 +51,7 @@
 # define Y_P 1
 
 # include "ft_structs.h"
+# include "ft_parsed.h"
 # include "ft_sphere.h"
 # include "ft_triangle.h"
 # include "ft_square.h"

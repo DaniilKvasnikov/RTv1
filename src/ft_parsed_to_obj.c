@@ -46,7 +46,7 @@ void ft_add_obj(t_data **data, t_parsed *p)
 	if (p->type == 5)
 		ft_add_lights(
 			list,
-			p->pos.x, p->pos.y, p->pos.z, p->l_pow);
+			p->pos, p->l_pow);
 	if (p->type == 6)
 		ft_add_cam(
 			list,

@@ -50,6 +50,21 @@ typedef struct	s_lights
 	double		*l_pows;
 }				t_lights;
 
+typedef struct			s_parsed
+{
+	int					type;
+	t_point				pos;
+	t_point				vect;
+	t_point				p1;
+	t_point				p2;
+	t_point				p3;
+	float				rad;
+	double 				color;
+	double				h;
+	double				l_pow;
+	struct s_parsed		*next;
+}						t_parsed;
+
 typedef struct	s_mydata
 {
 	t_point		pos;
@@ -61,6 +76,7 @@ typedef struct	s_mydata
 	int			argc;
 	char		*input;
 	t_matrix	*mat;
+	t_parsed	*parsed_obj;
 	t_obj3d		**objects;
 	t_lights	*lights;
 	int			objects_count;

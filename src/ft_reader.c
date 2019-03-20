@@ -34,9 +34,10 @@ void ft_read_file(t_mydata *mydata)
 	int ret;
 
 	line = NULL;
-	fd = open(mydata->argv[0], O_RDONLY);
+	if (!(fd = open(mydata->argv[0], O_RDONLY)))
+		ft_parse_error("opening error");
 	if (fd == -1)
-		return;
+		ft_parse_error("ivalid file");
 	mydata->input = ft_strdup("");
 	while ((ret = get_next_line(fd, &line) > 0))
 	{

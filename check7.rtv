@@ -1,0 +1,50 @@
+cam
+{
+	pos: 0, 0, -2;
+	vect: 0, 0, 0;
+}
+light
+{
+	pos: 10, 0, 0;
+	l_pow: 0.2;
+}
+light
+{
+	pos: -10, 0, 0;
+	l_pow: 0.2;
+}
+cylinder
+{
+	pos: 3, 0, 9;
+	vect: 0, -1, 0;
+	rad: 1;
+	h: 1;
+	color: 0x00fff0;
+}
+cone
+{
+	pos: 0, 0, 10;
+	vect: 0, 1, 0;
+	rad: 0.25;
+	color: 0xff0000;
+}
+sphere
+{
+	pos: 0, 0, 12;
+	rad: 2;
+	color: 0xff0000;
+}
+triangle
+{
+	p1: -4, -4, 14;
+	p2: -4, 4, 14;
+	p3: 4, 4, 14;
+	color: 0x00ff00;
+}
+triangle
+{
+	p1: 5, -5, 13;
+	p2: -5, -5, 13;
+	p3: 5, 5, 13;
+	color: 0xffff00;
+}

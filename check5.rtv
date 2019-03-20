@@ -17,6 +17,6 @@ sphere
 }
 light
 {
-	pos: 0, -10, 5;
-	l_pow: 0.1;
+	pos: 0, -5, 5;
+	l_pow: 0.2;
 }
